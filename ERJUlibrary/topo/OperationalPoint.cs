@@ -1,3 +1,4 @@
+using ERJUlibrary.topo;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -35,10 +36,12 @@ namespace topo
                 return this.name != null ? this.name : "";   
             }
         
-        }		
-		public List<string> timingPoints;
+        }
+        [XmlArrayItem("timingPoint", Namespace = "https://erju.org/topo")]
+        public List<TimingPointRef> timingPoints;
         [XmlAttribute]
-        public OPType type;		
-		public List<Platform> platforms;
+        public OPType type;
+        [XmlArrayItem("platform", Namespace = "https://erju.org/topo")]
+        public List<Platform> platforms;
 	}
 }

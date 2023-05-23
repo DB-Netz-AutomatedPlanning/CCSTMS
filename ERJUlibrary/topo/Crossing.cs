@@ -35,7 +35,8 @@ namespace topo
                 return this.name != null ? this.name : "";   
             }
         
-        }		
-		public List<TrackEdgePoint> trackEdgePoints;
+        }
+        [XmlArrayItem("trackEdgePoint", Namespace = "https://erju.org/topo")]
+        public List<TrackEdgePoint> trackEdgePoints;
 	}
 }

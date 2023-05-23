@@ -1,3 +1,4 @@
+using ERJUlibrary;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -35,7 +36,8 @@ namespace topo
                 return this.name != null ? this.name : "";   
             }
         
-        }		
-		public List<string> simplePoints;
+        }
+        [XmlArrayItem("simplePoint", Namespace = "https://erju.org/topo")]
+        public List<SimplePointRef> simplePoints;
 	}
 }

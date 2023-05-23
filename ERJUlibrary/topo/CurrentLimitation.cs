@@ -5,8 +5,9 @@ namespace topo
 {
 	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "currentLimitation")]
 	public struct CurrentLimitation
-	{		
-		public List<TrackEdgeSection> trackSections;		
+	{
+        [XmlArrayItem("trackEdgeSection", Namespace = "https://erju.org/topo")]
+        public List<TrackEdgeSection> trackSections;		
 		[XmlAttribute]
 		public uint maxCurrent;
 	}

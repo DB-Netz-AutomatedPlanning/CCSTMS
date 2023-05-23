@@ -1,3 +1,4 @@
+using ERJUlibrary;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -37,7 +38,8 @@ namespace topo
         
         }		
 		[XmlAttribute]
-		public uint reversalTime;		
-		public List<string> trackEdgeLinks;
+		public uint reversalTime;
+        [XmlArrayItem("trackEdgeLink", Namespace = "https://erju.org/topo")]
+        public List<TrackEdgeLinkRef> trackEdgeLinks;
 	}
 }

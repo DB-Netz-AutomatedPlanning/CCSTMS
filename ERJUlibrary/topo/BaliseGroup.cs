@@ -7,7 +7,7 @@ namespace topo
 	public struct BaliseGroup
 	{
 
- 
+        [XmlArrayItem("balise", Namespace = "https://erju.org/topo")]
         public List<Balise> balises;
         [XmlAttribute]
         public BaliseGroupFunction bgFunction;

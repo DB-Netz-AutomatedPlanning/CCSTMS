@@ -22,8 +22,10 @@ namespace topo
         
         }		
 		[XmlAttribute]
-		public bool alignment3d;		
-		public List<TrackEdgeGeometry> trackEdgeGeometries;		
-		public List<SampledTrackEdgeGeometry> sampledTrackEdgeGeometries;
+		public bool alignment3d;
+        [XmlArrayItem("trackEdgeGeometry", Namespace = "https://erju.org/topo")]
+        public List<TrackEdgeGeometry> trackEdgeGeometries;
+        [XmlArrayItem("sampledTrackEdgeGeometry", Namespace = "https://erju.org/topo")]
+        public List<SampledTrackEdgeGeometry> sampledTrackEdgeGeometries;
 	}
 }

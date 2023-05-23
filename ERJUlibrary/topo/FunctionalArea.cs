@@ -20,13 +20,20 @@ namespace topo
                 return this.areaId != null ? this.areaId : "";   
             }
         
-        }		
-		public List<OperationalPoint> opPoints;		
-		public List<TimingPoint> timingPoints;		
-		public List<SimplePoint> simplePoints;		
-		public List<SlipCrossing> slipCrossings;		
-		public List<Derailer> derailers;		
-		public List<Crossing> crossings;		
-		public List<BaliseGroup> baliseGroups;
+        }
+        [XmlArrayItem("opPoint", Namespace = "https://erju.org/topo")]
+        public List<OperationalPoint> opPoints;
+        [XmlArrayItem("timingPoint", Namespace = "https://erju.org/topo")]
+        public List<TimingPoint> timingPoints;
+        [XmlArrayItem("simplePoint", Namespace = "https://erju.org/topo")]
+        public List<SimplePoint> simplePoints;
+        [XmlArrayItem("slipCrossing", Namespace = "https://erju.org/topo")]
+        public List<SlipCrossing> slipCrossings;
+        [XmlArrayItem("derailer", Namespace = "https://erju.org/topo")]
+        public List<Derailer> derailers;
+        [XmlArrayItem("crossing", Namespace = "https://erju.org/topo")]
+        public List<Crossing> crossings;
+        [XmlArrayItem("baliseGroup", Namespace = "https://erju.org/topo")]
+        public List<BaliseGroup> baliseGroups;
 	}
 }

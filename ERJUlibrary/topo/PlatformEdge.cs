@@ -1,3 +1,4 @@
+using ERJUlibrary.topo;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -36,7 +37,8 @@ namespace topo
             }
         
         }		
-		public LinkedPath linearLocation;		
-		public List<string> stopLocations;
+		public LinkedPath linearLocation;
+        [XmlArrayItem("stopLocation", Namespace = "https://erju.org/topo")]
+        public List<StopLocationRef> stopLocations;
 	}
 }
