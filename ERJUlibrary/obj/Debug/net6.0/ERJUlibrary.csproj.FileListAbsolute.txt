@@ -1,0 +1,12 @@
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\bin\Debug\net6.0\ERJUlibrary.deps.json
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\bin\Debug\net6.0\ERJUlibrary.dll
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\bin\Debug\net6.0\ERJUlibrary.pdb
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.csproj.AssemblyReference.cache
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.GeneratedMSBuildEditorConfig.editorconfig
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.AssemblyInfoInputs.cache
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.AssemblyInfo.cs
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.csproj.CoreCompileInputs.cache
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.dll
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\refint\ERJUlibrary.dll
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ERJUlibrary.pdb
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary\obj\Debug\net6.0\ref\ERJUlibrary.dll

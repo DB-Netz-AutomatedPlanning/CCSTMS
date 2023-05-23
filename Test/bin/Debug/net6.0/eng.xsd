@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<xs:schema targetNamespace="https://erju.org/eng" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:eng="https://erju.org/eng" elementFormDefault="qualified">
+	<xs:complexType name="SimplePoint">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="simplePoint" type="eng:SimplePoint"/>
+	<xs:complexType name="Balise">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="fixed" type="xs:boolean" use="required"/>
+		<xs:attribute name="linked" type="xs:boolean" use="required"/>
+		<xs:attribute name="verticallyOriented" type="xs:boolean" use="required"/>
+		<xs:attribute name="standardSized" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="balise" type="eng:Balise"/>
+</xs:schema>

@@ -1,0 +1,790 @@
+<?xml version="1.0" ?>
+<xs:schema targetNamespace="https://erju.org/topo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:topo="https://erju.org/topo" elementFormDefault="qualified">
+	<xs:simpleType name="TransitionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="clothoid"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BaliseGroupFunction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="location"/>
+			<xs:enumeration value="sessionManagement"/>
+			<xs:enumeration value="networkRegistration"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoadingGaugeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="g1"/>
+			<xs:enumeration value="g2"/>
+			<xs:enumeration value="gA"/>
+			<xs:enumeration value="gB"/>
+			<xs:enumeration value="gC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConditionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="powerlessLowPanthograph"/>
+			<xs:enumeration value="powerlessMainSwitch"/>
+			<xs:enumeration value="airTighntness"/>
+			<xs:enumeration value="soundHorn"/>
+			<xs:enumeration value="nonStoppingArea"/>
+			<xs:enumeration value="tunnelStoppingArea"/>
+			<xs:enumeration value="bigMetalMasses"/>
+			<xs:enumeration value="radioHole"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StopTrainLimitSize">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="fullTrain"/>
+			<xs:enumeration value="halfTrain"/>
+			<xs:enumeration value="shortTrain"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OPType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="station"/>
+			<xs:enumeration value="depot"/>
+			<xs:enumeration value="siding"/>
+			<xs:enumeration value="trainTechnicalServices"/>
+			<xs:enumeration value="shuntingYard"/>
+			<xs:enumeration value="borderPoint"/>
+			<xs:enumeration value="technicalChange"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Direction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="both"/>
+			<xs:enumeration value="endToStart"/>
+			<xs:enumeration value="startToEnd"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TrackEdge">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="length" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdge" type="topo:TrackEdge"/>
+	<xs:complexType name="TrackEdgeLink">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="trackEdgeA" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="trackEdgeB" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="startOnA" type="xs:boolean" use="required"/>
+		<xs:attribute name="startOnB" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeLink" type="topo:TrackEdgeLink"/>
+	<xs:complexType name="TopoArea">
+		<xs:sequence>
+			<xs:element name="trackEdges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdge" type="topo:TrackEdge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="trackEdgeLinks" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeLink" type="topo:TrackEdgeLink" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="topoArea" type="topo:TopoArea"/>
+	<xs:complexType name="TrackEdgePoint">
+		<xs:sequence/>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="lateralOffset" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint"/>
+	<xs:complexType name="TrackEdgeSection">
+		<xs:sequence/>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="skipFromStart" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="skipFromEnd" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeSection" type="topo:TrackEdgeSection"/>
+	<xs:complexType name="DirTrackEdge">
+		<xs:sequence/>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dirStartToEnd" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="dirTrackEdge" type="topo:DirTrackEdge"/>
+	<xs:complexType name="LinkedPath">
+		<xs:sequence>
+			<xs:element name="dirTrackEdges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dirTrackEdge" type="topo:DirTrackEdge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="skipFromStart" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="skipFromEnd" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="linkedPath" type="topo:LinkedPath"/>
+	<xs:complexType name="GeometryArea">
+		<xs:sequence>
+			<xs:element name="trackEdgeGeometries" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeGeometry" type="topo:TrackEdgeGeometry" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sampledTrackEdgeGeometries" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sampledTrackEdgeGeometry" type="topo:SampledTrackEdgeGeometry" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="alignment3d" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="geometryArea" type="topo:GeometryArea"/>
+	<xs:complexType name="TrackEdgeGeometry">
+		<xs:sequence>
+			<xs:element name="horizontalAlignment" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="horizontalAlignmentItem" type="topo:HorizontalSegment" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verticalAlignment" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="verticalAlignmentItem" type="topo:VerticalSegment" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cantSamples" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="cantSample" type="topo:CantSamplePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="trackEdgeGeometry" type="topo:TrackEdgeGeometry"/>
+	<xs:complexType name="HorizontalSegment">
+		<xs:sequence>
+			<xs:element name="line" type="topo:HorizontalLine" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="arc" type="topo:HorizontalArc" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="transition" type="topo:HorizontalTransition" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="horizontalSegment" type="topo:HorizontalSegment"/>
+	<xs:complexType name="HorizontalLine">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="azimuth" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="horizontalLine" type="topo:HorizontalLine"/>
+	<xs:complexType name="HorizontalArc">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="azimuth" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="radius" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="horizontalArc" type="topo:HorizontalArc"/>
+	<xs:complexType name="HorizontalTransition">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="azimuth" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="radius" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="type" type="topo:TransitionType"/>
+	</xs:complexType>
+	<xs:element name="horizontalTransition" type="topo:HorizontalTransition"/>
+	<xs:complexType name="VerticalSegment">
+		<xs:sequence>
+			<xs:element name="line" type="topo:VerticalLine" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="arc" type="topo:VerticalArc" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="verticalSegment" type="topo:VerticalSegment"/>
+	<xs:complexType name="VerticalLine">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="slope" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="verticalLine" type="topo:VerticalLine"/>
+	<xs:complexType name="VerticalArc">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="slope" type="xs:int" use="required"/>
+		<xs:attribute name="radius" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="verticalArc" type="topo:VerticalArc"/>
+	<xs:complexType name="CantSamplePoint">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="cant" type="xs:int" use="required"/>
+		<xs:attribute name="c" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="cantSamplePoint" type="topo:CantSamplePoint"/>
+	<xs:complexType name="SampledGeometryArea">
+		<xs:sequence>
+			<xs:element name="sampledTrackEdgeGeometries" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sampledTrackEdgeGeometry" type="topo:SampledTrackEdgeGeometry" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="sampledGeometryArea" type="topo:SampledGeometryArea"/>
+	<xs:complexType name="SampledTrackEdgeGeometry">
+		<xs:sequence>
+			<xs:element name="slopes" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="slope" type="topo:SlopeSamplePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="curves" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="curve" type="topo:CurveSamplePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cants" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="cant" type="topo:CantSamplePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="sampledTrackEdgeGeometry" type="topo:SampledTrackEdgeGeometry"/>
+	<xs:complexType name="SlopeSamplePoint">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="s" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="slopeSamplePoint" type="topo:SlopeSamplePoint"/>
+	<xs:complexType name="CurveSamplePoint">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="r" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:element name="curveSamplePoint" type="topo:CurveSamplePoint"/>
+	<xs:complexType name="SimplePoint">
+		<xs:sequence>
+			<xs:element name="trackEdgeLinks" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to topo:TrackEdgeLink</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeLink">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="reversalTime" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="simplePoint" type="topo:SimplePoint"/>
+	<xs:complexType name="SlipCrossing">
+		<xs:sequence>
+			<xs:element name="simplePoints" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to topo:SimplePoint</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="simplePoint">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="slipCrossing" type="topo:SlipCrossing"/>
+	<xs:complexType name="Derailer">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="reversalTime" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="derailer" type="topo:Derailer"/>
+	<xs:complexType name="Crossing">
+		<xs:sequence>
+			<xs:element name="trackEdgePoints" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="crossing" type="topo:Crossing"/>
+	<xs:complexType name="BaliseGroup">
+		<xs:sequence>
+			<xs:element name="balises" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="balise" type="topo:Balise" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="nidBG" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="nidC" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="bgFunction" type="topo:BaliseGroupFunction"/>
+		<xs:attribute name="locationAccuracy" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="baliseGroup" type="topo:BaliseGroup"/>
+	<xs:complexType name="Balise">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="positionInGroup" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="baliseTelegram" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="balise" type="topo:Balise"/>
+	<xs:complexType name="PropertiesArea">
+		<xs:sequence>
+			<xs:element name="trackEdgeGauges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeGauge" type="topo:TrackEdgeGauge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="trackEdgeLoadingGauges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeLoadingGauge" type="topo:TrackEdgeLoadingGauge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="trackConditions" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackCondition" type="topo:TrackCondition" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="areaId" type="xs:string" use="required"/>
+		<xs:attribute name="gauge" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="loadingGaugeType" type="topo:LoadingGaugeType"/>
+	</xs:complexType>
+	<xs:element name="propertiesArea" type="topo:PropertiesArea"/>
+	<xs:complexType name="TrackEdgeGauge">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="gauge" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeGauge" type="topo:TrackEdgeGauge"/>
+	<xs:complexType name="TrackEdgeLoadingGauge">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="loadingGaugeType" type="topo:LoadingGaugeType"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeLoadingGauge" type="topo:TrackEdgeLoadingGauge"/>
+	<xs:complexType name="TrackCondition">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="topo:ConditionType"/>
+	</xs:complexType>
+	<xs:element name="trackCondition" type="topo:TrackCondition"/>
+	<xs:complexType name="CurrentLimitation">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="maxCurrent" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="currentLimitation" type="topo:CurrentLimitation"/>
+	<xs:complexType name="PermittedBrakingDistance">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="brakeDist" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="permittedBrakingDistance" type="topo:PermittedBrakingDistance"/>
+	<xs:complexType name="MilageMarker">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="v" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="milageMarker" type="topo:MilageMarker"/>
+	<xs:complexType name="TrackEdgeMilageLineSegment">
+		<xs:sequence>
+			<xs:element name="points" type="topo:MilageMarker" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="trackEdgeMilageLineSegment" type="topo:TrackEdgeMilageLineSegment"/>
+	<xs:complexType name="MilageLine">
+		<xs:sequence>
+			<xs:element name="trackEdges" type="topo:TrackEdgeMilageLineSegment" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="milageLine" type="topo:MilageLine"/>
+	<xs:complexType name="MilageArea">
+		<xs:sequence>
+			<xs:element name="milageLines" type="topo:MilageLine" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="areaId" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="milageArea" type="topo:MilageArea"/>
+	<xs:complexType name="MapArea">
+		<xs:sequence>
+			<xs:element name="trackEdges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdge" type="topo:TrackEdgeProjection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="funcElements" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="funcElement" type="topo:FuncElementProjection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="areaId" type="xs:string" use="required"/>
+		<xs:attribute name="epsg" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="mapArea" type="topo:MapArea"/>
+	<xs:complexType name="TrackEdgeProjection">
+		<xs:sequence>
+			<xs:element name="coordinates" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="coordinate" type="topo:TrackEdgeCoordinate" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="trackEdgeId" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeProjection" type="topo:TrackEdgeProjection"/>
+	<xs:complexType name="TrackEdgeCoordinate">
+		<xs:sequence/>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="x" type="xs:decimal" use="required"/>
+		<xs:attribute name="y" type="xs:decimal" use="required"/>
+		<xs:attribute name="z" type="xs:decimal" use="required"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeCoordinate" type="topo:TrackEdgeCoordinate"/>
+	<xs:complexType name="FuncElementProjection">
+		<xs:sequence>
+			<xs:element name="elementRef" type="topo:FuncElementRef" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="x" type="xs:decimal" use="required"/>
+		<xs:attribute name="y" type="xs:decimal" use="required"/>
+		<xs:attribute name="z" type="xs:decimal" use="required"/>
+	</xs:complexType>
+	<xs:element name="funcElementProjection" type="topo:FuncElementProjection"/>
+	<xs:complexType name="FuncElementRef">
+		<xs:sequence/>
+		<xs:attribute name="simplePoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:SimplePoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="funcElementRef" type="topo:FuncElementRef"/>
+	<xs:complexType name="ETCSMarker">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="markerFunctionStop" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="eTCSMarker" type="topo:ETCSMarker"/>
+	<xs:complexType name="StopLocation">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="stopTrainLimit" type="topo:StopTrainLimit" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopLocation" type="topo:StopLocation"/>
+	<xs:complexType name="StopTrainLimitLength">
+		<xs:sequence/>
+		<xs:attribute name="maxTrainLength" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopTrainLimitLength" type="topo:StopTrainLimitLength"/>
+	<xs:complexType name="StopTrainLimitAxles">
+		<xs:sequence/>
+		<xs:attribute name="maxTrainLength" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopTrainLimitAxles" type="topo:StopTrainLimitAxles"/>
+	<xs:complexType name="StopTrainLimitWagons">
+		<xs:sequence/>
+		<xs:attribute name="maxWagonNumber" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopTrainLimitWagons" type="topo:StopTrainLimitWagons"/>
+	<xs:complexType name="StopTrainLimitSizes">
+		<xs:sequence/>
+		<xs:attribute name="trainSize" type="topo:StopTrainLimitSize"/>
+	</xs:complexType>
+	<xs:element name="stopTrainLimitSize" type="topo:StopTrainLimitSize"/>
+	<xs:complexType name="StopTrainLimit">
+		<xs:sequence>
+			<xs:element name="trainLimitLength" type="topo:StopTrainLimitLength" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="trainLimitAxles" type="topo:StopTrainLimitAxles" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="trainLimitWagons" type="topo:StopTrainLimitWagons" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="trainLimitSize" type="topo:StopTrainLimitSize" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="stopTrainLimit" type="topo:StopTrainLimit"/>
+	<xs:complexType name="PlatformEdge">
+		<xs:sequence>
+			<xs:element name="linearLocation" type="topo:LinkedPath" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="stopLocations" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to topo:StopLocation</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="stopLocation">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="platformEdge" type="topo:PlatformEdge"/>
+	<xs:complexType name="Platform">
+		<xs:sequence>
+			<xs:element name="platformEdges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="platformEdge" type="topo:PlatformEdge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="platform" type="topo:Platform"/>
+	<xs:complexType name="OperationalPoint">
+		<xs:sequence>
+			<xs:element name="timingPoints" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to topo:TimingPoint</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="timingPoint">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="platforms" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="platform" type="topo:Platform" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="topo:OPType"/>
+	</xs:complexType>
+	<xs:element name="operationalPoint" type="topo:OperationalPoint"/>
+	<xs:complexType name="TimingPoint">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="timingPointObject" type="topo:TimingPointObject" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="direction" type="topo:Direction"/>
+	</xs:complexType>
+	<xs:element name="timingPoint" type="topo:TimingPoint"/>
+	<xs:complexType name="TimingPointObject">
+		<xs:sequence/>
+		<xs:attribute name="etcsMarkerBoard" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:ETCSMarker</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="platform" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:Platform</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="stopLocation" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:StopLocation</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="timingPointObject" type="topo:TimingPointObject"/>
+	<xs:complexType name="FunctionalArea">
+		<xs:sequence>
+			<xs:element name="opPoints" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="opPoint" type="topo:OperationalPoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="timingPoints" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="timingPoint" type="topo:TimingPoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="simplePoints" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="simplePoint" type="topo:SimplePoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="slipCrossings" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="slipCrossing" type="topo:SlipCrossing" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="derailers" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="derailer" type="topo:Derailer" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="crossings" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="crossing" type="topo:Crossing" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="baliseGroups" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="baliseGroup" type="topo:BaliseGroup" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="areaId" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="functionalArea" type="topo:FunctionalArea"/>
+</xs:schema>
