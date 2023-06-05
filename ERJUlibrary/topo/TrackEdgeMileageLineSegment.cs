@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace topo
 {
-	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "trackEdgeMilageLineSegment")]
-	public struct TrackEdgeMilageLineSegment
+	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "trackEdgeMileageLineSegment")]
+	public struct TrackEdgeMileageLineSegment
 	{		
 		private string trackEdge;
 		[XmlAttribute(AttributeName = "trackEdge")]
@@ -20,6 +20,6 @@ namespace topo
             }
         
         }		
-		public MilageMarker points;
+		public MileageMarker points;
 	}
 }

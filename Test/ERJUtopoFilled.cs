@@ -762,11 +762,11 @@ namespace Test
         {
             namespaces.Add("topo", "https://erju.org/topo");
 
-            MilageMarker milageMarker = new MilageMarker();
+            MileageMarker milageMarker = new MileageMarker();
 
             milageMarker.p = 4294967295;
             milageMarker.v = 4294967295;
-            var serializer = new XmlSerializer(typeof(MilageMarker));
+            var serializer = new XmlSerializer(typeof(MileageMarker));
 
             serializer.Serialize(writer, milageMarker, namespaces);
 
@@ -782,11 +782,11 @@ namespace Test
         {
             namespaces.Add("topo", "https://erju.org/topo");
 
-            TrackEdgeMilageLineSegment trackEdgeMilageLineSegment = new TrackEdgeMilageLineSegment();
+            TrackEdgeMileageLineSegment trackEdgeMilageLineSegment = new TrackEdgeMileageLineSegment();
 
             trackEdgeMilageLineSegment.TrackEdge = "HelloWorld";
             trackEdgeMilageLineSegment.points = new();
-            var serializer = new XmlSerializer(typeof(TrackEdgeMilageLineSegment));
+            var serializer = new XmlSerializer(typeof(TrackEdgeMileageLineSegment));
 
             serializer.Serialize(writer, trackEdgeMilageLineSegment, namespaces);
 
@@ -802,11 +802,11 @@ namespace Test
         {
             namespaces.Add("topo", "https://erju.org/topo");
 
-            MilageLine milageLine = new MilageLine();
+            MileageLine milageLine = new MileageLine();
 
             milageLine.Id = "HelloWorld";
             milageLine.trackEdges = new();
-            var serializer = new XmlSerializer(typeof(MilageLine));
+            var serializer = new XmlSerializer(typeof(MileageLine));
 
             serializer.Serialize(writer, milageLine, namespaces);
 
@@ -822,11 +822,11 @@ namespace Test
         {
             namespaces.Add("topo", "https://erju.org/topo");
 
-            MilageArea milageArea = new MilageArea();
+            MileageArea milageArea = new MileageArea();
 
             milageArea.AreaId = "HelloWorld";
-            milageArea.milageLines = new();
-            var serializer = new XmlSerializer(typeof(MilageArea));
+            milageArea.mileageLines = new();
+            var serializer = new XmlSerializer(typeof(MileageArea));
 
             serializer.Serialize(writer, milageArea, namespaces);
 
@@ -917,25 +917,6 @@ namespace Test
             var serializer = new XmlSerializer(typeof(FuncElementProjection));
 
             serializer.Serialize(writer, funcElementProjection, namespaces);
-
-            // Get the serialized XML as a string
-            string xml = writer.ToString();
-
-            validate(xml);
-
-            Assert.Equal("", validationOutput);
-        }
-        [Fact]
-        public void FuncElementRef()
-        {
-            namespaces.Add("topo", "https://erju.org/topo");
-
-            FuncElementRef funcElementRef = new FuncElementRef();
-
-            funcElementRef.SimplePoint = "HelloWorld";
-            var serializer = new XmlSerializer(typeof(FuncElementRef));
-
-            serializer.Serialize(writer, funcElementRef, namespaces);
 
             // Get the serialized XML as a string
             string xml = writer.ToString();
@@ -1179,6 +1160,375 @@ namespace Test
             Assert.Equal("", validationOutput);
         }
         [Fact]
+        public void TrackEdgeSpeedProfile()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            TrackEdgeSpeedProfile trackEdgeSpeedProfile = new TrackEdgeSpeedProfile();
+
+            trackEdgeSpeedProfile.Id = "HelloWorld";
+            trackEdgeSpeedProfile.TrackEdge = "HelloWorld";
+            trackEdgeSpeedProfile.staticSpeedProfile = new();
+            trackEdgeSpeedProfile.axleLoadSpeedProfiles = new();
+            trackEdgeSpeedProfile.direction = Direction.both;
+            var serializer = new XmlSerializer(typeof(TrackEdgeSpeedProfile));
+
+            serializer.Serialize(writer, trackEdgeSpeedProfile, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void StaticSpeedLimit()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            StaticSpeedLimit staticSpeedLimit = new StaticSpeedLimit();
+
+            staticSpeedLimit.p = 4294967295;
+            staticSpeedLimit.speed = 4294967295;
+            staticSpeedLimit.specificStaticSpeedLimits = new();
+            var serializer = new XmlSerializer(typeof(StaticSpeedLimit));
+
+            serializer.Serialize(writer, staticSpeedLimit, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void SpecificStaticSpeedLimit()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            SpecificStaticSpeedLimit specificStaticSpeedLimit = new SpecificStaticSpeedLimit();
+
+            specificStaticSpeedLimit.speed = 4294967295;
+            specificStaticSpeedLimit.specificLimitType = new();
+            var serializer = new XmlSerializer(typeof(SpecificStaticSpeedLimit));
+
+            serializer.Serialize(writer, specificStaticSpeedLimit, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void SpeedLimitType()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            SpeedLimitType speedLimitType = new SpeedLimitType();
+
+            speedLimitType.otherCategory = OtherSpecificStaticSpeedProfileCategory.passengerTrain;
+            speedLimitType.cantDeficiency = CantDeficiencyCategory._100mm;
+            var serializer = new XmlSerializer(typeof(SpeedLimitType));
+
+            serializer.Serialize(writer, speedLimitType, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void AxleLoadSpeedProfile()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            AxleLoadSpeedProfile axleLoadSpeedProfile = new AxleLoadSpeedProfile();
+
+            axleLoadSpeedProfile.startP = 4294967295;
+            axleLoadSpeedProfile.endP = 4294967295;
+            axleLoadSpeedProfile.speed = 4294967295;
+            axleLoadSpeedProfile.axleLoadCategory = AxleLoadCategory.A;
+            var serializer = new XmlSerializer(typeof(AxleLoadSpeedProfile));
+
+            serializer.Serialize(writer, axleLoadSpeedProfile, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void MpTargetMarker()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            MpTargetMarker mpTargetMarker = new MpTargetMarker();
+
+            mpTargetMarker.Id = "HelloWorld";
+            mpTargetMarker.type = MpTargetMarkerType.Balise;
+            mpTargetMarker.trackEdgePoint = new();
+            var serializer = new XmlSerializer(typeof(MpTargetMarker));
+
+            serializer.Serialize(writer, mpTargetMarker, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void Tunnel()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            Tunnel tunnel = new Tunnel();
+
+            tunnel.Id = "HelloWorld";
+            tunnel.Name = "HelloWorld";
+            tunnel.tunnelTubes = new();
+            var serializer = new XmlSerializer(typeof(Tunnel));
+
+            serializer.Serialize(writer, tunnel, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void TunnelTube()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            TunnelTube tunnelTube = new TunnelTube();
+
+            tunnelTube.id = 4294967295;
+            tunnelTube.startTunnelPortal = new();
+            tunnelTube.endTunnelPortal = new();
+            tunnelTube.numberOfTracks = 4294967295;
+            tunnelTube.trackSections = new();
+            tunnelTube.tubeLength = 4294967295;
+            tunnelTube.crossSection = 4294967295;
+            var serializer = new XmlSerializer(typeof(TunnelTube));
+
+            serializer.Serialize(writer, tunnelTube, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void TunnelPortal()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            TunnelPortal tunnelPortal = new TunnelPortal();
+
+            tunnelPortal.Id = "HelloWorld";
+            tunnelPortal.trackEdgePoint = new();
+            var serializer = new XmlSerializer(typeof(TunnelPortal));
+
+            serializer.Serialize(writer, tunnelPortal, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void Bridge()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            Bridge bridge = new Bridge();
+
+            bridge.Id = "HelloWorld";
+            bridge.Name = "HelloWorld";
+            bridge.trackEdgeSections = new();
+            var serializer = new XmlSerializer(typeof(Bridge));
+
+            serializer.Serialize(writer, bridge, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void Underpass()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            Underpass underpass = new Underpass();
+
+            underpass.Id = "HelloWorld";
+            underpass.Name = "HelloWorld";
+            underpass.trackEdgeSections = new();
+            var serializer = new XmlSerializer(typeof(Underpass));
+
+            serializer.Serialize(writer, underpass, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void TvpSection()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            TvpSection tvpSection = new TvpSection();
+
+            tvpSection.Id = "HelloWorld";
+            tvpSection.Name = "HelloWorld";
+            tvpSection.trackSections = new();
+            tvpSection.trainDetectors = new() {new()};
+            var serializer = new XmlSerializer(typeof(TvpSection));
+
+            serializer.Serialize(writer, tvpSection, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void TrainDetector()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            TrainDetector trainDetector = new TrainDetector();
+
+            trainDetector.Id = "HelloWorld";
+            trainDetector.Name = "HelloWorld";
+            trainDetector.trackEdgePoint = new();
+            trainDetector.type = TrainDetectorType.trackCircuitBorder;
+            var serializer = new XmlSerializer(typeof(TrainDetector));
+
+            serializer.Serialize(writer, trainDetector, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void LevelCrossing()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            LevelCrossing levelCrossing = new LevelCrossing();
+
+            levelCrossing.Id = "HelloWorld";
+            levelCrossing.Name = "HelloWorld";
+            levelCrossing.trackEdgeSections = new();
+            var serializer = new XmlSerializer(typeof(LevelCrossing));
+
+            serializer.Serialize(writer, levelCrossing, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void Border()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            Border border = new Border();
+
+            border.Id = "HelloWorld";
+            border.Name = "HelloWorld";
+            border.trackEdgePoint = new();
+            var serializer = new XmlSerializer(typeof(Border));
+
+            serializer.Serialize(writer, border, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void Infrastructure()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            Infrastructure infrastructure = new Infrastructure();
+
+            infrastructure.topoAreas = new();
+            infrastructure.geometryAreas = new();
+            infrastructure.sampledGeometryAreas = new();
+            infrastructure.propertiesAreas = new();
+            infrastructure.mileageAreas = new();
+            infrastructure.mapAreas = new();
+            var serializer = new XmlSerializer(typeof(Infrastructure));
+
+            serializer.Serialize(writer, infrastructure, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
+        public void FuncElementRef()
+        {
+            namespaces.Add("topo", "https://erju.org/topo");
+
+            FuncElementRef funcElementRef = new FuncElementRef();
+
+            funcElementRef.SimplePoint = "HelloWorld";
+            funcElementRef.EtcsMarker = "HelloWorld";
+            funcElementRef.StopLocation = "HelloWorld";
+            funcElementRef.TimingPoint = "HelloWorld";
+            funcElementRef.OperationalPoint = "HelloWorld";
+            funcElementRef.Balise = "HelloWorld";
+            var serializer = new XmlSerializer(typeof(FuncElementRef));
+
+            serializer.Serialize(writer, funcElementRef, namespaces);
+
+            // Get the serialized XML as a string
+            string xml = writer.ToString();
+
+            validate(xml);
+
+            Assert.Equal("", validationOutput);
+        }
+        [Fact]
         public void FunctionalArea()
         {
             namespaces.Add("topo", "https://erju.org/topo");
@@ -1193,6 +1543,16 @@ namespace Test
             functionalArea.derailers = new();
             functionalArea.crossings = new();
             functionalArea.baliseGroups = new();
+            functionalArea.etcsMarkers = new();
+            functionalArea.stopLocations = new();
+            functionalArea.teSpeedProfiles = new();
+            functionalArea.tunnels = new();
+            functionalArea.bridges = new();
+            functionalArea.underpasses = new();
+            functionalArea.tvps = new();
+            functionalArea.mpTargetMarkers = new();
+            functionalArea.levelCrossings = new();
+            functionalArea.borders = new();
             var serializer = new XmlSerializer(typeof(FunctionalArea));
 
             serializer.Serialize(writer, functionalArea, namespaces);

@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace topo
 {
-	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "milageMarker")]
-	public struct MilageMarker
+	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "mileageMarker")]
+	public struct MileageMarker
 	{		
 		[XmlAttribute]
 		public uint p;		

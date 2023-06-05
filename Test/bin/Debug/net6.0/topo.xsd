@@ -33,11 +33,68 @@
 			<xs:enumeration value="radioHole"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="StopTrainLimitSize">
+	<xs:simpleType name="TrainEndApplicability">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="lengthDelay"/>
+			<xs:enumeration value="noLengthDelay"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecificStaticSpeedProfileType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="cantDeficiency"/>
+			<xs:enumeration value="otherSpecificSSP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OtherSpecificStaticSpeedProfileCategory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="freightTrainP"/>
+			<xs:enumeration value="freightTrainG"/>
+			<xs:enumeration value="passengerTrain"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CantDeficiencyCategory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="80mm"/>
+			<xs:enumeration value="100mm"/>
+			<xs:enumeration value="130mm"/>
+			<xs:enumeration value="150mm"/>
+			<xs:enumeration value="165mm"/>
+			<xs:enumeration value="180mm"/>
+			<xs:enumeration value="210mm"/>
+			<xs:enumeration value="225mm"/>
+			<xs:enumeration value="245mm"/>
+			<xs:enumeration value="275mm"/>
+			<xs:enumeration value="300mm"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AxleLoadCategory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="HS17"/>
+			<xs:enumeration value="B1"/>
+			<xs:enumeration value="C2"/>
+			<xs:enumeration value="C3"/>
+			<xs:enumeration value="C4"/>
+			<xs:enumeration value="D2"/>
+			<xs:enumeration value="D3"/>
+			<xs:enumeration value="D4"/>
+			<xs:enumeration value="D4XL"/>
+			<xs:enumeration value="E4"/>
+			<xs:enumeration value="E5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StopTrainLimitSizeEnum">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="fullTrain"/>
 			<xs:enumeration value="halfTrain"/>
 			<xs:enumeration value="shortTrain"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MpTargetMarkerType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ETCSMarker"/>
+			<xs:enumeration value="StopLocation"/>
+			<xs:enumeration value="Balise"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="OPType">
@@ -56,6 +113,12 @@
 			<xs:enumeration value="both"/>
 			<xs:enumeration value="endToStart"/>
 			<xs:enumeration value="startToEnd"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrainDetectorType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="axleCounter"/>
+			<xs:enumeration value="trackCircuitBorder"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="TrackEdge">
@@ -498,15 +561,76 @@
 		<xs:attribute name="brakeDist" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="permittedBrakingDistance" type="topo:PermittedBrakingDistance"/>
-	<xs:complexType name="MilageMarker">
+	<xs:complexType name="TrackEdgeSpeedProfile">
+		<xs:sequence>
+			<xs:element name="staticSpeedProfile" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="staticSpeedProfileItem" type="topo:StaticSpeedLimit" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="axleLoadSpeedProfiles" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="axleLoadSpeedProfile" type="topo:AxleLoadSpeedProfile" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="trackEdge" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TrackEdge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="direction" type="topo:Direction"/>
+	</xs:complexType>
+	<xs:element name="trackEdgeSpeedProfile" type="topo:TrackEdgeSpeedProfile"/>
+	<xs:complexType name="StaticSpeedLimit">
+		<xs:sequence>
+			<xs:element name="specificStaticSpeedLimits" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="specificStaticSpeedLimit" type="topo:SpecificStaticSpeedLimit" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="speed" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="staticSpeedLimit" type="topo:StaticSpeedLimit"/>
+	<xs:complexType name="SpecificStaticSpeedLimit">
+		<xs:sequence>
+			<xs:element name="specificLimitType" type="topo:SpeedLimitType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="speed" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="specificStaticSpeedLimit" type="topo:SpecificStaticSpeedLimit"/>
+	<xs:complexType name="SpeedLimitType">
+		<xs:sequence/>
+		<xs:attribute name="otherCategory" type="topo:OtherSpecificStaticSpeedProfileCategory"/>
+		<xs:attribute name="cantDeficiency" type="topo:CantDeficiencyCategory"/>
+	</xs:complexType>
+	<xs:element name="speedLimitType" type="topo:SpeedLimitType"/>
+	<xs:complexType name="AxleLoadSpeedProfile">
+		<xs:sequence/>
+		<xs:attribute name="startP" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="endP" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="speed" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="axleLoadCategory" type="topo:AxleLoadCategory"/>
+	</xs:complexType>
+	<xs:element name="axleLoadSpeedProfile" type="topo:AxleLoadSpeedProfile"/>
+	<xs:complexType name="MileageMarker">
 		<xs:sequence/>
 		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="v" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
-	<xs:element name="milageMarker" type="topo:MilageMarker"/>
-	<xs:complexType name="TrackEdgeMilageLineSegment">
+	<xs:element name="mileageMarker" type="topo:MileageMarker"/>
+	<xs:complexType name="TrackEdgeMileageLineSegment">
 		<xs:sequence>
-			<xs:element name="points" type="topo:MilageMarker" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="points" type="topo:MileageMarker" minOccurs="1" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="trackEdge" type="xs:string" use="required">
 			<xs:annotation>
@@ -514,21 +638,21 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:element name="trackEdgeMilageLineSegment" type="topo:TrackEdgeMilageLineSegment"/>
-	<xs:complexType name="MilageLine">
+	<xs:element name="trackEdgeMileageLineSegment" type="topo:TrackEdgeMileageLineSegment"/>
+	<xs:complexType name="MileageLine">
 		<xs:sequence>
-			<xs:element name="trackEdges" type="topo:TrackEdgeMilageLineSegment" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="trackEdges" type="topo:TrackEdgeMileageLineSegment" minOccurs="1" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
-	<xs:element name="milageLine" type="topo:MilageLine"/>
-	<xs:complexType name="MilageArea">
+	<xs:element name="mileageLine" type="topo:MileageLine"/>
+	<xs:complexType name="MileageArea">
 		<xs:sequence>
-			<xs:element name="milageLines" type="topo:MilageLine" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="mileageLines" type="topo:MileageLine" minOccurs="1" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="areaId" type="xs:string" use="required"/>
 	</xs:complexType>
-	<xs:element name="milageArea" type="topo:MilageArea"/>
+	<xs:element name="mileageArea" type="topo:MileageArea"/>
 	<xs:complexType name="MapArea">
 		<xs:sequence>
 			<xs:element name="trackEdges" minOccurs="0" maxOccurs="1">
@@ -589,6 +713,31 @@
 				<xs:documentation>Reference to topo:SimplePoint</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="etcsMarker" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:ETCSMarker</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="stopLocation" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:StopLocation</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="timingPoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:TimingPoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="operationalPoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:OperationalPoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="balise" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to topo:Balise</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="funcElementRef" type="topo:FuncElementRef"/>
 	<xs:complexType name="ETCSMarker">
@@ -624,9 +773,9 @@
 		<xs:attribute name="maxWagonNumber" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="stopTrainLimitWagons" type="topo:StopTrainLimitWagons"/>
-	<xs:complexType name="StopTrainLimitSizes">
+	<xs:complexType name="StopTrainLimitSize">
 		<xs:sequence/>
-		<xs:attribute name="trainSize" type="topo:StopTrainLimitSize"/>
+		<xs:attribute name="trainSize" type="topo:StopTrainLimitSizeEnum"/>
 	</xs:complexType>
 	<xs:element name="stopTrainLimitSize" type="topo:StopTrainLimitSize"/>
 	<xs:complexType name="StopTrainLimit">
@@ -638,6 +787,14 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="stopTrainLimit" type="topo:StopTrainLimit"/>
+	<xs:complexType name="MpTargetMarker">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="topo:MpTargetMarkerType"/>
+	</xs:complexType>
+	<xs:element name="mpTargetMarker" type="topo:MpTargetMarker"/>
 	<xs:complexType name="PlatformEdge">
 		<xs:sequence>
 			<xs:element name="linearLocation" type="topo:LinkedPath" minOccurs="1" maxOccurs="1"/>
@@ -732,6 +889,132 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="timingPointObject" type="topo:TimingPointObject"/>
+	<xs:complexType name="Tunnel">
+		<xs:sequence>
+			<xs:element name="tunnelTubes" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tunnelTube" type="topo:TunnelTube" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="tunnel" type="topo:Tunnel"/>
+	<xs:complexType name="TunnelTube">
+		<xs:sequence>
+			<xs:element name="startTunnelPortal" type="topo:TunnelPortal" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="endTunnelPortal" type="topo:TunnelPortal" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="numberOfTracks" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="tubeLength" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="crossSection" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="tunnelTube" type="topo:TunnelTube"/>
+	<xs:complexType name="TunnelPortal">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="tunnelPortal" type="topo:TunnelPortal"/>
+	<xs:complexType name="Bridge">
+		<xs:sequence>
+			<xs:element name="trackEdgeSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="bridge" type="topo:Bridge"/>
+	<xs:complexType name="Underpass">
+		<xs:sequence>
+			<xs:element name="trackEdgeSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="underpass" type="topo:Underpass"/>
+	<xs:complexType name="TvpSection">
+		<xs:sequence>
+			<xs:element name="trackSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="trainDetectors" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to topo:TrainDetector</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trainDetector">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="tvpSection" type="topo:TvpSection"/>
+	<xs:complexType name="TrainDetector">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="topo:TrainDetectorType"/>
+	</xs:complexType>
+	<xs:element name="trainDetector" type="topo:TrainDetector"/>
+	<xs:complexType name="LevelCrossing">
+		<xs:sequence>
+			<xs:element name="trackEdgeSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="trackEdgeSection" type="topo:TrackEdgeSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="levelCrossing" type="topo:LevelCrossing"/>
+	<xs:complexType name="Border">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="topo:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="border" type="topo:Border"/>
 	<xs:complexType name="FunctionalArea">
 		<xs:sequence>
 			<xs:element name="opPoints" minOccurs="0" maxOccurs="1">
@@ -783,8 +1066,125 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="etcsMarkers" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="etcsMarker" type="topo:ETCSMarker" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="stopLocations" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="stopLocation" type="topo:StopLocation" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="teSpeedProfiles" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="teSpeedProfile" type="topo:TrackEdgeSpeedProfile" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tunnels" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tunnel" type="topo:Tunnel" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bridges" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="bridge" type="topo:Bridge" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="underpasses" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="underpasse" type="topo:Underpass" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tvps" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tvp" type="topo:TvpSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mpTargetMarkers" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="mpTargetMarker" type="topo:MpTargetMarker" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="levelCrossings" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="levelCrossing" type="topo:LevelCrossing" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="borders" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="border" type="topo:Border" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="areaId" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:element name="functionalArea" type="topo:FunctionalArea"/>
+	<xs:complexType name="Infrastructure">
+		<xs:sequence>
+			<xs:element name="topoAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="topoArea" type="topo:TopoArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometryAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="geometryArea" type="topo:GeometryArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sampledGeometryAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sampledGeometryArea" type="topo:SampledGeometryArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="propertiesAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="propertiesArea" type="topo:PropertiesArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mileageAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="mileageArea" type="topo:MileageArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mapAreas" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="mapArea" type="topo:MapArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="infrastructure" type="topo:Infrastructure"/>
 </xs:schema>

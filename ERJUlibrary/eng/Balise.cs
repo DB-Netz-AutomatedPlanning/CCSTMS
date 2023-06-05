@@ -36,13 +36,35 @@ namespace eng
             }
         
         }		
-		[XmlAttribute(AttributeName ="fixed")]
+		[XmlAttribute]
+		public uint p;		
+		[XmlAttribute]
+		public uint numberOfBalisesInGroup;		
+		[XmlAttribute]
 		public bool _fixed;		
 		[XmlAttribute]
 		public bool linked;		
 		[XmlAttribute]
 		public bool verticallyOriented;		
 		[XmlAttribute]
-		public bool standardSized;
+		public bool standardSize;		
+		[XmlAttribute]
+        ETCSlevel level;		
+		[XmlAttribute]
+		public uint packetNumber;		
+		private string baliseGroup;
+		[XmlAttribute(AttributeName = "baliseGroup")]
+		public string BaliseGroup
+        {
+            set
+            {
+                this.baliseGroup = value;
+            }
+            get
+            {
+                return this.baliseGroup != null ? this.baliseGroup : "";   
+            }
+        
+        }
 	}
 }

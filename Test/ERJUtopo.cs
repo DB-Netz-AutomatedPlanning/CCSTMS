@@ -1197,9 +1197,9 @@ namespace Test
 
 
 
-            MilageMarker milageMarker = new MilageMarker();
+            MileageMarker milageMarker = new MileageMarker();
 
-            var serializer = new XmlSerializer(typeof(MilageMarker));
+            var serializer = new XmlSerializer(typeof(MileageMarker));
 
 
 
@@ -1231,9 +1231,9 @@ namespace Test
 
 
 
-            TrackEdgeMilageLineSegment trackEdgeMilageLineSegment = new TrackEdgeMilageLineSegment();
+            TrackEdgeMileageLineSegment trackEdgeMilageLineSegment = new TrackEdgeMileageLineSegment();
 
-            var serializer = new XmlSerializer(typeof(TrackEdgeMilageLineSegment));
+            var serializer = new XmlSerializer(typeof(TrackEdgeMileageLineSegment));
 
 
 
@@ -1265,9 +1265,9 @@ namespace Test
 
 
 
-            MilageLine milageLine = new MilageLine();
+            MileageLine milageLine = new MileageLine();
 
-            var serializer = new XmlSerializer(typeof(MilageLine));
+            var serializer = new XmlSerializer(typeof(MileageLine));
 
 
 
@@ -1299,9 +1299,9 @@ namespace Test
 
 
 
-            MilageArea milageArea = new MilageArea();
+            MileageArea milageArea = new MileageArea();
 
-            var serializer = new XmlSerializer(typeof(MilageArea));
+            var serializer = new XmlSerializer(typeof(MileageArea));
 
 
 

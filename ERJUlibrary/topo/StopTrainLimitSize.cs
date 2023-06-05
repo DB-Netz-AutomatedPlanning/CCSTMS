@@ -1,13 +1,13 @@
+using ERJUlibrary.topo;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace topo
 {
 	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "stopTrainLimitSize")]
-	public enum StopTrainLimitSize
+	public struct StopTrainLimitSize
 	{
-		fullTrain,
-		halfTrain,
-		shortTrain,
+		[XmlAttribute]
+		public StopTrainLimitSizeEnum trainSize { get; set; }
 	}
 }

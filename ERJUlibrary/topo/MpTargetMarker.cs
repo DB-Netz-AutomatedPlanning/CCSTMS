@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace topo
 {
-	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "milageLine")]
-	public struct MilageLine
+	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "mpTargetMarker")]
+	public struct MpTargetMarker
 	{		
 		[XmlAttribute]
 		private string id;
@@ -21,6 +21,8 @@ namespace topo
             }
         
         }		
-		public TrackEdgeMilageLineSegment trackEdges;
+		[XmlAttribute]
+        public MpTargetMarkerType type;		
+		public TrackEdgePoint trackEdgePoint;
 	}
 }

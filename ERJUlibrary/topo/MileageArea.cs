@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace topo
 {
-	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "milageArea")]
-	public struct MilageArea
+	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "mileageArea")]
+	public struct MileageArea
 	{		
 		[XmlAttribute]
 		private string areaId;
@@ -21,6 +21,6 @@ namespace topo
             }
         
         }		
-		public MilageLine milageLines;
+		public MileageLine mileageLines;
 	}
 }

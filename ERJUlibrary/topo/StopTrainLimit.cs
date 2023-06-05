@@ -5,10 +5,10 @@ namespace topo
 {
 	[XmlRoot(Namespace = "https://erju.org/topo", ElementName = "stopTrainLimit")]
 	public struct StopTrainLimit
-	{		
-		public StopTrainLimitLength trainLimitLength;		
-		public StopTrainLimitAxles trainLimitAxles;		
-		public StopTrainLimitWagons trainLimitWagons;		
+	{
+        public StopTrainLimitLength trainLimitLength;
+        public StopTrainLimitAxles trainLimitAxles;		
+		public StopTrainLimitWagons trainLimitWagons;
 		public StopTrainLimitSize trainLimitSize;
 	}
 }

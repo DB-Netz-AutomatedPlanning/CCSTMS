@@ -20,6 +20,37 @@ namespace eng
                 return this.id != null ? this.id : "";   
             }
         
-        }
+        }		
+		[XmlAttribute]
+		private string name;
+		[XmlAttribute(AttributeName = "name")]
+		public string Name
+        {
+            set
+            {
+                this.name = value;
+            }
+            get
+            {
+                return this.name != null ? this.name : "";   
+            }
+        
+        }		
+		private string positionRef;
+		[XmlAttribute(AttributeName = "positionRef")]
+		public string PositionRef
+        {
+            set
+            {
+                this.positionRef = value;
+            }
+            get
+            {
+                return this.positionRef != null ? this.positionRef : "";   
+            }
+        
+        }		
+		public List<string> trackEdges;		
+		public List<string> dangerPoints;
 	}
 }
