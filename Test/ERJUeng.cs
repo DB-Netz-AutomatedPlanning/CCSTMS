@@ -32,7 +32,13 @@ namespace Test
 
 
             // Set the schema to validate against
+            settings.Schemas.Add(null, "infra.xsd");
+            // Set the schema to validate against
             settings.Schemas.Add(null, "eng.xsd");
+            // Set the schema to validate against
+            settings.Schemas.Add(null, "ato.xsd");
+            // Set the schema to validate against
+            settings.Schemas.Add(null, "tp.xsd");
 
             // Attach the validation event handler
             settings.ValidationEventHandler += ValidationCallback;
@@ -53,7 +59,6 @@ namespace Test
                 }
             }
         }
-
         private void ValidationCallback(object sender, ValidationEventArgs e)
         {
 
@@ -97,7 +102,6 @@ namespace Test
             Assert.Equal("", validationOutput);
 
         }
-
         [Fact]
         public void Balise()
         {

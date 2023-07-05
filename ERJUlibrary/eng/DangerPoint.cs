@@ -1,15 +1,15 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using topo;
+using infra;
 
 namespace eng
 {
 	[XmlRoot(Namespace = "https://erju.org/eng", ElementName = "dangerPoint")]
-	public struct DangerPoint
+	public class DangerPoint
 	{		
 		[XmlAttribute]
-		private string id;
+		private string? id;
 		[XmlAttribute(AttributeName = "id")]
 		public string Id
         {
@@ -24,7 +24,7 @@ namespace eng
         
         }		
 		[XmlAttribute]
-		private string name;
+		private string? name;
 		[XmlAttribute(AttributeName = "name")]
 		public string Name
         {
@@ -37,25 +37,7 @@ namespace eng
                 return this.name != null ? this.name : "";   
             }
         
-        }		
-		private string position;
-		[XmlAttribute(AttributeName = "position")]
-		public string Position
-        {
-            set
-            {
-                this.position = value;
-            }
-            get
-            {
-                return this.position != null ? this.position : "";   
-            }
-        
-        }		
-		[XmlAttribute]
-		public uint p;		
-		public TrackEdgePoint trackEdgePoints;		
-		[XmlAttribute]
-		public uint allowableApproachingSpeed;
+        }			
+		public TrackEdgePoint? trackEdgePoint;		
 	}
 }

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ERJUtopoFilled.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -22,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ERJUlibrary">
-      <HintPath>..\ERJUlibrary\bin\Debug\net6.0\ERJUlibrary.dll</HintPath>
+    <Reference Include="ERJUlibrary_4.8">
+      <HintPath>..\ERJUlibrary_4.8\bin\Debug\ERJUlibrary_4.8.dll</HintPath>
     </Reference>
   </ItemGroup>
 

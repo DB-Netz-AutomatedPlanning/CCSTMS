@@ -6114,19 +6114,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\k7ada\\.nuget\\packages\\": {}
+    "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\Test.csproj",
+      "projectUniqueName": "C:\\Hadary\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\Test.csproj",
       "projectName": "Test",
-      "projectPath": "F:\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\Test.csproj",
-      "packagesPath": "C:\\Users\\k7ada\\.nuget\\packages\\",
-      "outputPath": "F:\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\obj\\",
+      "projectPath": "C:\\Hadary\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\Test.csproj",
+      "packagesPath": "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\",
+      "outputPath": "C:\\Hadary\\DB_Work\\ERJU\\ERJUcodeGenerator\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\k7ada\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Khaled Elhadary\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6134,7 +6134,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "E:\\ERDM\\Libraries": {},
+        "D:\\DB_Work\\Aplan--GIT\\APlan\\Libraries": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6190,7 +6190,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -4,10 +4,10 @@ using System.Xml.Serialization;
 namespace eng
 {
 	[XmlRoot(Namespace = "https://erju.org/eng", ElementName = "levelCrossing")]
-	public struct LevelCrossing
+	public class LevelCrossing
 	{		
 		[XmlAttribute]
-		private string id;
+		private string? id;
 		[XmlAttribute(AttributeName = "id")]
 		public string Id
         {
@@ -20,30 +20,9 @@ namespace eng
                 return this.id != null ? this.id : "";   
             }
         
-        }		
-		[XmlAttribute]
-		private string name;
-		[XmlAttribute(AttributeName = "name")]
-		public string Name
-        {
-            set
-            {
-                this.name = value;
-            }
-            get
-            {
-                return this.name != null ? this.name : "";   
-            }
-        
-        }		
-		[XmlAttribute]
-		public uint p;		
+        }
+        [XmlArrayItem("dangerPoint", Namespace = "https://erju.org/eng")]
+        public List<DangerPointRef>? dangerPoints;
 
-		[XmlAttribute]
-LevelCrossingActivation activation;		
-
-		[XmlAttribute]
-LevelCrossingSupervisionState supervisionState;		
-		public List<string> dangerPoints;
-	}
+    }
 }

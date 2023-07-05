@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<xs:schema targetNamespace="https://erju.org/tp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tp="https://erju.org/tp" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra">
+	<xs:import namespace="https://erju.org/infra" schemaLocation="infra.xsd"/>
+	<xs:simpleType name="MinimalDrivability">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="full"/>
+			<xs:enumeration value="limited"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ProtectedInfraElement">
+		<xs:sequence/>
+		<xs:attribute name="simplePoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:SimplePoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="crossing" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:Crossing</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="derailer" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:Derailer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="levelCrossing" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:LevelCrossing</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="protectedInfraElement" type="tp:ProtectedInfraElement"/>
+	<xs:complexType name="DriveProtectionSectionGroup">
+		<xs:sequence>
+			<xs:element name="driveProtectionSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="driveProtectionSection" type="tp:DriveProtectionSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="protectedInfraElements" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="protectedInfraElement" type="tp:ProtectedInfraElement" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="driveProtectionSectionGroup" type="tp:DriveProtectionSectionGroup"/>
+	<xs:complexType name="DriveProtectionSection">
+		<xs:sequence>
+			<xs:element name="trackEdgeSection" type="infra:TrackEdgeSection" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="flankProtectionDirection" type="infra:Direction"/>
+		<xs:attribute name="minimalDrivability" type="tp:MinimalDrivability"/>
+	</xs:complexType>
+	<xs:element name="driveProtectionSection" type="tp:DriveProtectionSection"/>
+	<xs:complexType name="AllocationSection">
+		<xs:sequence>
+			<xs:element name="linearLocation" type="infra:LinkedPath" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="allocationSections" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to tp:AllocationSection</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="allocationSection">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="allocatedInfraElement" type="tp:ProtectedInfraElement" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="allocationSection" type="tp:AllocationSection"/>
+	<xs:complexType name="TrainProtectionArea">
+		<xs:sequence>
+			<xs:element name="dpsGroups" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dpsGroup" type="tp:DriveProtectionSectionGroup" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="allocationSections" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="allocationSection" type="tp:AllocationSection" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="trainProtectionArea" type="tp:TrainProtectionArea"/>
+	<xs:complexType name="TrainProtection">
+		<xs:sequence>
+			<xs:element name="tpArea" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tpAreaItem" type="tp:TrainProtectionArea" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="trainProtection" type="tp:TrainProtection"/>
+</xs:schema>

@@ -1,0 +1,12 @@
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.csproj.AssemblyReference.cache
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.csproj.CoreCompileInputs.cache
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\bin\Debug\ERJUlibrary_4.8.dll
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\bin\Debug\ERJUlibrary_4.8.pdb
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.dll
+F:\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.pdb
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.csproj.AssemblyReference.cache
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.csproj.CoreCompileInputs.cache
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\bin\Debug\ERJUlibrary_4.8.dll
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\bin\Debug\ERJUlibrary_4.8.pdb
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.dll
+C:\Hadary\DB_Work\ERJU\ERJUcodeGenerator\ERJUlibrary_4.8\obj\Debug\ERJUlibrary_4.8.pdb

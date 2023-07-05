@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Sz0xaYtGSNRpwHIUqYaGH5m7vHqOzPdWA3qhOrvXZkaZcIPU9vxnCSVlKPCbuTYcEtKjN6tJriUdUv+/2osKLA==",
+  "dgSpecHash": "c6rrcGuz75Yal36Tf6Zmu7JvjRdchvCjPe6+XE6EBJRwxnEn+C6DpOgwQm+xu8ttagGG7EWzJb35EJZ75TZ/rg==",
   "success": true,
-  "projectFilePath": "F:\\DB_Work\\ERJU\\ERJUcodeGenerator\\ERJUlibrary\\ERJUlibrary.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Hadary\\DB_Work\\ERJU\\ERJUcodeGenerator\\ERJUlibrary\\ERJUlibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\Khaled Elhadary\\.nuget\\packages\\system.text.json\\7.0.3\\system.text.json.7.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

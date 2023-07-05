@@ -1,15 +1,15 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using topo;
+using infra;
 
 namespace eng
 {
 	[XmlRoot(Namespace = "https://erju.org/eng", ElementName = "sleepers")]
-	public struct Sleepers
+	public class Sleepers
 	{		
 		[XmlAttribute]
-		private string id;
+		private string? id;
 		[XmlAttribute(AttributeName = "id")]
 		public string Id
         {
@@ -22,12 +22,10 @@ namespace eng
                 return this.id != null ? this.id : "";   
             }
         
-        }		
-		public TrackEdgePoint trackEdgePoints;		
-		[XmlAttribute]
-		public uint p;		
-
-		[XmlAttribute]
-SleepersType sleepersType;
+        }
+        [XmlArrayItem("trackEdgeSection", Namespace = "https://erju.org/infra")]
+        public List<TrackEdgeSection>? trackEdgeSection;
+        [XmlAttribute]
+		public SleepersType type;
 	}
 }
