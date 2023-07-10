@@ -7,17 +7,17 @@ namespace ato
 	public class ATOArea
 	{		
 		[XmlAttribute]
-		private string? atoTSId;
+		private string? id;
 		[XmlAttribute(AttributeName = "atoTSId")]
-		public string AtoTSId
+		public string Id
         {
             set
             {
-                this.atoTSId = value;
+                this.id = value;
             }
             get
             {
-                return this.atoTSId != null ? this.atoTSId : "";   
+                return this.id != null ? this.id : "";   
             }
         
         }		

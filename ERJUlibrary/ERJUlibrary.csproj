@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="ato\" />
+    <Folder Include="SS026\" />
   </ItemGroup>
 
 </Project>

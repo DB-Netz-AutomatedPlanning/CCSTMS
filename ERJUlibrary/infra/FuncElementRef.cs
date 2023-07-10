@@ -90,5 +90,19 @@ namespace infra
             }
         
         }
+
+        private string? trainDetector;
+        [XmlAttribute(AttributeName = "trainDetector")]
+        public string TrainDetector
+        {
+            set
+            {
+                this.trainDetector = value;
+            }
+            get
+            {
+                return this.trainDetector != null ? this.trainDetector : "";
+            }
+        }
     }
 }

@@ -57,5 +57,7 @@ namespace infra
         public List<NationalBorder>? nationalBorders;
         [XmlArrayItem("bufferStop", Namespace = "https://erju.org/infra")]
         public List<BufferStop>? bufferStops;
+        [XmlArrayItem("trainDetector", Namespace = "https://erju.org/infra")]
+        public List<TrainDetector>? trainDetectors;
     }
 }

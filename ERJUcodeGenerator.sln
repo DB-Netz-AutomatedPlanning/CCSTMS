@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERJUfeedData", "ERJUfeedDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERJUlibrary_4.8", "ERJUlibrary_4.8\ERJUlibrary_4.8.csproj", "{467E40CC-8B67-4F80-93F6-8124D6B13968}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETCS_L2_Planning", "ETCS_L2_Planning\ETCS_L2_Planning.csproj", "{2E14BA79-4413-46EC-BD68-7FFECEF19878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{467E40CC-8B67-4F80-93F6-8124D6B13968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{467E40CC-8B67-4F80-93F6-8124D6B13968}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{467E40CC-8B67-4F80-93F6-8124D6B13968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E14BA79-4413-46EC-BD68-7FFECEF19878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E14BA79-4413-46EC-BD68-7FFECEF19878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E14BA79-4413-46EC-BD68-7FFECEF19878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E14BA79-4413-46EC-BD68-7FFECEF19878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

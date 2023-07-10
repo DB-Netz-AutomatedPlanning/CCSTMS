@@ -87,7 +87,19 @@ namespace infra
             {
                 return this.balise != null?  this.balise : "";   
             }
-        
+        }
+        private string trainDetector;
+        [XmlAttribute(AttributeName = "trainDetector")]
+        public string TrainDetector
+        {
+            set
+            {
+                this.trainDetector = value;
+            }
+            get
+            {
+                return this.trainDetector != null ? this.trainDetector : "";
+            }
         }
     }
 }

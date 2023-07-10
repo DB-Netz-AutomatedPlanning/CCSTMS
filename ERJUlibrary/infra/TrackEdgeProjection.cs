@@ -20,7 +20,8 @@ namespace infra
                 return this.trackEdgeId != null ? this.trackEdgeId : "";   
             }
         
-        }		
-		public List<TrackEdgeCoordinate>? coordinates;
+        }
+        [XmlArrayItem("coordinate", Namespace = "https://erju.org/infra")]
+        public List<TrackEdgeCoordinate>? coordinates;
 	}
 }

@@ -6133,8 +6133,8 @@
         "net6.0"
       ],
       "sources": {
+        "C:\\Hadary\\DB_Work\\Aplan--GIT\\APlan\\Libraries": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "D:\\DB_Work\\Aplan--GIT\\APlan\\Libraries": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

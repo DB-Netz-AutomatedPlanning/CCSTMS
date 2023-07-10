@@ -8,8 +8,6 @@ namespace infra
 		[XmlAttribute]
 		public uint p;		
 		[XmlAttribute]
-		public int cant;		
-		[XmlAttribute]
 		public int c;
 	}
 }
