@@ -6,5 +6,5 @@ using System.Xml.Serialization;
 	{
 		freightTrains,
 		conventionalPassengerTrains,
-		spare,
+		other,
 }

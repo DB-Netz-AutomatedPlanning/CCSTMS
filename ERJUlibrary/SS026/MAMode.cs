@@ -7,5 +7,5 @@ using System.Xml.Serialization;
 		MAM_OS,
 		MAM_LS,
 		MAM_SH,
-		MAM_Spare,
+		MAM_other,
 }

@@ -7,5 +7,5 @@ using System.Xml.Serialization;
 		left,
 		right,
 		both,
-		spare,
+		other,
 }

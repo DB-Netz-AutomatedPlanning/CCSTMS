@@ -7,5 +7,5 @@ using System.Xml.Serialization;
 		trainTrip,
 		applyServiceBrake,
 		noReaction,
-		spare,
+		other,
 }

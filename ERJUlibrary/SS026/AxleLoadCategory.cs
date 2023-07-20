@@ -17,5 +17,5 @@ using System.Xml.Serialization;
 		D4XL,
 		E4,
 		E5,
-		spare,
+		other,
 }

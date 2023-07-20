@@ -18,5 +18,5 @@ using System.Xml.Serialization;
 		_920,
 		_960,
 		_1100,
-		spare,
+		other,
 }

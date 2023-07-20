@@ -35,5 +35,9 @@ namespace infra
         public List<SecondaryTrackRef>? secondaryTracks;
         [XmlArrayItem("shuntingTrack", Namespace = "https://erju.org/infra")]
         public List<ShuntingTrackRef>? shuntingTracks;
+        [XmlArrayItem("permittedBrakingDistance", Namespace = "https://erju.org/infra")]
+        public List<PermittedBrakingDistance>? permittedBrakingDistances;
+        [XmlArrayItem("currentLimitation", Namespace = "https://erju.org/infra")]
+        public List<CurrentLimitation>? currentLimitations;
     }
 }

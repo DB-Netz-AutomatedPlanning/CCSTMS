@@ -9,5 +9,5 @@ using System.Xml.Serialization;
 		Level1,
 		Level2,
 		Level3,
-		spare,
+		other,
 }

@@ -38,5 +38,8 @@ namespace infra
         }
         [XmlArrayItem("trackEdgePoint", Namespace = "https://erju.org/infra")]
         public List<TrackEdgePoint>? trackEdgePoints;
-	}
+
+        public bool hasmovabletongues;
+
+    }
 }

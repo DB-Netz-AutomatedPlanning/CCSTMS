@@ -6,5 +6,5 @@ using System.Xml.Serialization;
 	{
 		auxiliary,
 		important,
-		spare,
+		other,
 }

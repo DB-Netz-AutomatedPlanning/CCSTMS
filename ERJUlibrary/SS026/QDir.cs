@@ -7,5 +7,5 @@ using System.Xml.Serialization;
 		reverse,
 		nominal,
 		both,
-		spare,
+		other,
 }

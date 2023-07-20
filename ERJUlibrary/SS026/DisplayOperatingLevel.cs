@@ -10,5 +10,5 @@ using System.Xml.Serialization;
 		level2,
 		level3,
 		notLimited,
-		spare,
+		other,
 }

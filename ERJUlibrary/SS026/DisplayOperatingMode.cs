@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 		trip,
 		postTrip,
 		limitedSupervision,
-		spare,
+		other,
 		reversing,
 		notLimitedByMode,
 }

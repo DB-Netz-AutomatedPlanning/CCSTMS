@@ -10,5 +10,5 @@ using System.Xml.Serialization;
 		VT_3,
 		VT_4,
 		VT_5,
-		VT_Spare,
+		VT_other,
 }

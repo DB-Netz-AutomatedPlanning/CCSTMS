@@ -48,5 +48,21 @@ namespace infra
             }
         
         }
-	}
+
+        private string? bufferStop;
+        [XmlAttribute(AttributeName = "bufferStop")]
+        public string BufferStop
+        {
+            set
+            {
+                this.bufferStop = value;
+            }
+            get
+            {
+                return this.bufferStop != null ? this.bufferStop : "";
+            }
+
+        }
+
+    }
 }
