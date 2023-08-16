@@ -1,5 +1,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using ERJUlibrary_4._8.infra;
+
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "functionalArea")]
@@ -58,5 +60,7 @@ namespace infra
         public List<BufferStop> bufferStops;
         [XmlArrayItem("trainDetector", Namespace = "https://erju.org/infra")]
         public List<TrainDetector> trainDetectors;
+        [XmlArrayItem("switchedCrossing", Namespace = "https://erju.org/infra")]
+        public List<SwitchedCrossing> switchedCrossings;
     }
 }

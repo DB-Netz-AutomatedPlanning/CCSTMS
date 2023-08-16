@@ -19,9 +19,24 @@ namespace infra
             }
 
         }
-        public TrackEdgePoint trackEdgePoint;		
+        private string trackEdge;
+        [XmlAttribute(AttributeName = "trackEdge")]
+        public string TrackEdge
+        {
+            set
+            {
+                this.trackEdge = value;
+            }
+            get
+            {
+                return this.trackEdge != null ? this.trackEdge : "";
+            }
 
-		private string fromCountryCode;
+        }
+        [XmlAttribute]
+        public uint pos;
+
+        private string fromCountryCode;
         [XmlAttribute(AttributeName = "fromCountryCode")]
         public string FromCountryCode
         {

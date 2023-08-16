@@ -21,7 +21,7 @@ namespace ato
         
         }		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public uint nidTP;		
 		[XmlAttribute]

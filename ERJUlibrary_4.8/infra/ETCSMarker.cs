@@ -35,8 +35,14 @@ namespace infra
             }
         
         }		
-		public DirTrackEdgePoint dirTrackEdgePoint;		
-		[XmlAttribute]
+
+		public TrackEdge trackEdge;
+
+        public uint pos;
+
+        public bool sameDir;
+
+        [XmlAttribute]
 		public bool markerFunctionStop;
 	}
 }

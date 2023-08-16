@@ -6,7 +6,7 @@ namespace infra
 	public class CurveSamplePoint
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public int r;
 	}

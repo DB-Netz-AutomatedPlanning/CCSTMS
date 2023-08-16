@@ -49,8 +49,10 @@ namespace infra
         
         }		
 		[XmlAttribute]
-		public bool startOnA;		
+		public bool startOfA;		
 		[XmlAttribute]
-		public bool startOnB;
-	}
+		public bool startOfB;
+        [XmlAttribute]
+        public Direction usableDir;
+    }
 }

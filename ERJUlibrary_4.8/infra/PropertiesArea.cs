@@ -6,17 +6,17 @@ namespace infra
 	public class PropertiesArea
 	{		
 		[XmlAttribute]
-		private string areaId;
-		[XmlAttribute(AttributeName = "areaId")]
-		public string AreaId
+		private string id;
+		[XmlAttribute(AttributeName = "id")]
+		public string Id
         {
             set
             {
-                this.areaId = value;
+                this.id = value;
             }
             get
             {
-                return this.areaId != null?  this.areaId : "";   
+                return this.id != null?  this.id : "";   
             }
         
         }		
@@ -34,5 +34,9 @@ namespace infra
         public List<SecondaryTrackRef> secondaryTracks;
         [XmlArrayItem("shuntingTrack", Namespace = "https://erju.org/infra")]
         public List<ShuntingTrackRef> shuntingTracks;
+        [XmlArrayItem("currentLimitation", Namespace = "https://erju.org/infra")]
+        public List<CurrentLimitation> currentLimitations;
+        [XmlArrayItem("permittedBrakingDistance", Namespace = "https://erju.org/infra")]
+        public List<PermittedBrakingDistance> permittedBrakingDistances;
     }
 }

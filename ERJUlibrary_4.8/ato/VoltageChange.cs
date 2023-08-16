@@ -6,7 +6,7 @@ namespace ato
 	public class VoltageChange
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public VoltageType voltage;		
 		[XmlAttribute]

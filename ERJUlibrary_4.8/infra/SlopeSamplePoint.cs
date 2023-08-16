@@ -6,7 +6,7 @@ namespace infra
 	public class SlopeSamplePoint
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public int s;
 	}

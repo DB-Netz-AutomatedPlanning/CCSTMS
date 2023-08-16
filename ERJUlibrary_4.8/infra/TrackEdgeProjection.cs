@@ -6,17 +6,17 @@ namespace infra
 	public class TrackEdgeProjection
 	{		
 		[XmlAttribute]
-		private string trackEdgeId;
-		[XmlAttribute(AttributeName = "trackEdgeId")]
-		public string TrackEdgeId
+		private string id;
+		[XmlAttribute(AttributeName = "id")]
+		public string Id
         {
             set
             {
-                this.trackEdgeId = value;
+                this.id = value;
             }
             get
             {
-                return this.trackEdgeId != null?  this.trackEdgeId : "";   
+                return this.id != null?  this.id : "";   
             }
         
         }

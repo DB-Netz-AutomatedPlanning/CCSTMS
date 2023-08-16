@@ -6,7 +6,7 @@ namespace ato
 	public class StaticSpeedProfileChange
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlArrayItem("specificStaticSpeedProfileChange", Namespace = "https://erju.org/ato")]
 		public List<SpecificStaticSpeedProfileChange> specificStaticSpeedProfile;		
 		[XmlAttribute]

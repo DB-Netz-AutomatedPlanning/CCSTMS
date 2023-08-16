@@ -6,8 +6,10 @@ namespace infra
 	public class CantSamplePoint
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public int c;
-	}
+        [XmlAttribute]
+        public int cant;
+    }
 }

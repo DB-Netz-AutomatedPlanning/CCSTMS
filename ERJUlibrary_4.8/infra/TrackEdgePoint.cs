@@ -20,8 +20,6 @@ namespace infra
         
         }		
 		[XmlAttribute]
-		public uint p;		
-		[XmlAttribute]
-		public int lateralOffset;
+		public uint pos;
 	}
 }

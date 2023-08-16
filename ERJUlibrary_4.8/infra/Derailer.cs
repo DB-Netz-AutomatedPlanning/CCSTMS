@@ -1,5 +1,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System;
+
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "derailer")]
@@ -34,14 +36,29 @@ namespace infra
                 return this.name != null?  this.name : "";   
             }
         
-        }		
-		public TrackEdgePoint trackEdgePoint;		
-		[XmlAttribute]
+        }
+        private string trackEdge;
+        [XmlAttribute(AttributeName = "trackEdge")]
+        public string TrackEdge
+        {
+            set
+            {
+                this.trackEdge = value;
+            }
+            get
+            {
+                return this.trackEdge != null ? this.trackEdge : "";
+            }
+
+        }
+        [XmlAttribute]
+        public uint pos;
+        [XmlAttribute]
+        public bool sameDir;
+        [XmlAttribute]
 		public uint reversalTime;
         [XmlAttribute]
         public bool derailToRight;
-        [XmlAttribute]
-        public bool dirStartToEnd;
 
     }
 }

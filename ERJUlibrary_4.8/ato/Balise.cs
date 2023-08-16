@@ -8,6 +8,6 @@ namespace ato
 		[XmlAttribute]
 		public uint positionInGroup;		
 		[XmlAttribute]
-		public uint p;
+		public uint pos;
 	}
 }

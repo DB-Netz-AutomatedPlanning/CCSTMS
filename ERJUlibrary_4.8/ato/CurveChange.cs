@@ -8,6 +8,6 @@ namespace ato
 		[XmlAttribute]
 		public CurveRadius curve;		
 		[XmlAttribute]
-		public uint p;
+		public uint pos;
 	}
 }

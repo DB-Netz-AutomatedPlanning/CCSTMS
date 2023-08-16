@@ -88,13 +88,10 @@
     <Compile Include="eng\Sleepers.cs" />
     <Compile Include="eng\SleepersType.cs" />
     <Compile Include="eng\TrackEdgeSection.cs" />
-    <Compile Include="ETCS_L2\ETCS_L2.cs" />
-    <Compile Include="infra\additionals\Border.cs" />
     <Compile Include="infra\additionals\SecondaryTrackRef.cs" />
     <Compile Include="infra\additionals\ShuntingTrackRef.cs" />
     <Compile Include="infra\additionals\SimplePointRef.cs" />
     <Compile Include="infra\additionals\StopLocationRef.cs" />
-    <Compile Include="infra\additionals\StopTrainLimitSizeEnum.cs" />
     <Compile Include="infra\additionals\TimingPointRef.cs" />
     <Compile Include="infra\additionals\TrackEdgeLinkRef.cs" />
     <Compile Include="infra\additionals\TrainDetectorRef.cs" />
@@ -115,7 +112,7 @@
     <Compile Include="infra\Derailer.cs" />
     <Compile Include="infra\Direction.cs" />
     <Compile Include="infra\DirTrackEdge.cs" />
-    <Compile Include="infra\DirTrackEdgePoint.cs" />
+    <Compile Include="infra\DoorOpeningSide.cs" />
     <Compile Include="infra\ETCSMarker.cs" />
     <Compile Include="infra\FuncElementProjection.cs" />
     <Compile Include="infra\FuncElementRef.cs" />
@@ -154,12 +151,8 @@
     <Compile Include="infra\StaticSpeedLimit.cs" />
     <Compile Include="infra\StopLocation.cs" />
     <Compile Include="infra\StopTrainLimit.cs" />
-    <Compile Include="infra\StopTrainLimitAxles.cs" />
-    <Compile Include="infra\StopTrainLimitLength.cs" />
-    <Compile Include="infra\StopTrainLimitSize.cs" />
-    <Compile Include="infra\StopTrainLimitWagons.cs" />
+    <Compile Include="infra\SwitchedCrossing.cs" />
     <Compile Include="infra\TimingPoint.cs" />
-    <Compile Include="infra\TimingPointObject.cs" />
     <Compile Include="infra\TopoArea.cs" />
     <Compile Include="infra\TrackCondition.cs" />
     <Compile Include="infra\TrackEdge.cs" />
@@ -176,6 +169,8 @@
     <Compile Include="infra\TrainDetector.cs" />
     <Compile Include="infra\TrainDetectorType.cs" />
     <Compile Include="infra\TrainEndApplicability.cs" />
+    <Compile Include="infra\TrainLoadType.cs" />
+    <Compile Include="infra\TrainSize.cs" />
     <Compile Include="infra\TransitionType.cs" />
     <Compile Include="infra\Tunnel.cs" />
     <Compile Include="infra\TunnelPortal.cs" />

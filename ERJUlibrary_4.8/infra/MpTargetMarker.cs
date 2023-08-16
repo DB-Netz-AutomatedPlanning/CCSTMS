@@ -19,9 +19,24 @@ namespace infra
                 return this.id != null?  this.id : "";   
             }
         
-        }		
-		[XmlAttribute]
-        public MpTargetMarkerType type;		
-		public TrackEdgePoint trackEdgePoint;
+        }
+        private string trackEdge;
+        [XmlAttribute(AttributeName = "trackEdge")]
+        public string TrackEdge
+        {
+            set
+            {
+                this.trackEdge = value;
+            }
+            get
+            {
+                return this.trackEdge != null ? this.trackEdge : "";
+            }
+
+        }
+        [XmlAttribute]
+        public uint pos;
+        [XmlAttribute]
+        public MpTargetMarkerType type;
 	}
 }

@@ -35,9 +35,7 @@ namespace infra
             }
         
         }		
-		public TrackEdgePoint trackEdgePoint;		
-		public TimingPointObject timingPointObject;
-        [XmlAttribute]
-        public Direction direction;
+		public TrackEdge trackEdge;		
+		public uint pos;
 	}
 }

@@ -6,7 +6,7 @@ namespace infra
 	public class StaticSpeedLimit
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public uint speed;		
 		[XmlArrayItem("specificStaticSpeedLimit", Namespace = "https://erju.org/infra")]

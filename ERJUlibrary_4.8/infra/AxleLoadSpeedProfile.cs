@@ -6,12 +6,12 @@ namespace infra
 	public class AxleLoadSpeedProfile
 	{		
 		[XmlAttribute]
-		public uint startP;		
+		public uint startpos;		
 		[XmlAttribute]
-		public uint endP;		
+		public uint endpos;		
 		[XmlAttribute]
 		public uint speed;		
 		[XmlAttribute]
-public AxleLoadCategory axleLoadCategory;
+		public AxleLoadCategory axleLoadCategory;
 	}
 }

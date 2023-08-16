@@ -6,7 +6,7 @@ namespace infra
 	public class HorizontalArc
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public uint azimuth;		
 		[XmlAttribute]

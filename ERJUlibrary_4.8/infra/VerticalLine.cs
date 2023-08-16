@@ -6,7 +6,7 @@ namespace infra
 	public class VerticalLine
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public int slope;
 	}

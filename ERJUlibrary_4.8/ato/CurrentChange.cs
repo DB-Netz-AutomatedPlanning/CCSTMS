@@ -6,7 +6,7 @@ namespace ato
 	public class CurrentChange
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public uint current;
 	}

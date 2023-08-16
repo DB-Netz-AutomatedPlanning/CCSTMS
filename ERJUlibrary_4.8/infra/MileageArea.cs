@@ -6,17 +6,17 @@ namespace infra
 	public class MileageArea
 	{		
 		[XmlAttribute]
-		private string areaId;
-		[XmlAttribute(AttributeName = "areaId")]
-		public string AreaId
+		private string id;
+		[XmlAttribute(AttributeName = "id")]
+		public string Id
         {
             set
             {
-                this.areaId = value;
+                this.id = value;
             }
             get
             {
-                return this.areaId != null?  this.areaId : "";   
+                return this.id != null?  this.id : "";   
             }
         
         }		

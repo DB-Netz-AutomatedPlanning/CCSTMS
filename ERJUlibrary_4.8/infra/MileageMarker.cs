@@ -6,7 +6,7 @@ namespace infra
 	public class MileageMarker
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public uint v;
 	}

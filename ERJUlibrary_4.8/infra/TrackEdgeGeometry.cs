@@ -4,20 +4,21 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "trackEdgeGeometry")]
 	public class TrackEdgeGeometry
-	{		
-		private string trackEdge;
-		[XmlAttribute(AttributeName = "trackEdge")]
-		public string TrackEdge
+	{
+        [XmlAttribute]
+        private string id;
+        [XmlAttribute(AttributeName = "id")]
+        public string Id
         {
             set
             {
-                this.trackEdge = value;
+                this.id = value;
             }
             get
             {
-                return this.trackEdge != null?  this.trackEdge : "";   
+                return this.id != null ? this.id : "";
             }
-        
+
         }
         [XmlArrayItem("horizontalSegment", Namespace = "https://erju.org/infra")]
         public List<HorizontalSegment> horizontalAlignment;

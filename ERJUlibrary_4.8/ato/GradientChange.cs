@@ -6,7 +6,7 @@ namespace ato
 	public class GradientChange
 	{		
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;		
 		[XmlAttribute]
 		public bool uphillGradient;
 	}

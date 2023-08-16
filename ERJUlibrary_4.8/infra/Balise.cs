@@ -5,7 +5,6 @@ namespace infra
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "balise")]
 	public class Balise
 	{
-        public TrackEdgePoint trackEdgePoint;
         private string id;
         [XmlAttribute(AttributeName = "id")]
         public string Id
@@ -19,8 +18,24 @@ namespace infra
                 return this.id != null?  this.id : "";
             }
 
-        }    	
-		[XmlAttribute]
+        }
+        private string trackEdge;
+        [XmlAttribute(AttributeName = "trackEdge")]
+        public string TrackEdge
+        {
+            set
+            {
+                this.trackEdge = value;
+            }
+            get
+            {
+                return this.trackEdge != null ? this.trackEdge : "";
+            }
+
+        }
+        [XmlAttribute]
+        public uint pos;
+        [XmlAttribute]
 		public uint positionInGroup;		
 	}
 }

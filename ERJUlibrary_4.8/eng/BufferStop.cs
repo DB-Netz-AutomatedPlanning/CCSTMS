@@ -26,5 +26,6 @@ namespace eng
         public List<TrackEdgeSection> trackEdgeSections;
         [XmlAttribute]
         public BufferStopType bsType;
+
     }
 }

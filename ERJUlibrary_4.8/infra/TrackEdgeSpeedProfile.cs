@@ -20,20 +20,6 @@ namespace infra
             }
         
         }		
-		private string trackEdge;
-		[XmlAttribute(AttributeName = "trackEdge")]
-		public string TrackEdge
-        {
-            set
-            {
-                this.trackEdge = value;
-            }
-            get
-            {
-                return this.trackEdge != null?  this.trackEdge : "";   
-            }
-        
-        }		
 		[XmlArrayItem("staticSpeedLimit", Namespace = "https://erju.org/infra")]
 		public List<StaticSpeedLimit> staticSpeedProfile;		
 		[XmlArrayItem("axleLoadSpeedProfile", Namespace = "https://erju.org/infra")]
