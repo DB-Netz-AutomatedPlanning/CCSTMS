@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ERJUlibrary_4._8.infra
+using System.Xml.Serialization;
+namespace infra
 {
-    public enum TrainSize
-    {
-        shortTrain,
-        halfTrain,
-        fullTrain
-    }
+	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "trainSize")]
+	public enum TrainSize
+	{
+		shortTrain,
+		halfTrain,
+		fullTrain
+	}
 }

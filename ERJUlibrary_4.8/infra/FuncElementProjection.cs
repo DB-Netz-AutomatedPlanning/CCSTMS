@@ -4,13 +4,14 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "funcElementProjection")]
 	public class FuncElementProjection
-	{		
-		public FuncElementRef elementRef;		
+	{
+		public FuncElementRef elementRef;
 		[XmlAttribute]
-		public double x;		
+		public double x;
 		[XmlAttribute]
-		public double y;		
+		public double y;
 		[XmlAttribute]
 		public double z;
+
 	}
 }

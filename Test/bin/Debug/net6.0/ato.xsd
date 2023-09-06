@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
-<xs:schema targetNamespace="https://erju.org/ato" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ato="https://erju.org/ato" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra">
+<xs:schema targetNamespace="https://erju.org/ato" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ato="https://erju.org/ato" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra" xmlns:ss026="https://erju.org/ss026">
 	<xs:import namespace="https://erju.org/infra" schemaLocation="infra.xsd"/>
+	<xs:import namespace="https://erju.org/ss026" schemaLocation="ss026.xsd"/>
 	<xs:simpleType name="RangeType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="rtStart"/>
@@ -72,6 +73,20 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="aTO" type="ato:ATO"/>
+	<xs:complexType name="TimingPointMapping">
+		<xs:sequence/>
+		<xs:attribute name="infraTimingPoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:TimingPoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="atoTimingPoint" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to ato:TimingPoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="timingPointMapping" type="ato:TimingPointMapping"/>
 	<xs:complexType name="ATOArea">
 		<xs:sequence>
 			<xs:element name="segments" minOccurs="0" maxOccurs="1">
@@ -81,8 +96,15 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="timingPointsMapping" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="timingPointsMappingItem" type="ato:TimingPointMapping" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="atoTSId" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:element name="aTOArea" type="ato:ATOArea"/>
 	<xs:complexType name="ATOSegment">
@@ -152,7 +174,13 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="timingPoints" type="ato:TimingPoint" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="timingPoints" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="timingPoint" type="ato:TimingPoint" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="platformAreas" minOccurs="0" maxOccurs="1">
 				<xs:complexType>
 					<xs:sequence>
@@ -237,7 +265,7 @@
 		<xs:attribute name="nidC" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="eoaOffset" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="utcOffset" type="xs:unsignedInt" use="required"/>
-		<xs:attribute name="startAltitude" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="startAltitude" type="xs:int" use="required"/>
 		<xs:attribute name="atotsContactInfoDir" type="xs:boolean" use="required"/>
 	</xs:complexType>
 	<xs:element name="segmentProfile" type="ato:SegmentProfile"/>
@@ -281,7 +309,7 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="speed" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="trainEndApplicability" type="ato:TrainEndApplicability"/>
 	</xs:complexType>
@@ -311,8 +339,9 @@
 	<xs:element name="gradientStart" type="ato:GradientStart"/>
 	<xs:complexType name="GradientChange">
 		<xs:sequence/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="gradient" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="uphillGradient" type="xs:boolean" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="gradientChange" type="ato:GradientChange"/>
 	<xs:complexType name="CurveStart">
@@ -323,13 +352,13 @@
 	<xs:complexType name="CurveChange">
 		<xs:sequence/>
 		<xs:attribute name="curve" type="ato:CurveRadius"/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="curveChange" type="ato:CurveChange"/>
 	<xs:complexType name="TimingPoint">
 		<xs:sequence/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="nidTP" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="stopLocationTolerance" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="stoppingPointReachDistance" type="xs:unsignedInt" use="required"/>
@@ -340,7 +369,7 @@
 			<xs:element name="balises" minOccurs="0" maxOccurs="1">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="balise" type="ato:Balise" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="balis" type="ato:Balise" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -353,7 +382,7 @@
 	<xs:complexType name="Balise">
 		<xs:sequence/>
 		<xs:attribute name="positionInGroup" type="xs:unsignedInt" use="required"/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="balise" type="ato:Balise"/>
 	<xs:complexType name="PermittedBrakingDistance">
@@ -374,7 +403,7 @@
 	<xs:element name="voltageStart" type="ato:VoltageStart"/>
 	<xs:complexType name="VoltageChange">
 		<xs:sequence/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="voltage" type="ato:VoltageType"/>
 		<xs:attribute name="nidC" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
@@ -386,7 +415,7 @@
 	<xs:element name="currentStart" type="ato:CurrentStart"/>
 	<xs:complexType name="CurrentChange">
 		<xs:sequence/>
-		<xs:attribute name="p" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="pos" type="xs:unsignedInt" use="required"/>
 		<xs:attribute name="current" type="xs:unsignedInt" use="required"/>
 	</xs:complexType>
 	<xs:element name="currentChange" type="ato:CurrentChange"/>

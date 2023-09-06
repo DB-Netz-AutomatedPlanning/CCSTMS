@@ -4,12 +4,13 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "verticalArc")]
 	public class VerticalArc
-	{		
+	{
 		[XmlAttribute]
-		public uint pos;		
+		public double pos;
 		[XmlAttribute]
-		public int slope;		
+		public double slope;
 		[XmlAttribute]
-		public int radius;
+		public double radius;
+
 	}
 }

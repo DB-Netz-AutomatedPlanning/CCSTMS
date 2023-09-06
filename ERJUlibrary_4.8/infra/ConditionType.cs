@@ -1,5 +1,4 @@
 using System.Xml.Serialization;
-using System.Collections.Generic;
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "conditionType")]
@@ -7,11 +6,11 @@ namespace infra
 	{
 		powerlessLowPanthograph,
 		powerlessMainSwitch,
-		airTighntness,
+		airTightness,
 		soundHorn,
 		nonStoppingArea,
 		tunnelStoppingArea,
 		bigMetalMasses,
-		radioHole,
+		radioHole
 	}
 }

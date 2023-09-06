@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace infra
 {
@@ -8,11 +6,11 @@ namespace infra
 	{
 		powerlessLowPanthograph,
 		powerlessMainSwitch,
-		airTighntness,
+		airTightness,
 		soundHorn,
 		nonStoppingArea,
 		tunnelStoppingArea,
 		bigMetalMasses,
-		radioHole,
+		radioHole
 	}
 }

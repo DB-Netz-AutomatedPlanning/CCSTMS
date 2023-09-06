@@ -4,9 +4,10 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "horizontalSegment")]
 	public class HorizontalSegment
-	{		
-		public HorizontalLine line;		
-		public HorizontalArc arc;		
-		public HorizontalTransition transition;
+	{
+				public HorizontalLine line;
+				public HorizontalArc arc;
+				public HorizontalTransition transition;
+
 	}
 }

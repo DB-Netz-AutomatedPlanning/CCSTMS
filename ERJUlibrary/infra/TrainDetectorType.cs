@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace infra
 {
@@ -7,6 +5,6 @@ namespace infra
 	public enum TrainDetectorType
 	{
 		axleCounter,
-		trackCircuitBorder,
+		trackCircuitBorder
 	}
 }

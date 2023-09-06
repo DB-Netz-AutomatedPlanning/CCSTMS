@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace infra
 {
@@ -8,6 +6,6 @@ namespace infra
 	{
 		both,
 		endToStart,
-		startToEnd,
+		startToEnd
 	}
 }

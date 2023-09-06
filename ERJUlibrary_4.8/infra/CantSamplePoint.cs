@@ -4,12 +4,13 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "cantSamplePoint")]
 	public class CantSamplePoint
-	{		
+	{
 		[XmlAttribute]
-		public uint pos;		
+		public uint pos;
 		[XmlAttribute]
-		public int c;
-        [XmlAttribute]
-        public int cant;
-    }
+		public double appliedCant;
+		[XmlAttribute]
+		public int cant;
+
+	}
 }

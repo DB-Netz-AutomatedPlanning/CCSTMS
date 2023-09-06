@@ -1,18 +1,18 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "trackEdgeCoordinate")]
 	public class TrackEdgeCoordinate
-	{		
+	{
 		[XmlAttribute]
-		public uint p;		
+		public uint pos;
 		[XmlAttribute]
-		public double x;		
+		public double x;
 		[XmlAttribute]
-		public double y;		
+		public double y;
 		[XmlAttribute]
 		public double z;
+
 	}
 }

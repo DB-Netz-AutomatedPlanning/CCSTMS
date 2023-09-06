@@ -1,18 +1,18 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "axleLoadSpeedProfile")]
 	public class AxleLoadSpeedProfile
-	{		
+	{
 		[XmlAttribute]
-		public uint startP;		
+		public uint startPos;
 		[XmlAttribute]
-		public uint endP;		
+		public uint endPos;
 		[XmlAttribute]
-		public uint speed;		
+		public uint speed;
 		[XmlAttribute]
-public AxleLoadCategory axleLoadCategory;
+		public AxleLoadCategory axleLoadCategory;
+
 	}
 }

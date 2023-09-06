@@ -1,0 +1,56 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Xml.Serialization;
+	[XmlRoot(Namespace = "https://erju.org/", ElementName = "eTCSPacket_72")]
+	public class ETCSPacket_72
+	{		
+		[XmlAttribute]
+		public TextClass q_textclass;		
+		[XmlAttribute]
+		public bool q_textdisplay;		
+		[XmlAttribute]
+		public uint d_textdisplay;		
+		[XmlAttribute]
+		public DisplayOperatingMode m_modetextdisplay;		
+		[XmlAttribute]
+		public DisplayOperatingLevel m_leveltextdisplay;		
+		[XmlAttribute]
+		public uint nid_ntc;		
+		[XmlAttribute]
+		public uint l_textdisplay;		
+		[XmlAttribute]
+		public uint t_textdisplay;		
+		[XmlAttribute]
+		public DisplayOperatingMode m_modetextdisplay_2;		
+		[XmlAttribute]
+		public DisplayOperatingLevel m_leveltextdisplay_2;		
+		[XmlAttribute]
+		public uint nid_ntc_2;
+		[XmlAttribute]
+		public TextConfirmationType q_textconfirm;		
+		[XmlAttribute]
+		public bool q_conftextdisplay;		
+		[XmlAttribute]
+		public bool q_textreport;		
+		[XmlAttribute]
+		public uint nid_textmessage;		
+		[XmlAttribute]
+		public uint nid_c;		
+		[XmlAttribute]
+		public uint nid_rbc;		
+		[XmlAttribute]
+		private string? text;
+		[XmlAttribute(AttributeName = "text")]
+		public string Text
+        {
+            set
+            {
+                this.text = value;
+            }
+            get
+            {
+                return this.text != null ? this.text : "";   
+            }
+        
+        }
+}

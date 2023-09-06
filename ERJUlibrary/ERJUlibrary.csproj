@@ -7,23 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="eng\remove\**" />
-    <EmbeddedResource Remove="eng\remove\**" />
-    <None Remove="eng\remove\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="infra\SimplePointRef.cs" />
+    <Compile Remove="ato\**" />
+    <Compile Remove="Temp\**" />
+    <EmbeddedResource Remove="ato\**" />
+    <EmbeddedResource Remove="Temp\**" />
+    <None Remove="ato\**" />
+    <None Remove="Temp\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ato\" />
-    <Folder Include="SS026\" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ERJUatoFilled.cs" />
+    <Compile Remove="ERJUeng.cs" />
+    <Compile Remove="ERJUengFilled.cs" />
+    <Compile Remove="ERJUinfra.cs" />
     <Compile Remove="ERJUtopoFilled.cs" />
+    <Compile Remove="ERJUtpFilled.cs" />
   </ItemGroup>
 
   <ItemGroup>

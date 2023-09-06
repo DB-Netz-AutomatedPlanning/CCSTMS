@@ -4,10 +4,11 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "slopeSamplePoint")]
 	public class SlopeSamplePoint
-	{		
+	{
 		[XmlAttribute]
-		public uint pos;		
+		public uint pos;
 		[XmlAttribute]
-		public int s;
+		public int slope;
+
 	}
 }

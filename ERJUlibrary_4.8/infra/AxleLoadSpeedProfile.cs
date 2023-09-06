@@ -4,14 +4,15 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "axleLoadSpeedProfile")]
 	public class AxleLoadSpeedProfile
-	{		
+	{
 		[XmlAttribute]
-		public uint startpos;		
+		public uint startPos;
 		[XmlAttribute]
-		public uint endpos;		
+		public uint endPos;
 		[XmlAttribute]
-		public uint speed;		
+		public uint speed;
 		[XmlAttribute]
 		public AxleLoadCategory axleLoadCategory;
+
 	}
 }

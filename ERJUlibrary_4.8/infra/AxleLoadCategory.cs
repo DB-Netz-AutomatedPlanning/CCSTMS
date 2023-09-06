@@ -1,21 +1,20 @@
 using System.Xml.Serialization;
-using System.Collections.Generic;
 namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "axleLoadCategory")]
 	public enum AxleLoadCategory
 	{
-		A,
-		HS17,
-		B1,
-		C2,
-		C3,
-		C4,
-		D2,
-		D3,
-		D4,
-		D4XL,
-		E4,
-		E5,
+		AL_A,
+		AL_HS17,
+		AL_B1,
+		AL_C2,
+		AL_C3,
+		AL_C4,
+		AL_D2,
+		AL_D3,
+		AL_D4,
+		AL_D4XL,
+		AL_E4,
+		AL_E5
 	}
 }

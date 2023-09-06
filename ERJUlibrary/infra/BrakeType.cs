@@ -1,12 +1,10 @@
-using System;
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 namespace infra
 {
-	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "braketype")]
-	public enum BreakType
+	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "brakeType")]
+	public enum BrakeType
 	{
-        serviceBrake,
-        emergencyBrake
+		serviceBrake,
+		emergencyBrake
 	}
 }

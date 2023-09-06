@@ -4,12 +4,11 @@ namespace infra
 {
 	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "horizontalArc")]
 	public class HorizontalArc
-	{		
+	{
 		[XmlAttribute]
-		public uint pos;		
+		public double pos;
 		[XmlAttribute]
-		public uint azimuth;		
-		[XmlAttribute]
-		public int radius;
+		public double azimuth;
+
 	}
 }

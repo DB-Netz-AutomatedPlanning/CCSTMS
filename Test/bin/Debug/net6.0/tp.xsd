@@ -1,18 +1,24 @@
 <?xml version="1.0" ?>
-<xs:schema targetNamespace="https://erju.org/tp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tp="https://erju.org/tp" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra">
+<xs:schema targetNamespace="https://erju.org/tp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tp="https://erju.org/tp" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra" xmlns:ss026="https://erju.org/ss026">
 	<xs:import namespace="https://erju.org/infra" schemaLocation="infra.xsd"/>
-	<xs:simpleType name="MinimalDrivability">
+	<xs:import namespace="https://erju.org/ss026" schemaLocation="ss026.xsd"/>
+	<xs:simpleType name="DPSDependencyType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="none"/>
-			<xs:enumeration value="full"/>
-			<xs:enumeration value="limited"/>
+			<xs:enumeration value="Exclusive"/>
+			<xs:enumeration value="Equivalent"/>
+			<xs:enumeration value="Specific"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="ProtectedInfraElement">
-		<xs:sequence/>
+		<xs:choice/>
 		<xs:attribute name="simplePoint" type="xs:string" use="required">
 			<xs:annotation>
 				<xs:documentation>Reference to infra:SimplePoint</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="slipCrossing" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to infra:SlipCrossing</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="crossing" type="xs:string" use="required">
@@ -41,16 +47,12 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="protectedInfraElements" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="protectedInfraElement" type="tp:ProtectedInfraElement" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="protectedInfraElements" type="tp:ProtectedInfraElement" minOccurs="1" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="dependenciesType" type="tp:DPSDependencyType"/>
+		<xs:attribute name="dependencies" type="xs:unsignedInt"/>
 	</xs:complexType>
 	<xs:element name="driveProtectionSectionGroup" type="tp:DriveProtectionSectionGroup"/>
 	<xs:complexType name="DriveProtectionSection">
@@ -60,7 +62,6 @@
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="flankProtectionDirection" type="infra:Direction"/>
-		<xs:attribute name="minimalDrivability" type="tp:MinimalDrivability"/>
 	</xs:complexType>
 	<xs:element name="driveProtectionSection" type="tp:DriveProtectionSection"/>
 	<xs:complexType name="AllocationSection">
@@ -80,7 +81,6 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="allocatedInfraElement" type="tp:ProtectedInfraElement" minOccurs="1" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
@@ -103,6 +103,7 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:element name="trainProtectionArea" type="tp:TrainProtectionArea"/>
 	<xs:complexType name="TrainProtection">
