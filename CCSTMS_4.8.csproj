@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4711E093-27F9-40B9-B09C-DFD785E0BFCD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCSTMS</RootNamespace>
+    <AssemblyName>CCSTMS</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TheCore">
+      <HintPath>..\TheCore\bin\Debug\TheCore.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ato\ATO.cs" />
+    <Compile Include="ato\ATOArea.cs" />
+    <Compile Include="ato\ATOSegment.cs" />
+    <Compile Include="ato\AtoTSContactInfo.cs" />
+    <Compile Include="ato\AxleLoadSpeedProfile.cs" />
+    <Compile Include="ato\Balise.cs" />
+    <Compile Include="ato\BaliseGroup.cs" />
+    <Compile Include="ato\CurrentChange.cs" />
+    <Compile Include="ato\CurrentStart.cs" />
+    <Compile Include="ato\CurveChange.cs" />
+    <Compile Include="ato\CurveRadius.cs" />
+    <Compile Include="ato\CurveStart.cs" />
+    <Compile Include="ato\GradientChange.cs" />
+    <Compile Include="ato\GradientStart.cs" />
+    <Compile Include="ato\LimitedDynamicBrakeForce.cs" />
+    <Compile Include="ato\PermittedBrakingDistance.cs" />
+    <Compile Include="ato\RangeType.cs" />
+    <Compile Include="ato\SegmentProfile.cs" />
+    <Compile Include="ato\SegmentSection.cs" />
+    <Compile Include="ato\SpecificStaticSpeedProfileChange.cs" />
+    <Compile Include="ato\SpecificStaticSpeedProfileStart.cs" />
+    <Compile Include="ato\StaticSpeedProfileChange.cs" />
+    <Compile Include="ato\StaticSpeedProfileStart.cs" />
+    <Compile Include="ato\TimingPoint.cs" />
+    <Compile Include="ato\TimingPointMapping.cs" />
+    <Compile Include="ato\TrainEndApplicability.cs" />
+    <Compile Include="ato\Tunnel.cs" />
+    <Compile Include="ato\TunnelType.cs" />
+    <Compile Include="ato\UnprotectedLX.cs" />
+    <Compile Include="ato\VoltageChange.cs" />
+    <Compile Include="ato\VoltageStart.cs" />
+    <Compile Include="ato\VoltageType.cs" />
+    <Compile Include="eng\Balise.cs" />
+    <Compile Include="eng\BaliseGroup.cs" />
+    <Compile Include="eng\BufferStop.cs" />
+    <Compile Include="eng\BufferStopType.cs" />
+    <Compile Include="eng\Crossing.cs" />
+    <Compile Include="eng\DangerPoint.cs" />
+    <Compile Include="eng\DangerPointRef.cs" />
+    <Compile Include="eng\DuplicationType.cs" />
+    <Compile Include="eng\EngArea.cs" />
+    <Compile Include="eng\ETCSEngineering.cs" />
+    <Compile Include="eng\LevelCrossing.cs" />
+    <Compile Include="eng\MileageArea.cs" />
+    <Compile Include="eng\MileageLine.cs" />
+    <Compile Include="eng\MileagePoint.cs" />
+    <Compile Include="eng\MileageReferenceMarker.cs" />
+    <Compile Include="eng\SimplePoint.cs" />
+    <Compile Include="eng\Sleepers.cs" />
+    <Compile Include="eng\SleepersType.cs" />
+    <Compile Include="eng\TrackEdgeMileage.cs" />
+    <Compile Include="ETCS_L2\BaliseGroup\BaliseGroups.cs" />
+    <Compile Include="ETCS_L2\ETCSmarker\ETCSmarker.cs" />
+    <Compile Include="ETCS_L2\ETCS_L2.cs" />
+    <Compile Include="ETCS_L2\Help\Help.cs" />
+    <Compile Include="ETCS_L2\Help\HelperFunctions.cs" />
+    <Compile Include="ETCS_L2\Routes\Routes.cs" />
+    <Compile Include="ETCS_L2\TP\TP.cs" />
+    <Compile Include="ETCS_L2\TVPS\TVPS.cs" />
+    <Compile Include="infra\AxleLoadCategory.cs" />
+    <Compile Include="infra\AxleLoadSpeedProfile.cs" />
+    <Compile Include="infra\Balise.cs" />
+    <Compile Include="infra\BaliseGroup.cs" />
+    <Compile Include="infra\BaliseGroupFunction.cs" />
+    <Compile Include="infra\BaliseRef.cs" />
+    <Compile Include="infra\BrakeType.cs" />
+    <Compile Include="infra\Bridge.cs" />
+    <Compile Include="infra\BufferStop.cs" />
+    <Compile Include="infra\CantDeficiencyCategory.cs" />
+    <Compile Include="infra\CantDeficiencyRef.cs" />
+    <Compile Include="infra\CantSamplePoint.cs" />
+    <Compile Include="infra\ConditionType.cs" />
+    <Compile Include="infra\Crossing.cs" />
+    <Compile Include="infra\CurrentLimitation.cs" />
+    <Compile Include="infra\CurveSamplePoint.cs" />
+    <Compile Include="infra\Derailer.cs" />
+    <Compile Include="infra\Direction.cs" />
+    <Compile Include="infra\DirTrackEdge.cs" />
+    <Compile Include="infra\DoorOpeningSide.cs" />
+    <Compile Include="infra\ETCSMarker.cs" />
+    <Compile Include="infra\EtcsMarkerRef.cs" />
+    <Compile Include="infra\FuncElementProjection.cs" />
+    <Compile Include="infra\FuncElementRef.cs" />
+    <Compile Include="infra\FunctionalArea.cs" />
+    <Compile Include="infra\GeometryArea.cs" />
+    <Compile Include="infra\HorizontalArc.cs" />
+    <Compile Include="infra\HorizontalLine.cs" />
+    <Compile Include="infra\HorizontalSegment.cs" />
+    <Compile Include="infra\HorizontalTransition.cs" />
+    <Compile Include="infra\Infrastructure.cs" />
+    <Compile Include="infra\LevelCrossing.cs" />
+    <Compile Include="infra\LinkDirection.cs" />
+    <Compile Include="infra\LinkedPath.cs" />
+    <Compile Include="infra\LoadingGaugeType.cs" />
+    <Compile Include="infra\MapArea.cs" />
+    <Compile Include="infra\NationalBorder.cs" />
+    <Compile Include="infra\OperationalPoint.cs" />
+    <Compile Include="infra\OperationalPointRef.cs" />
+    <Compile Include="infra\OPType.cs" />
+    <Compile Include="infra\OtherCategoryRef.cs" />
+    <Compile Include="infra\OtherSpecificStaticSpeedProfileCategory.cs" />
+    <Compile Include="infra\PermittedBrakingDistance.cs" />
+    <Compile Include="infra\Platform.cs" />
+    <Compile Include="infra\PlatformEdge.cs" />
+    <Compile Include="infra\PlatformHeight.cs" />
+    <Compile Include="infra\PreferredOppositeDiRef.cs" />
+    <Compile Include="infra\PreferredSameDiRef.cs" />
+    <Compile Include="infra\PropertiesArea.cs" />
+    <Compile Include="infra\SampledGeometryArea.cs" />
+    <Compile Include="infra\SampledTrackEdgeGeometry.cs" />
+    <Compile Include="infra\SecondaryTrackRef.cs" />
+    <Compile Include="infra\ShuntingTrackRef.cs" />
+    <Compile Include="infra\SimplePoint.cs" />
+    <Compile Include="infra\SimplePointRef.cs" />
+    <Compile Include="infra\SlipCrossing.cs" />
+    <Compile Include="infra\SlopeSamplePoint.cs" />
+    <Compile Include="infra\SpecificStaticSpeedLimit.cs" />
+    <Compile Include="infra\SpecificStaticSpeedProfileType.cs" />
+    <Compile Include="infra\SpeedLimitType.cs" />
+    <Compile Include="infra\StaticSpeedLimit.cs" />
+    <Compile Include="infra\StopLocation.cs" />
+    <Compile Include="infra\StopLocationRef.cs" />
+    <Compile Include="infra\StopTrainLimit.cs" />
+    <Compile Include="infra\TimingPoint.cs" />
+    <Compile Include="infra\TimingPointRef.cs" />
+    <Compile Include="infra\TopoArea.cs" />
+    <Compile Include="infra\TrackCondition.cs" />
+    <Compile Include="infra\TrackEdge.cs" />
+    <Compile Include="infra\TrackEdgeCoordinate.cs" />
+    <Compile Include="infra\TrackEdgeGauge.cs" />
+    <Compile Include="infra\TrackEdgeGeometry.cs" />
+    <Compile Include="infra\TrackEdgeLink.cs" />
+    <Compile Include="infra\TrackEdgeLoadingGauge.cs" />
+    <Compile Include="infra\TrackEdgePoint.cs" />
+    <Compile Include="infra\TrackEdgeProjection.cs" />
+    <Compile Include="infra\TrackEdgeSection.cs" />
+    <Compile Include="infra\TrackEdgeSpeedProfile.cs" />
+    <Compile Include="infra\TractionSystem.cs" />
+    <Compile Include="infra\TrainDetector.cs" />
+    <Compile Include="infra\TrainDetectorRef.cs" />
+    <Compile Include="infra\TrainDetectorType.cs" />
+    <Compile Include="infra\TrainEndApplicability.cs" />
+    <Compile Include="infra\TrainLoadType.cs" />
+    <Compile Include="infra\TrainMaxAxlesRef.cs" />
+    <Compile Include="infra\TrainMaxLengthRef.cs" />
+    <Compile Include="infra\TrainMaxSizeRef.cs" />
+    <Compile Include="infra\TrainMaxWagonsRef.cs" />
+    <Compile Include="infra\TrainSize.cs" />
+    <Compile Include="infra\TransitionType.cs" />
+    <Compile Include="infra\TravelTimeMeasurementPointRef.cs" />
+    <Compile Include="infra\Tunnel.cs" />
+    <Compile Include="infra\TunnelTube.cs" />
+    <Compile Include="infra\TvpSection.cs" />
+    <Compile Include="infra\Underpass.cs" />
+    <Compile Include="infra\VerticalArc.cs" />
+    <Compile Include="infra\VerticalLine.cs" />
+    <Compile Include="infra\VerticalSegment.cs" />
+    <Compile Include="infra\VoltageType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ss026\AxleLoad.cs" />
+    <Compile Include="ss026\AxleLoadCategory.cs" />
+    <Compile Include="ss026\AxleLoadDLRestriction.cs" />
+    <Compile Include="ss026\AxleLoadRestriction.cs" />
+    <Compile Include="ss026\AxleLoadSelection.cs" />
+    <Compile Include="ss026\BalisePacket.cs" />
+    <Compile Include="ss026\CountryBalise.cs" />
+    <Compile Include="ss026\CountryId.cs" />
+    <Compile Include="ss026\DisplayOperatingLevel.cs" />
+    <Compile Include="ss026\DisplayOperatingMode.cs" />
+    <Compile Include="ss026\DLMCondition.cs" />
+    <Compile Include="ss026\DLTrackCond.cs" />
+    <Compile Include="ss026\D_trackinitRef.cs" />
+    <Compile Include="ss026\EtcsLevel.cs" />
+    <Compile Include="ss026\ETCSPacket_0.cs" />
+    <Compile Include="ss026\ETCSPacket_131.cs" />
+    <Compile Include="ss026\ETCSPacket_132.cs" />
+    <Compile Include="ss026\ETCSPacket_133.cs" />
+    <Compile Include="ss026\ETCSPacket_134.cs" />
+    <Compile Include="ss026\ETCSPacket_135.cs" />
+    <Compile Include="ss026\ETCSPacket_136.cs" />
+    <Compile Include="ss026\ETCSPacket_137.cs" />
+    <Compile Include="ss026\ETCSPacket_138.cs" />
+    <Compile Include="ss026\ETCSPacket_139.cs" />
+    <Compile Include="ss026\ETCSPacket_141.cs" />
+    <Compile Include="ss026\ETCSPacket_145.cs" />
+    <Compile Include="ss026\ETCSPacket_16.cs" />
+    <Compile Include="ss026\ETCSPacket_180.cs" />
+    <Compile Include="ss026\ETCSPacket_181.cs" />
+    <Compile Include="ss026\ETCSPacket_2.cs" />
+    <Compile Include="ss026\ETCSPacket_254.cs" />
+    <Compile Include="ss026\ETCSPacket_255.cs" />
+    <Compile Include="ss026\ETCSPacket_3.cs" />
+    <Compile Include="ss026\ETCSPacket_39.cs" />
+    <Compile Include="ss026\ETCSPacket_40.cs" />
+    <Compile Include="ss026\ETCSPacket_41.cs" />
+    <Compile Include="ss026\ETCSPacket_42.cs" />
+    <Compile Include="ss026\ETCSPacket_44.cs" />
+    <Compile Include="ss026\ETCSPacket_45.cs" />
+    <Compile Include="ss026\ETCSPacket_46.cs" />
+    <Compile Include="ss026\ETCSPacket_49.cs" />
+    <Compile Include="ss026\ETCSPacket_5.cs" />
+    <Compile Include="ss026\ETCSPacket_51.cs" />
+    <Compile Include="ss026\ETCSPacket_52.cs" />
+    <Compile Include="ss026\ETCSPacket_6.cs" />
+    <Compile Include="ss026\ETCSPacket_65.cs" />
+    <Compile Include="ss026\ETCSPacket_66.cs" />
+    <Compile Include="ss026\ETCSPacket_67.cs" />
+    <Compile Include="ss026\ETCSPacket_68.cs" />
+    <Compile Include="ss026\ETCSPacket_69.cs" />
+    <Compile Include="ss026\ETCSPacket_70.cs" />
+    <Compile Include="ss026\ETCSPacket_71.cs" />
+    <Compile Include="ss026\ETCSPacket_72.cs" />
+    <Compile Include="ss026\ETCSPacket_76.cs" />
+    <Compile Include="ss026\ETCSPacket_79.cs" />
+    <Compile Include="ss026\ETCSPacket_80.cs" />
+    <Compile Include="ss026\ETCSPacket_88.cs" />
+    <Compile Include="ss026\ETCSPacket_90.cs" />
+    <Compile Include="ss026\ETCSVersion.cs" />
+    <Compile Include="ss026\GeoPosItem.cs" />
+    <Compile Include="ss026\KVType.cs" />
+    <Compile Include="ss026\LevelTransition.cs" />
+    <Compile Include="ss026\LevelTransitionWithAck.cs" />
+    <Compile Include="ss026\LinkItem.cs" />
+    <Compile Include="ss026\LinkReaction.cs" />
+    <Compile Include="ss026\LMKVR.cs" />
+    <Compile Include="ss026\LoadingGaugeRef.cs" />
+    <Compile Include="ss026\LXStatus.cs" />
+    <Compile Include="ss026\MAMode.cs" />
+    <Compile Include="ss026\MaxAxleLoadRef.cs" />
+    <Compile Include="ss026\ModeProfileItem.cs" />
+    <Compile Include="ss026\NewCountry.cs" />
+    <Compile Include="ss026\NKV.cs" />
+    <Compile Include="ss026\NKVItem.cs" />
+    <Compile Include="ss026\NKVSubItem.cs" />
+    <Compile Include="ss026\NVContact.cs" />
+    <Compile Include="ss026\NVP13.cs" />
+    <Compile Include="ss026\Packet.cs" />
+    <Compile Include="ss026\PBDSelection.cs" />
+    <Compile Include="ss026\PermittedBrakingDist.cs" />
+    <Compile Include="ss026\PlatformPosition.cs" />
+    <Compile Include="ss026\PlatformType.cs" />
+    <Compile Include="ss026\QDir.cs" />
+    <Compile Include="ss026\RouteSuitability.cs" />
+    <Compile Include="ss026\TCSPCondition.cs" />
+    <Compile Include="ss026\TextClass.cs" />
+    <Compile Include="ss026\TextConfirmationType.cs" />
+    <Compile Include="ss026\TrackCondPlatformSelection.cs" />
+    <Compile Include="ss026\TrackCondSelection.cs" />
+    <Compile Include="ss026\TrackCondType.cs" />
+    <Compile Include="ss026\TractionSystem.cs" />
+    <Compile Include="ss026\ValidityPeriod.cs" />
+    <Compile Include="ss026\VMM.cs" />
+    <Compile Include="ss026\VoltageType.cs" />
+    <Compile Include="tp\AllocationSection.cs" />
+    <Compile Include="tp\AllocationSectionRef.cs" />
+    <Compile Include="tp\CrossingRef.cs" />
+    <Compile Include="tp\DerailerRef.cs" />
+    <Compile Include="tp\DPSDependencyType.cs" />
+    <Compile Include="tp\DriveProtectionSection.cs" />
+    <Compile Include="tp\DriveProtectionSectionGroup.cs" />
+    <Compile Include="tp\LevelCrossingRef.cs" />
+    <Compile Include="tp\ProtectedInfraElement.cs" />
+    <Compile Include="tp\SimplePointRef.cs" />
+    <Compile Include="tp\SlipCrossingRef.cs" />
+    <Compile Include="tp\TrainProtection.cs" />
+    <Compile Include="tp\TrainProtectionArea.cs" />
+    <Compile Include="tt2\ActivityType.cs" />
+    <Compile Include="tt2\AdhesionCategory.cs" />
+    <Compile Include="tt2\AlignmentType.cs" />
+    <Compile Include="tt2\AnyClass.cs" />
+    <Compile Include="tt2\BrakeModelType.cs" />
+    <Compile Include="tt2\BrakePosition.cs" />
+    <Compile Include="tt2\DoorSide.cs" />
+    <Compile Include="tt2\EventType.cs" />
+    <Compile Include="tt2\GradeOfAutomation.cs" />
+    <Compile Include="tt2\LoadingDirection.cs" />
+    <Compile Include="tt2\MovementEventTimeType.cs" />
+    <Compile Include="tt2\OperationalConsist.cs" />
+    <Compile Include="tt2\OperationalEventRef.cs" />
+    <Compile Include="tt2\OperationalMovementEvent.cs" />
+    <Compile Include="tt2\OperationalMovementEventTime.cs" />
+    <Compile Include="tt2\OperationalPlanOperationalMovement.cs" />
+    <Compile Include="tt2\OperationalRestrictionEvent.cs" />
+    <Compile Include="tt2\OperationalTrainCategory.cs" />
+    <Compile Include="tt2\OperationalTrainUnit.cs" />
+    <Compile Include="tt2\OperationalWarningMeasureEvent.cs" />
+    <Compile Include="tt2\PassengerTransferActivity.cs" />
+    <Compile Include="tt2\PhysicalTrainUnitIdentifier.cs" />
+    <Compile Include="tt2\PlatformEdgeRef.cs" />
+    <Compile Include="tt2\PositionType.cs" />
+    <Compile Include="tt2\StopDescription.cs" />
+    <Compile Include="tt2\StopTimes.cs" />
+    <Compile Include="tt2\StopType.cs" />
+    <Compile Include="tt2\SupportedOnBoardEquipment.cs" />
+    <Compile Include="tt2\TrainCategoryType.cs" />
+    <Compile Include="tt2\TrainProtectionType.cs" />
+    <Compile Include="tt2\TrainUnitActivity.cs" />
+    <Compile Include="tt2\TrainUsageType.cs" />
+    <Compile Include="tt\ActivityType.cs" />
+    <Compile Include="tt\AdhesionCategory.cs" />
+    <Compile Include="tt\AlignmentType.cs" />
+    <Compile Include="tt\AnyClass.cs" />
+    <Compile Include="tt\BrakeModelType.cs" />
+    <Compile Include="tt\BrakePosition.cs" />
+    <Compile Include="tt\DoorSide.cs" />
+    <Compile Include="tt\EventTimeType.cs" />
+    <Compile Include="tt\EventType.cs" />
+    <Compile Include="tt\GradeOfAutomation.cs" />
+    <Compile Include="tt\LoadingDirection.cs" />
+    <Compile Include="tt\LowAdhesionMarker.cs" />
+    <Compile Include="tt\OperationalConsist.cs" />
+    <Compile Include="tt\OperationalConsistRefRef.cs" />
+    <Compile Include="tt\OperationalEventLink.cs" />
+    <Compile Include="tt\OperationalEventRef.cs" />
+    <Compile Include="tt\OperationalEventTime.cs" />
+    <Compile Include="tt\OperationalMovementEvent.cs" />
+    <Compile Include="tt\OperationalMovementEventPosition.cs" />
+    <Compile Include="tt\OperationalMovementMarker.cs" />
+    <Compile Include="tt\OperationalPlanOperationalMovement.cs" />
+    <Compile Include="tt\OperationalRestrictionEvent.cs" />
+    <Compile Include="tt\OperationalSegment.cs" />
+    <Compile Include="tt\OperationalTrainCategory.cs" />
+    <Compile Include="tt\OperationalTrainUnit.cs" />
+    <Compile Include="tt\OperationalWarningMeasureEvent.cs" />
+    <Compile Include="tt\PhysicalTrainUnitIdentifier.cs" />
+    <Compile Include="tt\PlatformEdgeRef.cs" />
+    <Compile Include="tt\PositionType.cs" />
+    <Compile Include="tt\StopActivity.cs" />
+    <Compile Include="tt\StopDescription.cs" />
+    <Compile Include="tt\StopTimes.cs" />
+    <Compile Include="tt\StopType.cs" />
+    <Compile Include="tt\SupportedOnBoardEquipment.cs" />
+    <Compile Include="tt\TemporarySpeedRestrictionMarker.cs" />
+    <Compile Include="tt\TrainCategoryType.cs" />
+    <Compile Include="tt\TrainProtectionType.cs" />
+    <Compile Include="tt\TrainUsageType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ETCS_L2\TP\Req.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

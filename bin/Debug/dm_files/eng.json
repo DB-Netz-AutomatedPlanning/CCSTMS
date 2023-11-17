@@ -1,0 +1,197 @@
+{
+  "name": "eng",
+  "intId": 5,
+  "isDefinedBy": "http://ERJU/datamodel/0.2/eng",
+  "prefix": "eng",
+  "containerStruct": "ETCSEngineering",
+  "version": "0.3",
+  "info": "Engineering Data for the ETCS Level 2/3 use case",
+  "enums": [
+  {
+    "name": "BufferStopType",
+    "enumLiterals": [
+      {"intId": 0, "name": "friction"},
+      {"intId": 1, "name": "hydraulic"},
+      {"intId": 2, "name": "fixated"},
+      {"intId": 3, "name": "other"}
+    ]
+  },
+  {
+    "name": "DuplicationType",
+    "info": "Indicate whether the information of the balise is a duplicate of the balise before or after.",
+    "enumLiterals": [
+      {"intId": 0, "name": "noDuplicates"},
+      {"intId": 1, "name": "duplicateNextBalise"},
+      {"intId": 2, "name": "duplicatePreviousBalise"}
+    ]
+  },
+  {
+    "name": "SleepersType",
+    "enumLiterals": [
+      {"intId": 0, "name": "unknownSleepersType"},
+      {"intId": 1, "name": "composite"},
+      {"intId": 2, "name": "concrete"},
+      {"intId": 3, "name": "steel"},
+      {"intId": 4, "name": "wood"}
+    ]
+  }
+  ],
+  "structs": [
+  {
+    "name": "BufferStop",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.BufferStop",
+       "info": "same ID as infra.BufferStop to establish bidirectional linking"},
+      {"intId": 2, "name": "dangerPoints", "reference": "DangerPoint", "multiplicity": "1..*", "sorted": false},
+      {"intId": 3, "name": "trackEdgeSections", "composition": "infra.TrackEdgeSection", "multiplicity": "1..*", "sorted": false},
+      {"intId": 4, "name": "bsType", "enumType": "BufferStopType"}
+    ]
+  },
+  {
+    "name": "SimplePoint",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.SimplePoint",
+       "info": "same ID as infra.SimplePoint to establish bidirectional linking"},
+      {"intId": 2, "name": "dangerPoints", "reference": "DangerPoint", "multiplicity": "1..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "Crossing",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.Crossing",
+       "info": "same ID as infra.Crossing to establish bidirectional linking"},
+      {"intId": 2, "name": "dangerPoints", "reference": "DangerPoint", "multiplicity": "1..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "LevelCrossing",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.LevelCrossing",
+       "info": "same ID as infra.LevelCrossing to establish bidirectional linking"},
+      {"intId": 2, "name": "dangerPoints", "reference": "DangerPoint", "multiplicity": "1..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "BaliseGroup",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.BaliseGroup",
+       "info": "same ID as infra.BaliseGroup to establish bidirectional linking"},
+      {"intId": 2, "name": "m_version", "enumType": "ss026.ETCSVersion",
+       "info": "Version of the ERTMS/ETCS system"},
+      {"intId": 3, "name": "q_link", "dataType": "boolean",
+       "info": "true when the balise group is linked, otherwise, false (unlinked)"}
+    ]
+  },
+  {
+    "name": "Balise",
+    "see": "https://dataprep.eulynx.eu/2023-03/index.htm?goto=2:4:4:8082",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.Balise",
+       "info": "same ID as infra.Balise to establish bidirectional linking"},
+      {"intId": 2, "name": "fixed", "dataType": "boolean",
+       "info": "false when balise is of transparent type"},
+      {"intId": 3, "name": "q_updown", "dataType": "boolean",
+       "info": "true when it is Up-link and false when it is Down-link"},
+      {"intId": 4, "name": "m_dup", "enumType": "DuplicationType",
+       "info": "true when it is Up-link and false when it is Down-link"},
+      {"intId": 5, "name": "m_mcount", "dataType": "uint32",
+       "info": "the purpose of message counter is to make it possible for the ERTMS/ETCS on-board to detect which balise group message the telegram belongs to."},
+      {"intId": 6, "name": "verticallyOriented", "dataType": "boolean",
+       "info": "false when oriented parallel to the sleepers"},
+      {"intId": 7, "name": "standardSize", "dataType": "boolean",
+       "info": "false when balise is of reduced size"},
+      {"intId": 8, "name": "etcsPackets", "composition": "ss026.BalisePacket", "multiplicity": "0..*", "sorted": false,
+       "info": "ETCS-Packets from SS026"}
+    ]
+  },
+  {
+    "name": "Sleepers",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "trackEdgeSection", "composition": "infra.TrackEdgeSection", "multiplicity": "1..*", "sorted": false},
+      {"intId": 3, "name": "type", "enumType": "SleepersType"}
+    ]
+  },
+  {
+    "name": "DangerPoint",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "name", "dataType": "string"},
+      {"intId": 3, "name": "trackEdge", "reference": "infra.TrackEdge",
+       "info": "is located on the track edge point"},
+      {"intId": 4, "name": "pos", "dataType": "uint32", "exp": -3,
+       "info": "position on TrackEdge measured from start"}
+    ]
+  },
+  {
+    "name": "MileagePoint",
+    "info": "marker for mileage point on TrackEdge",
+    "attrs": [
+      {"intId": 1, "name": "pos", "dataType": "double",
+       "info": "position on the associated Track Edge"},
+      {"intId": 2, "name": "mileage", "dataType": "double",
+       "info": "mileage value"}
+    ]
+  },
+  {
+    "name": "TrackEdgeMileage",
+    "info": "List of mileage markers assigned to one Track Edge",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.TrackEdge",
+       "info": "is a mileage-layer of the TrackEdge-class, hence using the same id. If the trackEdge does not belong to the MilageLine completely, the first or the last point will be not at its limits"},
+      {"intId": 2, "name": "points", "composition": "MileagePoint", "multiplicity": "0..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "MileageReferenceMarker",
+    "attrs": [
+      {"intId": 1, "name": "name", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "mileage", "dataType": "double",
+       "info": "similar as IFC's 'station'"},
+      {"intId": 3, "name": "trackEdge", "reference": "infra.TrackEdge"},
+      {"intId": 4, "name": "pos", "dataType": "double",
+       "info": "position on TrackEdge"}
+    ]
+  },
+  {
+    "name": "MileageLine",
+    "info": "mileage definition for all Track Edges belonging to one mileageLine. Prerequisite: one Track Edge belongs only to one mileageLine",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "trackEdges", "composition": "TrackEdgeMileage", "multiplicity": "0..*", "sorted": true},
+      {"intId": 3, "name": "horizontalGeometry", "composition": "infra.HorizontalSegment", "multiplicity": "0..*", "sorted": false},
+      {"intId": 4, "name": "referenceMarkers", "composition": "MileageReferenceMarker", "multiplicity": "0..*", "sorted": true}
+    ]
+  },
+  {
+    "name": "MileageArea",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "TopoArea"},
+      {"intId": 2, "name": "mileageLines", "composition": "MileageLine", "multiplicity": "0..*", "sorted": true}
+    ]
+  },
+  {
+    "name": "EngArea",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.TopoArea"},
+      {"intId": 2, "name": "defaultSleelersType", "enumType": "SleepersType"},
+      {"intId": 3, "name": "simplePoints", "composition": "SimplePoint", "multiplicity": "1..*", "sorted": false},
+      {"intId": 4, "name": "crossings", "composition": "Crossing", "multiplicity": "1..*", "sorted": false},
+      {"intId": 5, "name": "levelCrossings", "composition": "LevelCrossing", "multiplicity": "1..*", "sorted": false},
+      {"intId": 6, "name": "baliseGroup", "composition": "BaliseGroup", "multiplicity": "1..*", "sorted": false},
+      {"intId": 7, "name": "balises", "composition": "Balise", "multiplicity": "1..*", "sorted": false},
+      {"intId": 8, "name": "sleepers", "composition": "Sleepers", "multiplicity": "1..*", "sorted": false},
+      {"intId": 9, "name": "dangerPoints", "composition": "DangerPoint", "multiplicity": "1..*", "sorted": false},
+      {"intId": 10, "name": "bufferStops", "composition": "BufferStop", "multiplicity": "1..*", "sorted": false},
+      {"intId": 11, "name": "mileageAreas", "composition": "MileageArea", "multiplicity": "1..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "ETCSEngineering",
+    "attrs": [
+      {"intId": 1, "name": "areas", "composition": "EngArea", "multiplicity": "0..*", "sorted": true},
+      {"intId": 2, "name": "mileageAreas", "composition": "MileageArea", "multiplicity": "0..*", "sorted": true}
+    ]
+  }
+  ]
+}

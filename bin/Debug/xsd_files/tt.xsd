@@ -1,0 +1,430 @@
+<?xml version="1.0" ?>
+<xs:schema targetNamespace="https://erju.org/tt" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="https://erju.org/tt" elementFormDefault="qualified" xmlns:infra="https://erju.org/infra" xmlns:ss026="https://erju.org/ss026">
+	<xs:import namespace="https://erju.org/infra" schemaLocation="infra.xsd"/>
+	<xs:import namespace="https://erju.org/ss026" schemaLocation="ss026.xsd"/>
+	<xs:simpleType name="BrakePosition">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="passengerTrainInP"/>
+			<xs:enumeration value="freightTrainInP"/>
+			<xs:enumeration value="freightTrainInG"/>
+			<xs:enumeration value="unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BrakeModelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="lambda"/>
+			<xs:enumeration value="gamma"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GradeOfAutomation">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GoA1"/>
+			<xs:enumeration value="GoA2"/>
+			<xs:enumeration value="GoA3"/>
+			<xs:enumeration value="GoA4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrainCategoryType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INTERREGIONAL"/>
+			<xs:enumeration value="REGIONAL"/>
+			<xs:enumeration value="SUB_URBAN"/>
+			<xs:enumeration value="NIGHT_TRAIN"/>
+			<xs:enumeration value="MOTOR_RAIL"/>
+			<xs:enumeration value="MOUNTAIN_TRAIN"/>
+			<xs:enumeration value="HISTORIC_TRAIN"/>
+			<xs:enumeration value="COACH_GROUP"/>
+			<xs:enumeration value="TRAM"/>
+			<xs:enumeration value="UNDERGROUND"/>
+			<xs:enumeration value="HIGHSPEED_TRAIN"/>
+			<xs:enumeration value="INTERCITY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrainUsageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMMERCIAL_PASSENGER_TRAIN"/>
+			<xs:enumeration value="COMMERCIAL_CARGO_TRAIN"/>
+			<xs:enumeration value="LOCOMOTIVE_RUNNING_LIGHT"/>
+			<xs:enumeration value="LIGHT_RUNNING"/>
+			<xs:enumeration value="NOT_IN_SERVICE"/>
+			<xs:enumeration value="ENGINEERING_TRAIN"/>
+			<xs:enumeration value="BREAKDOWN_TRAIN"/>
+			<xs:enumeration value="MIXED_TRAIN"/>
+			<xs:enumeration value="SPECIAL_TRAIN"/>
+			<xs:enumeration value="OTHER_TRAIN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrainProtectionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Etcs"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EventType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PASSAGE"/>
+			<xs:enumeration value="STOP"/>
+			<xs:enumeration value="OTHER_EVENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AlignmentType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HEAD"/>
+			<xs:enumeration value="CENTER"/>
+			<xs:enumeration value="REAR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PositionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PositionOnTrack"/>
+			<xs:enumeration value="LogicalPosition"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StopType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMMERCIAL"/>
+			<xs:enumeration value="OPERATIONAL"/>
+			<xs:enumeration value="CONDITIONAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoadingDirection">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="bothDirections"/>
+			<xs:enumeration value="onTrain"/>
+			<xs:enumeration value="offTrain"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DoorSide">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="noneSide"/>
+			<xs:enumeration value="rightSide"/>
+			<xs:enumeration value="leftSide"/>
+			<xs:enumeration value="bothSides"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ActivityType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="joinActivity"/>
+			<xs:enumeration value="splitActivity"/>
+			<xs:enumeration value="collectActivity"/>
+			<xs:enumeration value="dropActivity"/>
+			<xs:enumeration value="reverseActivity"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdhesionCategory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="dryRail"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="normal_low"/>
+			<xs:enumeration value="lowAdhesion"/>
+			<xs:enumeration value="veryLowAdhesion"/>
+			<xs:enumeration value="extremelyLowAdhesion"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EventTimeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="earliestOperationalDeparture"/>
+			<xs:enumeration value="latestOperationalDeparture"/>
+			<xs:enumeration value="earliestOperationalArrival"/>
+			<xs:enumeration value="lastOperationalArrival"/>
+			<xs:enumeration value="operationalDeparture"/>
+			<xs:enumeration value="publishedArrival"/>
+			<xs:enumeration value="publishedDeparture"/>
+			<xs:enumeration value="realisedArrival"/>
+			<xs:enumeration value="realisedDeparture"/>
+			<xs:enumeration value="creation"/>
+			<xs:enumeration value="removal"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="OperationalPlanOperationalMovement">
+		<xs:sequence>
+			<xs:element name="operationalSegments" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalSegment" type="tt:OperationalSegment" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="operationalTrainUnits" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalTrainUnit" type="tt:OperationalTrainUnit" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="operationalConsists" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalConsist" type="tt:OperationalConsist" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="operationalMovementEvents" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalMovementEvent" type="tt:OperationalMovementEvent" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="operationalMovementMarkers" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalMovementMarker" type="tt:OperationalMovementMarker" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="uuid" type="xs:string" use="required"/>
+		<xs:attribute name="versionId" type="xs:string" use="required"/>
+		<xs:attribute name="mapDataVersionRef" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalPlanOperationalMovement" type="tt:OperationalPlanOperationalMovement"/>
+	<xs:complexType name="OperationalSegment">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="uuid" type="xs:string" use="required"/>
+		<xs:attribute name="sequence" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="operationalTrainUnitRef" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalTrainUnit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="operationalSegment" type="tt:OperationalSegment"/>
+	<xs:complexType name="OperationalTrainUnit">
+		<xs:sequence>
+			<xs:element name="physicalTrainUnit" type="tt:PhysicalTrainUnitIdentifier" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="operationalTrainCategory" type="tt:OperationalTrainCategory" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="operationalConsistRefs" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to tt:OperationalConsist</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalConsistRef">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="uuid" type="xs:string" use="required"/>
+		<xs:attribute name="nominalRotatingMass" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="regularBrakeWeightPercentage" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="emergencyBrakeWeightPercentage" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="brakePosition" type="tt:BrakePosition"/>
+		<xs:attribute name="brakeModelType" type="tt:BrakeModelType"/>
+		<xs:attribute name="usedGradeOfAutomation" type="tt:GradeOfAutomation"/>
+	</xs:complexType>
+	<xs:element name="operationalTrainUnit" type="tt:OperationalTrainUnit"/>
+	<xs:complexType name="OperationalTrainCategory">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="uuid" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="tt:TrainCategoryType"/>
+		<xs:attribute name="description" type="xs:string" use="required"/>
+		<xs:attribute name="trainUsage" type="tt:TrainUsageType"/>
+	</xs:complexType>
+	<xs:element name="operationalTrainCategory" type="tt:OperationalTrainCategory"/>
+	<xs:complexType name="OperationalConsist">
+		<xs:sequence>
+			<xs:element name="supportedOnBoardEquipment" type="tt:SupportedOnBoardEquipment" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalConsist" type="tt:OperationalConsist"/>
+	<xs:complexType name="SupportedOnBoardEquipment">
+		<xs:sequence>
+			<xs:element name="anyClass" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="anyClas" type="tt:AnyClass" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="tt:TrainProtectionType"/>
+		<xs:attribute name="etcsVersions" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="supportedOnBoardEquipment" type="tt:SupportedOnBoardEquipment"/>
+	<xs:complexType name="AnyClass">
+		<xs:sequence/>
+		<xs:attribute name="className" type="xs:string" use="required"/>
+		<xs:attribute name="content" type="xs:base64Binary" use="required"/>
+	</xs:complexType>
+	<xs:element name="anyClass" type="tt:AnyClass"/>
+	<xs:complexType name="OperationalMovementEvent">
+		<xs:sequence>
+			<xs:element name="position" type="tt:OperationalMovementEventPosition" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="operationalEventTimes" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalEventTime" type="tt:OperationalEventTime" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="operationalEventLinks" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="operationalEventLink" type="tt:OperationalEventLink" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="trackPathToSubsequentEvent" type="infra:LinkedPath" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="stopDescription" type="tt:StopDescription" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="tt:EventType"/>
+		<xs:attribute name="alignment" type="tt:AlignmentType"/>
+		<xs:attribute name="changedSincePreviousVersion" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalMovementEvent" type="tt:OperationalMovementEvent"/>
+	<xs:complexType name="OperationalMovementEventPosition">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="infra:TrackEdgePoint" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="tt:PositionType"/>
+	</xs:complexType>
+	<xs:element name="operationalMovementEventPosition" type="tt:OperationalMovementEventPosition"/>
+	<xs:complexType name="StopDescription">
+		<xs:sequence>
+			<xs:element name="stopTimes" type="tt:StopTimes" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="stopActivities" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="stopActivity" type="tt:StopActivity" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="platformEdges" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to infra:PlatformEdge</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="platformEdge">
+							<xs:complexType>
+								<xs:attribute name="ref" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="stopType" type="tt:StopType"/>
+		<xs:attribute name="stopOnDemand" type="xs:boolean" use="required"/>
+		<xs:attribute name="stopSkipped" type="xs:boolean" use="required"/>
+		<xs:attribute name="onOff" type="tt:LoadingDirection"/>
+		<xs:attribute name="openingDoorSide" type="tt:DoorSide"/>
+		<xs:attribute name="centralisedOpening" type="xs:boolean" use="required"/>
+		<xs:attribute name="centralisedClosing" type="xs:boolean" use="required"/>
+		<xs:attribute name="changeOfGradeOfAutomation" type="xs:boolean" use="required"/>
+		<xs:attribute name="relaxedCoupler" type="xs:boolean" use="required"/>
+		<xs:attribute name="holdTrain" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopDescription" type="tt:StopDescription"/>
+	<xs:complexType name="StopTimes">
+		<xs:sequence/>
+		<xs:attribute name="minimalTime" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="operationalReserve" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="additionalReserve" type="xs:unsignedInt" use="required"/>
+	</xs:complexType>
+	<xs:element name="stopTimes" type="tt:StopTimes"/>
+	<xs:complexType name="StopActivity">
+		<xs:sequence/>
+		<xs:attribute name="type" type="tt:ActivityType"/>
+		<xs:attribute name="actualOperationalSegment" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalSegment</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="targetOperationalSegment" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalSegment</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="stopActivity" type="tt:StopActivity"/>
+	<xs:complexType name="PhysicalTrainUnitIdentifier">
+		<xs:sequence/>
+		<xs:attribute name="trainRunningNumber" type="xs:string"/>
+		<xs:attribute name="additionalTrainRunningNumber" type="xs:string"/>
+		<xs:attribute name="tafTapTsiTrainID" type="xs:string"/>
+		<xs:attribute name="leadingOnBoardUnitId" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="physicalTrainUnitIdentifier" type="tt:PhysicalTrainUnitIdentifier"/>
+	<xs:complexType name="OperationalMovementMarker">
+		<xs:choice>
+			<xs:element name="tsrMarker" type="tt:TemporarySpeedRestrictionMarker"/>
+			<xs:element name="lowAdhesionMarker" type="tt:LowAdhesionMarker"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="operationalMovementMarker" type="tt:OperationalMovementMarker"/>
+	<xs:complexType name="TemporarySpeedRestrictionMarker">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="infra:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="sequence" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="isStart" type="xs:boolean" use="required"/>
+		<xs:attribute name="maximumSpeedRestriction" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="observingPointHead" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="temporarySpeedRestrictionMarker" type="tt:TemporarySpeedRestrictionMarker"/>
+	<xs:complexType name="LowAdhesionMarker">
+		<xs:sequence>
+			<xs:element name="trackEdgePoint" type="infra:TrackEdgePoint" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="sequence" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="isStart" type="xs:boolean" use="required"/>
+		<xs:attribute name="adhesionCategory" type="tt:AdhesionCategory"/>
+		<xs:attribute name="observingPointHead" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="lowAdhesionMarker" type="tt:LowAdhesionMarker"/>
+	<xs:complexType name="OperationalEventLink">
+		<xs:sequence>
+			<xs:element name="operationalEvent" type="tt:OperationalEventRef" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="tt:EventType"/>
+	</xs:complexType>
+	<xs:element name="operationalEventLink" type="tt:OperationalEventLink"/>
+	<xs:complexType name="OperationalEventRef">
+		<xs:choice/>
+		<xs:attribute name="movementEvent" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalMovementEvent</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="restrictionEvent" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalRestrictionEvent</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="warningMeasureEvent" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Reference to tt:OperationalWarningMeasureEvent</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="operationalEventRef" type="tt:OperationalEventRef"/>
+	<xs:complexType name="OperationalEventTime">
+		<xs:sequence/>
+		<xs:attribute name="type" type="tt:EventTimeType"/>
+		<xs:attribute name="dateTime" type="xs:date" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalEventTime" type="tt:OperationalEventTime"/>
+	<xs:complexType name="OperationalRestrictionEvent">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalRestrictionEvent" type="tt:OperationalRestrictionEvent"/>
+	<xs:complexType name="OperationalWarningMeasureEvent">
+		<xs:sequence/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="operationalWarningMeasureEvent" type="tt:OperationalWarningMeasureEvent"/>
+</xs:schema>

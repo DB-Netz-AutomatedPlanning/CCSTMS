@@ -1,0 +1,83 @@
+{
+  "name": "tp",
+  "intId": 9,
+  "isDefinedBy": "http://ERJU/datamodel/0.2/trainprotection",
+  "prefix": "tp",
+  "containerStruct": "TrainProtection",
+  "version": "0.3",
+  "info": "Data model for Train Protection use case",
+  "enums": [
+  {
+    "name": "DPSDependencyType",
+    "info": "Defines the type of DPS dependency",
+    "enumLiterals": [
+      {"intId": 0, "name": "Exclusive"},
+      {"intId": 1, "name": "Equivalent"},
+      {"intId": 2, "name": "Specific"}
+    ]
+  }
+  ],
+  "structs": [
+  {
+    "name": "ProtectedInfraElement",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "simplePoint", "reference": "infra.SimplePoint"},
+      {"intId": 2, "name": "slipCrossing", "reference": "infra.SlipCrossing"},
+      {"intId": 3, "name": "crossing", "reference": "infra.Crossing"},
+      {"intId": 4, "name": "derailer", "reference": "infra.Derailer"},
+      {"intId": 5, "name": "levelCrossing", "reference": "infra.LevelCrossing"}
+    ]
+  },
+  {
+    "name": "DriveProtectionSectionGroup",
+    "info": "Defines the configuration of a DPS Group",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "name", "dataType": "string"},
+      {"intId": 3, "name": "driveProtectionSections", "composition": "DriveProtectionSection", "multiplicity": "1..*", "sorted": false},
+      {"intId": 4, "name": "protectedInfraElements", "composition": "ProtectedInfraElement"},
+      {"intId": 5, "name": "dependenciesType", "enumType": "DPSDependencyType",
+       "info": "defines dependencies between n drive protection sections"},
+      {"intId": 6, "name": "dependencies", "dataType": "uint32", "multiplicity": "0..*", "sorted": false,
+       "info": "contains row-wise bit matrix with column = index of the element in DriveProtectionSectionGroup. 0 means not allowed to use ; 1 means allowed to use for rail traffic.Each line in the matrix contains a valid state of the DriveProtectionSectionGroup ; Use only if DPSDependencyType == Specific"}
+    ]
+  },
+  {
+    "name": "DriveProtectionSection",
+    "info": "Defines a DPS for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "name", "dataType": "string"},
+      {"intId": 3, "name": "trackEdgeSection", "composition": "infra.TrackEdgeSection"},
+      {"intId": 4, "name": "flankProtectionDirection", "enumType": "infra.Direction",
+       "info": "Use Case to be clarified once APS has defined their Flank Protection Concept"}
+    ]
+  },
+  {
+    "name": "AllocationSection",
+    "info": "Defines an allocation section for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "name", "dataType": "string"},
+      {"intId": 3, "name": "linearLocation", "composition": "infra.LinkedPath"},
+      {"intId": 4, "name": "allocationSections", "reference": "AllocationSection", "multiplicity": "1..*", "sorted": false,
+       "info": "is dependent on the allocation sections"}
+    ]
+  },
+  {
+    "name": "TrainProtectionArea",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global", "sameKeyAs": "infra.TopoArea"},
+      {"intId": 2, "name": "dpsGroups", "composition": "DriveProtectionSectionGroup", "multiplicity": "0..*", "sorted": true},
+      {"intId": 3, "name": "allocationSections", "composition": "AllocationSection", "multiplicity": "0..*", "sorted": true}
+    ]
+  },
+  {
+    "name": "TrainProtection",
+    "attrs": [
+      {"intId": 1, "name": "tpArea", "composition": "TrainProtectionArea", "multiplicity": "0..*", "sorted": true}
+    ]
+  }
+  ]
+}

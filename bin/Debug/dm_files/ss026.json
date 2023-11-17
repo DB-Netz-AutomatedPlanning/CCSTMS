@@ -1,0 +1,1096 @@
+{
+  "name": "ss026",
+  "intId": 5,
+  "isDefinedBy": "http://ERJU/datamodel/0.1/SS026",
+  "prefix": "ss026",
+  "version": "0.3",
+  "info": "All Packets according to SUBSET-026-7 v360",
+  "enums": [
+  {
+    "name": "QDir",
+    "info": "Validity direction of transmitted data. Qualifier to indicate the relevantvalidity direction of transmitted data, with reference to directionality of the balise group sending the information or to directionality of the LRBG, in case of information sent via radio.. Length of variable : 2 bits. Minimum Value : None.Maximum Value : None. Resolution/formula : None. Comment : nan",
+    "enumLiterals": [
+      {"intId": 0, "name": "reverse"},
+      {"intId": 1, "name": "nominal"},
+      {"intId": 2, "name": "both"},
+      {"intId": 3, "name": "spare"}
+    ]
+  },
+  {
+    "name": "ETCSVersion",
+    "info": "M_VERSION:Version of ETCS system. This gives the version of the ETCS system. Each part indicates the first and second number of the version respectively. The first number distinguishes not compatible versions. (The three MSB’s)The second number indicates compatibility within a version X. (Thefour LSB’s). Length of variable : 7 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan",
+    "enumLiterals": [
+      {"intId": 0, "name": "v1_0", "info": "0010000: introduced in SRS 1.2.0"},
+      {"intId": 1, "name": "v1_1", "info": "0010001: introduced in SRS 3.3.0"},
+      {"intId": 2, "name": "v2_0", "info": "0100000: introduced in SRS 3.3.0"},
+      {"intId": 3, "name": "v2_1", "info": "0100001: introduced in SRS 3.5.0"},
+      {"intId": 4, "name": "v_previous", "info": "Previous version according toe.g. EEIG SRS, UIC A200 SRS (000XXXX)"},
+      {"intId": 5, "name": "v_reserved", "info": "Values from 0100010 to 1111111 are valid, but reserved for future use"},
+      {"intId": 6, "name": "v_invalid", "info": "Values from 0010010 to 0011111 are not valid"}
+    ]
+  },
+  {
+    "name": "NVContact",
+    "info": "M_NVCONTAC:T_NVCONTACT reaction. Indicates the reaction to be performedwhen T_NVCONTACT timer elapses This variable is part of the National Values. Length of variable : 2 bits.",
+    "enumLiterals": [
+      {"intId": 0, "name": "trainTrip"},
+      {"intId": 1, "name": "applyServiceBrake"},
+      {"intId": 2, "name": "noReaction"},
+      {"intId": 3, "name": "spare"}
+    ]
+  },
+  {
+    "name": "KVType",
+    "info": "Type of Kv_int set. None. Length of variable : 2 bits. Comment : Only if Q_NVKINT = 1, Q_NVKVINTSET and the following variables follow",
+    "enumLiterals": [
+      {"intId": 0, "name": "freightTrains"},
+      {"intId": 1, "name": "conventionalPassengerTrains"},
+      {"intId": 2, "name": "spare", "info": "binary values from 10 to 11 are spare"}
+    ]
+  },
+  {
+    "name": "LinkReaction",
+    "info": "Q_LINKREACTION: linking reaction. Qualifier for the reaction to be performed ifa linking or a balise group message consistency problem occurs with the balise group linked to.. Length of variable : 2 bits.",
+    "enumLiterals": [
+      {"intId": 0, "name": "trainTrip"},
+      {"intId": 1, "name": "applyServiceBrake"},
+      {"intId": 2, "name": "noReaction"},
+      {"intId": 3, "name": "spare"}
+    ]
+  },
+  {
+    "name": "EtcsLevel",
+    "info": "M_LEVELTR",
+    "enumLiterals": [
+      {"intId": 0, "name": "Level0"},
+      {"intId": 1, "name": "LevelNTC"},
+      {"intId": 2, "name": "Level1"},
+      {"intId": 3, "name": "Level2"},
+      {"intId": 4, "name": "Level3"},
+      {"intId": 5, "name": "spare", "info": "binary value 101, 110, and 111 are spare"}
+    ]
+  },
+  {
+    "name": "AxleLoadCategory",
+    "info": "M_AXLELOADCAT",
+    "enumLiterals": [
+      {"intId": 0, "name": "A"},
+      {"intId": 1, "name": "HS17"},
+      {"intId": 2, "name": "B1"},
+      {"intId": 3, "name": "B2"},
+      {"intId": 4, "name": "C2"},
+      {"intId": 5, "name": "C3"},
+      {"intId": 6, "name": "C4"},
+      {"intId": 7, "name": "D2"},
+      {"intId": 8, "name": "D3"},
+      {"intId": 9, "name": "D4"},
+      {"intId": 10, "name": "D4XL"},
+      {"intId": 11, "name": "E4"},
+      {"intId": 12, "name": "E5"},
+      {"intId": 13, "name": "ALC_spare", "info": "binary values from 0001101 to 1111111 are spare"}
+    ]
+  },
+  {
+    "name": "TrackCondType",
+    "info": "M_TRACKCOND: Type of track condition.None. Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan",
+    "enumLiterals": [
+      {"intId": 0, "name": "TCT_0000", "info": "Non stopping area. Initial state: stopping permitted"},
+      {"intId": 1, "name": "TCT_0001", "info": "Tunnel stopping area. Initial state: no tunnel stopping area"},
+      {"intId": 2, "name": "TCT_0010", "info": "Sound horn. Initial state: no request for sound horn"},
+      {"intId": 3, "name": "TCT_0011", "info": "Powerless Section - lower pantograph. Initial state: not powerless section"},
+      {"intId": 4, "name": "TCT_0100", "info": "Radio hole (stop supervising T_NVCONTACT). Initial state: supervise T_NVCONTACT"},
+      {"intId": 5, "name": "TCT_0101", "info": "Air tightness. Initial state: no request for air tightness"},
+      {"intId": 6, "name": "TCT_0110", "info": "Switch off regenerative brake. Initial state: regenerative brake on"},
+      {"intId": 7, "name": "TCT_0111", "info": "Switch off eddy current brake for service brake. Initial state: eddy current brake for service brake on"},
+      {"intId": 8, "name": "TCT_1000", "info": "Switch off magnetic shoe brake. Initial state: magnetic shoe brake on"},
+      {"intId": 9, "name": "TCT_1001", "info": "Powerless section - switch off the main power switch. Initial state: not powerless section"},
+      {"intId": 10, "name": "TCT_1010", "info": "Switch off eddy current brake for emergency brake. Initial state: eddy current brake for emergency brake on"},
+      {"intId": 11, "name": "TCT_0011_1111", "info": "Spare"}
+    ]
+  },
+  {
+    "name": "PlatformType",
+    "info": "Type of platform. Nominal height of platform above rail level in mm (refer to TSI infrastructure). Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan",
+    "enumLiterals": [
+      {"intId": 0, "name": "PT_200"},
+      {"intId": 1, "name": "PT_300_380", "info": "height values between 300mm and 380mm"},
+      {"intId": 2, "name": "PT_550"},
+      {"intId": 3, "name": "PT_580"},
+      {"intId": 4, "name": "PT_680"},
+      {"intId": 5, "name": "PT_685"},
+      {"intId": 6, "name": "PT_730"},
+      {"intId": 7, "name": "PT_760"},
+      {"intId": 8, "name": "PT_840"},
+      {"intId": 9, "name": "PT_900"},
+      {"intId": 10, "name": "PT_915"},
+      {"intId": 11, "name": "PT_920"},
+      {"intId": 12, "name": "PT_960"},
+      {"intId": 13, "name": "PT_1100", "info": "1100 mm"},
+      {"intId": 14, "name": "PT_spare", "info": "values from 1110 to 1111 are spare"}
+    ]
+  },
+  {
+    "name": "PlatformPosition",
+    "info": "Platform position (relative to direction of authorised movement).None. Length of variable : 2 bits",
+    "enumLiterals": [
+      {"intId": 0, "name": "PP_left", "info": "Platform on left side"},
+      {"intId": 1, "name": "PP_right", "info": "Platform on right side"},
+      {"intId": 2, "name": "PP_both", "info": "Platform on both sides"},
+      {"intId": 3, "name": "PP_spare"}
+    ]
+  },
+  {
+    "name": "TextClass",
+    "info": "Class of message to be displayed..Q_TEXTCLASS specifies the class of the text message included in the same packet (either plain or fixed message). Length of variable : 2 bits.",
+    "enumLiterals": [
+      {"intId": 0, "name": "TC_auxiliary", "info": "Auxiliary Information"},
+      {"intId": 1, "name": "TC_important", "info": "Important Information"},
+      {"intId": 2, "name": "TC_spare", "info": "Binary values 10 and 11 are spare"}
+    ]
+  },
+  {
+    "name": "DisplayOperatingMode",
+    "info": "Onboard operating mode for text display.The text is displayed when entering / as long as in the defined mode. Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : Start event",
+    "enumLiterals": [
+      {"intId": 0, "name": "DOM_fullSupervision"},
+      {"intId": 1, "name": "DOM_onSight"},
+      {"intId": 2, "name": "DOM_staffResponsible"},
+      {"intId": 3, "name": "DOM_spare"},
+      {"intId": 4, "name": "DOM_unfitted"},
+      {"intId": 5, "name": "DOM_spare1"},
+      {"intId": 6, "name": "DOM_standBy"},
+      {"intId": 7, "name": "DOM_trip"},
+      {"intId": 8, "name": "DOM_postTrip"},
+      {"intId": 9, "name": "DOM_spare2"},
+      {"intId": 10, "name": "DOM_spare3"},
+      {"intId": 11, "name": "DOM_spare4"},
+      {"intId": 12, "name": "DOM_limitedSupervision"},
+      {"intId": 13, "name": "DOM_spare5"},
+      {"intId": 14, "name": "DOM_reversing"},
+      {"intId": 15, "name": "DOM_notLimitedByMode"}
+    ]
+  },
+  {
+    "name": "DisplayOperatingLevel",
+    "info": "Onboard operating level for text display.The text is displayed when entering / as long as in the defined level. Length of variable : 3 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : Start event",
+    "enumLiterals": [
+      {"intId": 0, "name": "DOL_level0"},
+      {"intId": 1, "name": "DOL_levelNTC"},
+      {"intId": 2, "name": "DOL_level1"},
+      {"intId": 3, "name": "DOL_level2"},
+      {"intId": 4, "name": "DOL_level3"},
+      {"intId": 5, "name": "DOL_notLimited", "info": "The display of the text shall not be limited by the level"},
+      {"intId": 6, "name": "DOL_spare", "info": "binary values 110 and 111 are spare"}
+    ]
+  },
+  {
+    "name": "TextConfirmationType",
+    "info": "Qualifier for text confirmation.None. Length of variable : 2 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan",
+    "enumLiterals": [
+      {"intId": 0, "name": "TCT_00", "info": "No confirmation required"},
+      {"intId": 1, "name": "TCT_01", "info": "Confirmation required"},
+      {"intId": 2, "name": "TCT_10", "info": "Confirmation required: command application of the service brake when display end                 condition is fulfilled, unless the text has already been acknowledged by the driver"},
+      {"intId": 3, "name": "TCT_11", "info": "Confirmation required: command application of the emergency brake when display end              condition is fulfilled, unless the text has already been acknowledged by the driver"}
+    ]
+  },
+  {
+    "name": "MAMode",
+    "info": "Required mode for a part of the MA. None. Length of variable : 2 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : OS, LS, SH",
+    "enumLiterals": [
+      {"intId": 0, "name": "MAM_OS", "info": "On Sight"},
+      {"intId": 1, "name": "MAM_LS", "info": "Shunting"},
+      {"intId": 2, "name": "MAM_SH", "info": "Limited Supervision"},
+      {"intId": 3, "name": "MAM_Spare", "info": "Spare"}
+    ]
+  },
+  {
+    "name": "VoltageType",
+    "enumLiterals": [
+      {"intId": 0, "name": "VT_none", "info": "Line not fitted with any traction system"},
+      {"intId": 1, "name": "VT_1", "info": "AC 25kV 50Hz"},
+      {"intId": 2, "name": "VT_2", "info": "AC 15kV 16.7Hz"},
+      {"intId": 3, "name": "VT_3", "info": "DC 3kV"},
+      {"intId": 4, "name": "VT_4", "info": "DC 1.5kV"},
+      {"intId": 5, "name": "VT_5", "info": "DC 600/750V"},
+      {"intId": 6, "name": "VT_Spare", "info": "binary values from 0110 to 1111 are spare"}
+    ]
+  }
+  ],
+  "structs": [
+  {
+    "name": "BalisePacket",
+    "attrs": [
+      {"intId": 1, "name": "nid", "dataType": "uint32",
+       "info": "packet id"},
+      {"intId": 2, "name": "q_dir", "enumType": "QDir"},
+      {"intId": 3, "name": "packet", "composition": "Packet"}
+    ]
+  },
+  {
+    "name": "Packet",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "packet_0", "composition": "ETCSPacket_0"},
+      {"intId": 2, "name": "packet_2", "composition": "ETCSPacket_2"},
+      {"intId": 3, "name": "packet_3", "composition": "ETCSPacket_3"},
+      {"intId": 4, "name": "packet_5", "composition": "ETCSPacket_5"},
+      {"intId": 5, "name": "packet_6", "composition": "ETCSPacket_6"},
+      {"intId": 6, "name": "packet_16", "composition": "ETCSPacket_16"},
+      {"intId": 7, "name": "packet_39", "composition": "ETCSPacket_39"},
+      {"intId": 8, "name": "packet_40", "composition": "ETCSPacket_40"},
+      {"intId": 9, "name": "packet_41", "composition": "ETCSPacket_41"},
+      {"intId": 10, "name": "packet_42", "composition": "ETCSPacket_42"},
+      {"intId": 11, "name": "packet_44", "composition": "ETCSPacket_44"},
+      {"intId": 12, "name": "packet_45", "composition": "ETCSPacket_45"},
+      {"intId": 13, "name": "packet_46", "composition": "ETCSPacket_46"},
+      {"intId": 14, "name": "packet_49", "composition": "ETCSPacket_49"},
+      {"intId": 15, "name": "packet_51", "composition": "ETCSPacket_51"},
+      {"intId": 16, "name": "packet_52", "composition": "ETCSPacket_52"},
+      {"intId": 17, "name": "packet_65", "composition": "ETCSPacket_65"},
+      {"intId": 18, "name": "packet_66", "composition": "ETCSPacket_66"},
+      {"intId": 19, "name": "packet_67", "composition": "ETCSPacket_67"},
+      {"intId": 20, "name": "packet_68", "composition": "ETCSPacket_68"},
+      {"intId": 21, "name": "packet_69", "composition": "ETCSPacket_69"},
+      {"intId": 22, "name": "packet_70", "composition": "ETCSPacket_70"},
+      {"intId": 23, "name": "packet_71", "composition": "ETCSPacket_71"},
+      {"intId": 24, "name": "packet_72", "composition": "ETCSPacket_72"},
+      {"intId": 25, "name": "packet_76", "composition": "ETCSPacket_76"},
+      {"intId": 26, "name": "packet_79", "composition": "ETCSPacket_79"},
+      {"intId": 27, "name": "packet_80", "composition": "ETCSPacket_80"},
+      {"intId": 28, "name": "packet_88", "composition": "ETCSPacket_88"},
+      {"intId": 29, "name": "packet_90", "composition": "ETCSPacket_90"},
+      {"intId": 30, "name": "packet_131", "composition": "ETCSPacket_131"},
+      {"intId": 31, "name": "packet_132", "composition": "ETCSPacket_132"},
+      {"intId": 32, "name": "packet_133", "composition": "ETCSPacket_133"},
+      {"intId": 33, "name": "packet_134", "composition": "ETCSPacket_134"},
+      {"intId": 34, "name": "packet_135", "composition": "ETCSPacket_135"},
+      {"intId": 35, "name": "packet_136", "composition": "ETCSPacket_136"},
+      {"intId": 36, "name": "packet_137", "composition": "ETCSPacket_137"},
+      {"intId": 37, "name": "packet_138", "composition": "ETCSPacket_138"},
+      {"intId": 38, "name": "packet_139", "composition": "ETCSPacket_139"},
+      {"intId": 39, "name": "packet_141", "composition": "ETCSPacket_141"},
+      {"intId": 40, "name": "packet_145", "composition": "ETCSPacket_145"},
+      {"intId": 41, "name": "packet_180", "composition": "ETCSPacket_180"},
+      {"intId": 42, "name": "packet_181", "composition": "ETCSPacket_181"},
+      {"intId": 43, "name": "packet_254", "composition": "ETCSPacket_254"},
+      {"intId": 44, "name": "packet_255", "composition": "ETCSPacket_255"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_0",
+    "info": " Virtual Balise Cover marker",
+    "attrs": [
+      {"intId": 1, "name": "nid_vbcmk", "dataType": "uint32",
+       "info": "Marker for Virtual Balise Cover. minValue: 0, maxValue : 63"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_2",
+    "info": " System Version order",
+    "attrs": [
+      {"intId": 1, "name": "m_version", "enumType": "ETCSVersion"}
+    ]
+  },
+  {
+    "name": "LMKVR",
+    "attrs": [
+      {"intId": 1, "name": "l_nvkrint_l", "dataType": "uint32",
+       "info": "Train length step used to define the integrated correction factor Kr. This variable is part of the National Values. Length of variable : 5 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "m_nvkrint_l", "dataType": "uint32",
+       "info": "Integrated correction factor Kr. This is the train length dependentintegrated correction factor. M_NVKRINT(l) is valid for a train length between L_NVKRINT(l) and L_NVKRINT(l+1).M_NVKRINT is valid between 0m and L_NVKRINT(1)This variable is part of the National Values. Length of variable : 5 bits. Minimum Value : 0. Maximum Value : 1.55. Resolution/formula : 0.05. Comment : Valid between L_NVKRINT(l) andL_NVKRINT(l+1)"}
+    ]
+  },
+  {
+    "name": "NKV",
+    "attrs": [
+      {"intId": 1, "name": "q_nvkint", "dataType": "boolean",
+       "info": "Qualifier for integrated correction factors. This variable is part of the National Values. Length of variable : 1 bit."},
+      {"intId": 2, "name": "q_nvkvintset", "enumType": "KVType"},
+      {"intId": 3, "name": "a_nvp12", "dataType": "uint32",
+       "info": "Lower deceleration limit to determine the set of Kv to be used. Lower deceleration limit to determine the set of correction factor Kv to be used for Conventional Passenger trains. This variable is part of the National Values.. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value : 3.15 m/s2. Resolution/formula : 0.05 m/s2. Comment : Only if Q_NVKVINTSET = 1"},
+      {"intId": 4, "name": "a_nvp23", "dataType": "uint32",
+       "info": "Upper deceleration limit to determine the set of Kv to be used. Upper deceleration limit to determine the set of correction factor Kv to be used for Conventional Passenger trains. This variable is part of the National Values.. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value :3.15 m/s2. Resolution/formula : 0.05 m/s2. Comment : Only if Q_NVKVINTSET = 1"},
+      {"intId": 5, "name": "v_nvkvint", "dataType": "uint32",
+       "info": "Speed step used to define the integrated correction factor Kv. This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value: 600km/h. Resolution/formula : 5 km/h. Comment : = 0 km/h"},
+      {"intId": 6, "name": "m_nvkvint", "dataType": "double",
+       "info": "Integrated correction factor Kv. This is the speed dependent integrated correction factor. M_NVKVINT(n) is valid for an estimated speed between V_NVKVINT(n) and V_NVKVINT(n+1). M_NVKVINT is valid between 0 km/h and V_NVKVINT(1)This variable is part of the National Values. Length of variable : 7bits. Minimum Value : 0. Maximum Value : 2.54. Resolution/formula : 0.02. Comment : Valid between V_NVKVINT and V_NVKVINT(1) If Q_NVKVINTSET = 1, gives the correction factor if maximum emergency brake deceleration is lower thanA_NVP12"},
+      {"intId": 7, "name": "m_nvkvint_2", "dataType": "uint32",
+       "info": "Integrated correction factor Kv. This is the speed dependent integrated correction factor. M_NVKVINT(n) is valid for an estimated speed between V_NVKVINT(n) and V_NVKVINT(n+1). M_NVKVINT is valid between 0 km/h and V_NVKVINT(1)This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0. Maximum Value : 2.54. Resolution/formula : 0.02. Comment : Only if Q_NVKVINTSET = 1 Valid between V_NVKVINT and V_NVKVINT(1) Gives the correction factor if maximum emergency brake deceleration is higherthan A_NVP23"},
+      {"intId": 8, "name": "items", "composition": "NKVItem", "multiplicity": "0..32", "sorted": false},
+      {"intId": 9, "name": "qvItem", "composition": "NKVSubItem", "multiplicity": "0..32", "sorted": false},
+      {"intId": 10, "name": "lmkvrs", "composition": "LMKVR", "multiplicity": "0..33", "sorted": false},
+      {"intId": 11, "name": "m_nvkrint", "dataType": "uint32",
+       "info": "Integrated correction factor Kr. This is the train length dependent integrated correction factor. M_NVKRINT(l) is valid for a train length between L_NVKRINT(l) and L_NVKRINT(l+1). M_NVKRINT is valid between 0m and L_NVKRINT(1)This variable is part of the National Values. Length of variable : 5 bits. Minimum Value : 0. Maximum Value : 1.55. Resolution/formula : 0.05. Comment : Valid between L_NVKRINT and L_NVKRINT(1)"}
+    ]
+  },
+  {
+    "name": "NVP13",
+    "attrs": [
+      {"intId": 1, "name": "a_nvp12", "dataType": "uint32",
+       "info": "Lower deceleration limit to determine the set of Kv to beused. Lower deceleration limit to determine the set of correction factor Kv to be used for Conventional Passenger trains. This variable is part of the National Values.. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value :3.15 m/s2. Resolution/formula : 0.05 m/s2. Comment : Only if Q_NVKVINTSET = 1"},
+      {"intId": 2, "name": "a_nvp23", "dataType": "uint32",
+       "info": "Upper deceleration limit to determine the set of Kv to be used. Upper deceleration limit to determine the set of correction factor Kv to be used for Conventional Passenger trains. This variable is part of the National Values.. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value :3.15 m/s2. Resolution/formula : 0.05 m/s2. Comment : Only if Q_NVKVINTSET = 1"}
+    ]
+  },
+  {
+    "name": "VMM",
+    "attrs": [
+      {"intId": 1, "name": "v_nvkvint_k_m", "dataType": "uint32",
+       "info": "Speed step used to define the integrated correction factor Kv. This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h.Maximum Value : 600km/h. Resolution/formula : 5 km/h."},
+      {"intId": 2, "name": "m_nvkvint_k_m", "dataType": "uint32",
+       "info": "Integrated correction factor Kv. This is the speed dependent integrated correction factor. M_NVKVINT(n) is valid for an estimated speed between V_NVKVINT(n) and V_NVKVINT(n+1). M_NVKVINT is valid between 0 km/h and V_NVKVINT(1)This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0. Maximum Value : 2.54. Resolution/formula : 0.02. Comment : Valid betweenV_NVKVINT(k_m) and V_NVKVINT(k_m+1) If Q_NVKVINTSET(k) = 1, gives the correctionfactorifmaximum emergency brakedeceleration is"},
+      {"intId": 3, "name": "m_nvkvint_k_m_2", "dataType": "uint32",
+       "info": "Integrated correction factor Kv. This is the speed dependent integrated correction factor. M_NVKVINT(n) is valid for an estimated speed between V_NVKVINT(n) and V_NVKVINT(n+1).M_NVKVINT is valid between 0 km/h and V_NVKVINT(1)This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0. Maximum Value : 2.54. Resolution/formula : 0.02. Comment : Only if Q_NVKVINTSET(k) = 1 Valid betweenV_NVKVINT(k_m) and V_NVKVINT(k_m+1) Gives the correction factor if maximum emergency brake deceleration is higher than A_NVP23(k)"}
+    ]
+  },
+  {
+    "name": "NKVSubItem",
+    "attrs": [
+      {"intId": 1, "name": "nvp13", "composition": "NVP13", "multiplicity": "0..1"},
+      {"intId": 2, "name": "mvvs", "composition": "VMM", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "NKVItem",
+    "attrs": [
+      {"intId": 1, "name": "v_nvkvint", "dataType": "uint32",
+       "info": "Speed step used to define the integrated correction factor Kv. This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600km/h. Resolution/formula : 5 km/h. Comment : = 0 km/h"},
+      {"intId": 3, "name": "m_nvkvint", "dataType": "uint32",
+       "info": "Integrated correction factor Kv. This is the speed dependent integrated correction factor. M_NVKVINT(n) is valid for an estimated speed between V_NVKVINT(n) and V_NVKVINT(n+1). M_NVKVINT is valid between 0 km/h and V_NVKVINT(1)This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0. Maximum Value : 2.54. Resolution/formula : 0.02. Comment : Only if Q_NVKVINTSET = 1Valid between V_NVKVINT and V_NVKVINT(1)Gives the correction factor if maximum emergency brake deceleration is higher than A_NVP23"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_3",
+    "info": " National Values",
+    "attrs": [
+      {"intId": 4, "name": "d_validnv", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of validity of national values. None.Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10m depends on Q_SCALE. Comment : nan"},
+      {"intId": 5, "name": "nid_c", "dataType": "uint32", "multiplicity": "1..33", "sorted": false,
+       "info": "Identity number of the country or region. Code used to identify thecountryor region in which the balise group, the RBC or the RIU is situated. These need not necessarily followadministrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023.Resolution/formula : Numbers. Comment : Identification of national areas to which the set applies"},
+      {"intId": 6, "name": "nid_c_k", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify thecountry or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrativeor political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : Identification of additional national area(s) to which the set applies"},
+      {"intId": 7, "name": "v_nvshunt", "dataType": "uint32",
+       "info": "Shunting mode speed limit. This variable is part ofthe National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula :5 km/h. Comment : nan"},
+      {"intId": 8, "name": "v_nvstff", "dataType": "uint32",
+       "info": "Staff Responsible mode speed limit.This variable is partof the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : nan"},
+      {"intId": 9, "name": "v_nvonsight", "dataType": "uint32",
+       "info": "On Sight mode speed limit. This variable is partof the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : nan"},
+      {"intId": 10, "name": "v_nvlimsuperv", "dataType": "uint32",
+       "info": "Limited Supervision mode speed limit. Thisvariable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600km/h.Resolution/formula : 5 km/h. Comment : nan"},
+      {"intId": 11, "name": "v_nvunfit", "dataType": "uint32",
+       "info": "Unfitted mode speed limit. This variable is part of theNational Values. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5km/h. Comment : nan"},
+      {"intId": 12, "name": "v_nvrel", "dataType": "uint32",
+       "info": "Release Speed. This variable is part of the NationalValues. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h.Comment : nan"},
+      {"intId": 13, "name": "d_nvroll", "dataType": "uint32", "exp": -1,
+       "info": "Roll away distance limit. This variable is part of theNational Values and is used for Roll Away Protection and Reverse Movement Protection. Within the (national/default) limitsof D_NVROLL the train may be moved for uncoupling.. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value :327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 14, "name": "q_nvsbtsmperm", "dataType": "boolean",
+       "info": "Permission to use service brake in target speed monitoring.This variable is part of the National Values. Length of variable : 1 bit."},
+      {"intId": 15, "name": "q_nvemrrls", "dataType": "boolean",
+       "info": "Qualifier Emergency Brake Release.Permission to revoke theemergency brake command when the Permitted Speed limit is no longer exceeded or at standstill (for ceiling speedand target speed monitoring).This variable is part of the National Values. Length of variable : 1 bit."},
+      {"intId": 16, "name": "q_nvguiperm", "dataType": "boolean",
+       "info": "Permission to use the guidance curve. This variable is part oftheNational Values. Length of variable : 1 bit. "},
+      {"intId": 17, "name": "q_nvsbfbperm", "dataType": "boolean",
+       "info": "Permission to use the service brake feedback. This variable ispart of the National Values. Length of variable : 1 bit."},
+      {"intId": 18, "name": "q_nvinhsmicperm", "dataType": "boolean",
+       "info": "Permission to inhibit the compensation of the speed measurement inaccuracy. Qualifier to inhibit the compensation of the speed measurement inaccuracy for the calculation of the EBI related supervision limits. This variable is part of the National Values. Length of variable : 1 bit."},
+      {"intId": 19, "name": "v_nvallowovtrp", "dataType": "uint32",
+       "info": "Speed limit allowing the driver to select the “override” function.This variable is part of the National Values . Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600km/h. Resolution/formula : 5 km/h."},
+      {"intId": 20, "name": "v_nvsupovtrp", "dataType": "uint32",
+       "info": "Override speed limit to be supervised when the“override” function is active. This variable is part of the National Values. Length of variable : 7 bits. Minimum Value : 0 km/h.Maximum Value : 600km/h. Resolution/formula : 5 km/h."},
+      {"intId": 21, "name": "d_nvovtrp", "dataType": "uint32", "exp": -1,
+       "info": "Maximum distance for overriding the train trip. Thisvariable is part of the National Values. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km.Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 22, "name": "t_nvovtrp", "dataType": "uint32",
+       "info": "Maximum time for overriding the train trip. This variable ispart of the National Values. Length of variable : 8 bits. Minimum Value : 0 s. Maximum Value : 255 s. Resolution / formula :1s"},
+      {"intId": 23, "name": "d_nvpotrp", "dataType": "uint32", "exp": -2,
+       "info": "Maximum distance for reversing in Post Trip mode. Thisvariable is part of the National Values. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km.Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 24, "name": "m_nvcontact", "enumType": "NVContact"},
+      {"intId": 25, "name": "t_nvcontact", "dataType": "uint32",
+       "info": "Maximal time without new 'safe' message.. If no 'safe' message has been received from the track for more than T_NVCONTACT seconds, an appropriate action according toM_NVCONTACT must be triggered. This variable is part of the National Values. Length of variable : 8 bits. Minimum Value :0s. Maximum Value : 254 s. Resolution/formula : 1s"},
+      {"intId": 26, "name": "m_nvderun", "dataType": "boolean",
+       "info": "Entry of Driver ID permitted while running. This variable is part ofthe National Values. Length of variable : 1 bit."},
+      {"intId": 27, "name": "d_nvstff", "dataType": "uint32",
+       "info": "Maximum distance for running in Staff Responsible mode. This variable is part of the National Values. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km.Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 28, "name": "q_nvdriver_adhes", "dataType": "boolean",
+       "info": "Qualifier for the modification of trackside adhesion factorbydriver. This variable is part of the National Values. Length of variable : 1 bit."},
+      {"intId": 29, "name": "a_nvmaxredadh1", "dataType": "uint32",
+       "info": "Maximum deceleration under reducedadhesion conditions (1).Maximum deceleration under reduced adhesion conditions applicable for trains: With brake position 'Passenger train in P' and with special/additional brakes independent from wheel/rail adhesion. This variable is part of the National Values. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value : 3 m/s2. Resolution/formula : 0.05 m/s2."},
+      {"intId": 30, "name": "a_nvmaxredadh2", "dataType": "uint32",
+       "info": "Maximum deceleration under reducedadhesion conditions (2).Maximum deceleration under reduced adhesion conditions applicable for trains: with brakeposition 'Passenger train in P', and without special/additional brakes independent from wheel/rail adhesion. This variable is part of the National Values. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value : 3 m/s2.Resolution/formula : 0.05 m/s2."},
+      {"intId": 31, "name": "a_nvmaxredadh3", "dataType": "uint32",
+       "info": "Maximum deceleration under reduced adhesion conditions (3).Maximum deceleration under reduced adhesion conditions applicable for trains: with brake position 'Freight train in P', or with brake position 'Freight train in G'. This variable is part of the National Values. Length of variable : 6 bits. Minimum Value : 0 m/s2. Maximum Value : 3 m/s2. Resolution/formula : 0.05 m/s2."},
+      {"intId": 32, "name": "q_nvlocacc", "dataType": "uint32",
+       "info": "Default accuracy of the balise location (absolute value).This variable is part of the National Values. Length of variable : 6 bits. Minimum Value : 0 m. Maximum Value : 63 m. Resolution/formula : 1 m."},
+      {"intId": 33, "name": "m_nvavadh", "dataType": "uint32",
+       "info": "Weighting factor for available wheel/rail adhesion. This variable ispart of the National Values.. Length of variable : 5 bits. Minimum Value : 0. Maximum Value : 1."},
+      {"intId": 34, "name": "m_nvebcl", "dataType": "uint32",
+       "info": "Confidence level for emergency brake safe deceleration on dry rails.This variable is part of the National Values. Based on the required confidence level, the on-board equipment selects its corresponding rolling stock correction factor Kdry_rst(V).The confidence level on emergency brake safe deceleration represents the probability of the following individual event: the rolling stock emergency brake subsystem of the train does ensure a deceleration at least equal to A_brake_emergency(V) * Kdry_rst(V), when the emergency brake is commanded on dry rails.. Length of variable : 4 bits."},
+      {"intId": 35, "name": "nkvItem", "composition": "NKV"}
+    ]
+  },
+  {
+    "name": "CountryId",
+    "attrs": [
+      {"intId": 1, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region. Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrativeor political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. "}
+    ]
+  },
+  {
+    "name": "LinkItem",
+    "attrs": [
+      {"intId": 1, "name": "d_link", "dataType": "uint32", "exp": -1,
+       "info": "Incremental linking distance to next linked balise group.Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or10 m depends on Q_SCALE."},
+      {"intId": 2, "name": "q_newcountry", "composition": "CountryId", "multiplicity": "0..1",
+       "info": "New Country Qualifier.Qualifier to indicate whether the next balise group is in the same country / railway administration as the one before inside the packet or not.For the first balise group in the packet, ifnot provided, it is the same country / railway administration as the one of the LRBG within the radio message, the one of balise group within the balise telegram giving the packet, or the one of the loop within the loop message giving the packet.. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 3, "name": "nid_bg", "dataType": "uint32",
+       "info": "Identity number of the balise group. Identity number of a balise group or loop within the country or region defined by NID_C. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers. Comment : nan"},
+      {"intId": 4, "name": "q_linkorientation", "dataType": "boolean",
+       "info": "Qualifier for the direction of the linked balise group. Indicateswhether the linked balise group will be overpassed by the train in nominal or reverse direction.. Length of variable : 1 bit."},
+      {"intId": 5, "name": "q_linkreaction", "enumType": "LinkReaction",
+       "info": "linking reaction. Qualifier for the reaction to be performed ifa linking or a balise group message consistency problem occurs with the balise group linked to.. Length of variable : 2 bits."},
+      {"intId": 6, "name": "q_locacc", "dataType": "uint32",
+       "info": "Accuracy of the balise location.This Qualifier defines the absolute value of the accuracy of the Balise location (i.e., the value 63m identifies a location accuracy of +/- 63m). Length of variable : 6 bits. Minimum Value : 0 m. Maximum Value : 63 m. Resolution/formula : 1 m."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_5",
+    "info": " Linking",
+    "attrs": [
+      {"intId": 1, "name": "links", "composition": "LinkItem", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "ValidityPeriod",
+    "attrs": [
+      {"intId": 1, "name": "t_vbc", "dataType": "uint32",
+       "info": "maxValue: 255, resolution 1day"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_6",
+    "info": " Virtual Balise Cover order",
+    "attrs": [
+      {"intId": 1, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region. Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023."},
+      {"intId": 2, "name": "validityPeriod", "composition": "ValidityPeriod", "multiplicity": "0..1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_16",
+    "info": " Repositioning Information",
+    "attrs": [
+      {"intId": 1, "name": "l_section", "dataType": "uint32", "exp": -1,
+       "info": "Length of section in the MA. None. Length of variable : 15bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_39",
+    "info": " Track Condition Change of traction system",
+    "attrs": [
+      {"intId": 1, "name": "d_traction", "dataType": "uint32", "exp": -2,
+       "info": "Distance to change of traction.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "m_voltage", "enumType": "VoltageType",
+       "info": "Traction System voltage.It indicates the voltage of the traction system installed on a specific line or respectively that can be used by an engineThe identity of the traction system is given by M_VOLTAGE and, if M_VOLTAGE ≠ 0, by the country identifier of the traction system (NID_CTRACTION). Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Comment : Identity of the traction system"},
+      {"intId": 3, "name": "nid_ctraction", "dataType": "uint32",
+       "info": "Country identifier of the traction system.It identifies the information, additional to M_VOLTAGE, required to fully define the traction system.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : NID_CTRACTION given only if M_VOLTAGE ≠ 0"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_40",
+    "info": " Track Condition Change of allowed current consumption",
+    "attrs": [
+      {"intId": 1, "name": "d_current", "dataType": "uint32", "exp": -1,
+       "info": "Distance to change of allowed current consumption.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1 m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "m_current", "dataType": "uint32",
+       "info": "Allowed current consumption.It defines the allowed current consumption to be used by the train. Length of variable : 10 bits. Minimum Value : 0 A. Maximum Value : 10000 A. Resolution/formula : 10 A. Comment : Allowed current consumption."}
+    ]
+  },
+  {
+    "name": "LevelTransitionWithAck",
+    "attrs": [
+      {"intId": 1, "name": "m_leveltr", "enumType": "EtcsLevel",
+       "info": "Required level"},
+      {"intId": 2, "name": "nid_ntc_k", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : If M_LEVELTR(k) = 1 (NTC)"},
+      {"intId": 3, "name": "l_ackleveltr_k", "dataType": "uint32",
+       "info": "Length of the acknowledgement area in rear of the required level.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_41",
+    "info": " Level Transition Order",
+    "attrs": [
+      {"intId": 2, "name": "d_leveltr", "dataType": "uint32", "exp": -1,
+       "info": "Distance to level transition.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE.. Comment : nan"},
+      {"intId": 3, "name": "m_leveltr", "enumType": "EtcsLevel",
+       "info": "Required level"},
+      {"intId": 4, "name": "nid_ntc", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : If M_LEVELTR = 1 (NTC)"},
+      {"intId": 5, "name": "l_ackleveltr", "dataType": "uint32", "exp": -2,
+       "info": "Length of the acknowledgement area in rear of the required level.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 6, "name": "levelTransitions", "composition": "LevelTransitionWithAck", "multiplicity": "0..32", "sorted": false}
+    ]
+  },
+  {
+    "name": "ETCSPacket_42",
+    "info": " Session Management",
+    "attrs": [
+      {"intId": 1, "name": "q_rbc", "dataType": "boolean",
+       "info": "Qualifier for communication session order.None. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : RBC ETCS identity :NID_C not relevant if NID_RBC has value “Contact last known RBC"},
+      {"intId": 3, "name": "nid_rbc", "dataType": "uint32",
+       "info": "RBC ETCS identity number.This variable provides the identity of the RBC belonging to NID_C.The RBC ETCS identity is given by NID_C + NID_RBC.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Number. Comment : nan"},
+      {"intId": 4, "name": "nid_radio", "dataType": "uint64",
+       "info": "Radio subscriber number..Quoted as a 16 digit decimal number.The number is to be entered “left adjusted” starting with the first digit to be dialled. Padding by the special value F shall be added after the least significant digit of the number.For further information about NID_RADIO refer to SUBSET-054.. Length of variable : 64 bits. Minimum Value : 0. Maximum Value : 9999 9999 9999 9999. Resolution/formula : Binary Coded Decimal. Comment : not relevant if NID_RBC has value “Contact last known RBC”"},
+      {"intId": 5, "name": "q_sleepsession", "dataType": "boolean",
+       "info": "Session management for sleeping equipment.Qualifier for a Sleeping onboard equipment to execute or not the “session establishment” order. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_44",
+    "info": " Data used by applications outside the ERTMS/ETCS system.",
+    "attrs": [
+      {"intId": 1, "name": "nid_xuser", "dataType": "uint32",
+       "info": "Identity of user system.Identity of user system for which remainder of packet is intended.. Length of variable : 9 bits. Minimum Value : 0. Maximum Value : 511. Resolution/formula : Numbers. Comment : nan"},
+      {"intId": 2, "name": "nid_ntc", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : Only if NID_XUSER = 102 (National System functions)"},
+      {"intId": 3, "name": "otherData", "dataType": "bytes"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_45",
+    "info": " Radio Network registration",
+    "attrs": [
+      {"intId": 1, "name": "nid_mn", "dataType": "uint32",
+       "info": "Identity of Radio Network.The NID_MN identifies the GSM-R network the calling mobile station has to register with. The NID_MN consists of up to 6 digits which are entered left adjusted into the data field, the leftmost digit is the digit to be dialled first. In case the NID_MN is shorter than 6 digits, the remaining space is to be filled with special character F. For further information about NID_MN refer to Subset-54.. Length of variable : 24 bits. Minimum Value : 0. Maximum Value : 999999. Resolution/formula : Binary Coded Decimal."}
+    ]
+  },
+  {
+    "name": "LevelTransition",
+    "attrs": [
+      {"intId": 1, "name": "m_leveltr", "enumType": "EtcsLevel",
+       "info": "Required level"},
+      {"intId": 2, "name": "nid_ntc_k", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : If M_LEVELTR(k) = 1 (NTC)"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_46",
+    "info": " Conditional Level Transition Order",
+    "attrs": [
+      {"intId": 1, "name": "m_leveltr", "enumType": "EtcsLevel",
+       "info": "Required level.None. Length of variable : 3 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "nid_ntc", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : If M_LEVELTR = 1 (NTC)"},
+      {"intId": 3, "name": "levelTransitions", "composition": "LevelTransition", "multiplicity": "0..32", "sorted": false}
+    ]
+  },
+  {
+    "name": "CountryBalise",
+    "attrs": [
+      {"intId": 1, "name": "q_newcountry_k", "dataType": "boolean",
+       "info": "New Country Qualifier.Qualifier to indicate whether the next balise group is in the same country / railway administration as the one before inside the packet or not.For the first balise group in the packet, if Q_NEWCOUNTRY = 0, it is the same country / railway administration as the one of the LRBG within the radio message, the one of balise group within the balise telegram giving the packet, or the one of the loop within the loop message giving the packet.. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "nid_c_k", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : if Q_NEWCOUNTRY(k) = 1"},
+      {"intId": 3, "name": "nid_bg_k", "dataType": "uint32",
+       "info": "Identity number of the balise group.Identity number of a balise group or loop within the country or region defined by NID_C.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_49",
+    "info": " List of balises for SH Area",
+    "attrs": [
+      {"intId": 1, "name": "balises", "composition": "CountryBalise", "multiplicity": "0..32", "sorted": false}
+    ]
+  },
+  {
+    "name": "AxleLoadRestriction",
+    "attrs": [
+      {"intId": 1, "name": "m_axleloadcat_n", "enumType": "AxleLoadCategory",
+       "info": "Axle load category.The values allocated below correspond to a list of increasing axle load categories (i.e. B1 > HS17, B2 > B1, D2 > C4, ….etc) and it is used by the on-board equipment to compare its axle load category with the axle load category sent by trackside.For the underlying meaning of the axle load categories listed below (with the exception of HS17) refer to CR INF TSI.The category HS17 (axle load <= 17t) corresponds to a static load per axle only, as specified in HS RST TSI clause 4.2.3.2. The introduction of this artefact is necessary to ensure backward compatibility, without any negative performance impact, in case ASPs are used on lines operated with system version X = 1.. Length of variable : 7 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "v_axleload_n", "dataType": "uint32",
+       "info": "Speed restriction related to axleload.None. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : Speed restriction to be applied if the axle load category of the train M_AXLELOADCAT(n)"}
+    ]
+  },
+  {
+    "name": "AxleLoadDLRestriction",
+    "attrs": [
+      {"intId": 1, "name": "d_axleload_k", "dataType": "uint32", "exp": -1,
+       "info": "Incremental distance to the start of the next Axle load speed profile.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "l_axleload_k", "dataType": "uint32", "exp": -1,
+       "info": "Length of speed restriction due to Axle load.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "q_front_k", "dataType": "boolean",
+       "info": "Qualifier for validity end point of profile element.Qualifier to indicate if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 4, "name": "restrictions", "composition": "AxleLoadRestriction", "multiplicity": "0..32", "sorted": false}
+    ]
+  },
+  {
+    "name": "AxleLoad",
+    "attrs": [
+      {"intId": 1, "name": "d_axleload", "dataType": "uint32", "exp": -1,
+       "info": "Incremental distance to the start of the next Axle load speed profile.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 0, D_AXLELOAD and the following variables follow"},
+      {"intId": 2, "name": "l_axleload", "dataType": "uint32", "exp": -1,
+       "info": "Length of speed restriction due to Axle load.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "q_front", "dataType": "boolean",
+       "info": "Qualifier for validity end point of profile element.Qualifier to indicate if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 4, "name": "axleLoadDLRestrictions", "composition": "AxleLoadDLRestriction", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "AxleLoadSelection",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "axleLoad", "composition": "AxleLoad"},
+      {"intId": 2, "name": "d_trackinit", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of empty profile.Distance to where initial states of the related track description in the packet shall be resumed. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_51",
+    "info": " Axle Load Speed Profile",
+    "attrs": [
+      {"intId": 1, "name": "axleLoadSelection", "composition": "AxleLoadSelection"}
+    ]
+  },
+  {
+    "name": "PermittedBrakingDist",
+    "attrs": [
+      {"intId": 1, "name": "d_pbd", "dataType": "uint32", "exp": -1,
+       "info": "Permitted Braking Distance.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE.. Comment : Only if Q_TRACKINIT = 0, D_PBDand the following variables follow"},
+      {"intId": 2, "name": "q_gdir", "dataType": "boolean",
+       "info": "Qualifier for gradient slope..None. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : 0 = downhill, 1 = uphill"},
+      {"intId": 3, "name": "g_pbdsr", "dataType": "uint32",
+       "info": "Default gradient for PBD Speed restriction.Defines a default gradient to be used for calculation of speed restriction to ensure permitted braking distance. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255‰ . Resolution/formula : 1‰. Comment : Gradient value to be used for the calculation"},
+      {"intId": 4, "name": "q_pbdsr", "dataType": "boolean",
+       "info": "Qualifier for Permitted Braking Distance.Qualifier defining whether the permitted braking distance is to be achieved with the Service Brake or Emergency Brake. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 5, "name": "d_pbdsr", "dataType": "uint32", "exp": -1,
+       "info": "Incremental distance to the start of the next speed restriction to ensure permitted braking distance.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 6, "name": "l_pbdsr", "dataType": "uint32",
+       "info": "Length of speed restriction to ensure permitted braking distance.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE.. Comment : nan"}
+    ]
+  },
+  {
+    "name": "PBDSelection",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "pbds", "composition": "PermittedBrakingDist", "multiplicity": "1..33", "sorted": false},
+      {"intId": 2, "name": "d_trackinit", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of empty profile.Distance to where initial states of the related track description in the packet shall be resumed. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_52",
+    "info": " Permitted Braking Distance Information",
+    "attrs": [
+      {"intId": 1, "name": "pbdSelection", "composition": "PBDSelection"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_65",
+    "info": " Temporary Speed Restriction",
+    "attrs": [
+      {"intId": 2, "name": "nid_tsr", "dataType": "uint32",
+       "info": "Identity number of Temporary Speed Restriction..None. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : Number. Comment : nan"},
+      {"intId": 3, "name": "d_tsr", "dataType": "uint32", "exp": -1,
+       "info": "Distance to beginning of temporary speed restriction. None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 4, "name": "l_tsr", "dataType": "uint32", "exp": -1,
+       "info": "Length of the temporary speed restriction.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 5, "name": "q_front", "dataType": "boolean",
+       "info": "Qualifier for validity end point of profile element. Qualifier to indicate if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 6, "name": "v_tsr", "dataType": "uint32",
+       "info": "Permitted speed for the temporary speed restriction. None. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_66",
+    "info": " Temporary Speed Restriction Revocation",
+    "attrs": [
+      {"intId": 1, "name": "nid_tsr", "dataType": "uint32",
+       "info": "Identity number of Temporary Speed Restriction..None. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : Number. Comment : Identity of TSR to be revoked"}
+    ]
+  },
+  {
+    "name": "DLTrackCond",
+    "attrs": [
+      {"intId": 1, "name": "d_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Track condition distance.The incremental distance to where the track conditions change.. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. "},
+      {"intId": 2, "name": "l_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Length for which the defined track condition is valid.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : The distance for which integrity check alarms of balise transmission shall be ignored"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_67",
+    "info": " Track Condition Big Metal Masses",
+    "attrs": [
+      {"intId": 1, "name": "trackConditions", "composition": "DLTrackCond", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "DLMCondition",
+    "attrs": [
+      {"intId": 1, "name": "d_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Track condition distance.The incremental distance to where the track conditions change.. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : OnlyifQ_TRACKINIT=0, D_TRACKCOND and the following variables follow"},
+      {"intId": 2, "name": "l_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Length for which the defined track condition is valid.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "m_trackcond", "enumType": "TrackCondType"}
+    ]
+  },
+  {
+    "name": "TrackCondSelection",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "dlmConds", "composition": "DLMCondition", "multiplicity": "1..33", "sorted": false},
+      {"intId": 2, "name": "d_trackinit", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of empty profile.Distance to where initial states of the related track description in the packet shall be resumed. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_68",
+    "info": " Track Condition",
+    "attrs": [
+      {"intId": 1, "name": "trackCondSelection", "composition": "TrackCondSelection"}
+    ]
+  },
+  {
+    "name": "TCSPCondition",
+    "attrs": [
+      {"intId": 1, "name": "d_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Track condition distance.The incremental distance to where the track conditions change.. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 0, D_TRACKCOND and the following variables follow"},
+      {"intId": 2, "name": "l_trackcond", "dataType": "uint32", "exp": -1,
+       "info": "Length for which the defined track condition is valid.None. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "m_platform", "enumType": "PlatformType",
+       "info": "Type of platform. Nominal height of platform above rail level (refer to TSI infrastructure). Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 4, "name": "q_platform", "enumType": "PlatformPosition"}
+    ]
+  },
+  {
+    "name": "TrackCondPlatformSelection",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "tcspConds", "composition": "TCSPCondition", "multiplicity": "1..33", "sorted": false},
+      {"intId": 2, "name": "d_trackinit", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of empty profile.Distance to where initial states of the related track description in the packet shall be resumed. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : Only if Q_TRACKINIT = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_69",
+    "info": " Track Condition Station Platforms",
+    "attrs": [
+      {"intId": 1, "name": "trackCondPlatformSelection", "composition": "TrackCondPlatformSelection"}
+    ]
+  },
+  {
+    "name": "TractionSystem",
+    "attrs": [
+      {"intId": 1, "name": "d_voltage", "enumType": "VoltageType"},
+      {"intId": 2, "name": "nid_ctraction", "dataType": "uint32",
+       "info": "set to zero or skip, if d_voltage == VT_none"}
+    ]
+  },
+  {
+    "name": "RouteSuitability",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "loadingGauge", "dataType": "uint32"},
+      {"intId": 2, "name": "maxAxleLoad", "dataType": "uint32", "exp": 3},
+      {"intId": 3, "name": "voltage", "composition": "TractionSystem"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_70",
+    "info": "Route suitablity data",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "routeSuitabilities", "composition": "RouteSuitability", "multiplicity": "1..33", "sorted": false},
+      {"intId": 2, "name": "d_trackinit", "dataType": "uint32"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_71",
+    "info": "This packet is used when the trackside requests a change of the adhesion factor to be used in the brake model.",
+    "attrs": [
+      {"intId": 1, "name": "d_adhesion", "dataType": "uint32", "exp": -1,
+       "info": "Distance to start of area with reduced adhesion factor. None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1 m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "l_adhesion", "dataType": "uint32", "exp": -1,
+       "info": "Length of reduced adhesion. Length for which the reduced adhesion factor apply.. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1 m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "m_adhesion", "dataType": "boolean",
+       "info": "Adhesion factor. None. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_72",
+    "info": " Packet for sending plain text messages",
+    "attrs": [
+      {"intId": 1, "name": "q_textclass", "enumType": "TextClass"},
+      {"intId": 2, "name": "q_textdisplay", "dataType": "boolean",
+       "info": "Qualifier for the combination of text message eventss.Q_TEXTDISPLAY defines whether the start/end events for text message are to be combined or not. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : Start/end events relation"},
+      {"intId": 3, "name": "d_textdisplay", "dataType": "uint32", "exp": -1,
+       "info": "Distance from where on a text shall be displayed.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : Start event"},
+      {"intId": 9, "name": "m_modetextdisplay", "enumType": "DisplayOperatingMode",
+       "info": "Onboard operating mode for text display.The text is displayed when entering / as long as in the defined mode. Length of variable : 4 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : End event"},
+      {"intId": 10, "name": "m_leveltextdisplay", "enumType": "DisplayOperatingLevel",
+       "info": "Onboard operating level for text display.The text is displayed when entering / as long as in the defined level. Length of variable : 3 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : End event"},
+      {"intId": 11, "name": "nid_ntc", "dataType": "uint32",
+       "info": "National System identity.Each value of this variable represents the identity of a National System.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : None. Comment : If M_LEVELTEXTDISPLAY = 1 (NTC)"},
+      {"intId": 7, "name": "l_textdisplay", "dataType": "uint32", "exp": -1,
+       "info": "Length on which a text shall be displayed.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : End event"},
+      {"intId": 8, "name": "t_textdisplay", "dataType": "uint32",
+       "info": "Duration for which a text shall be displayed.None. Length of variable : 10 bits. Minimum Value : 0 s. Maximum Value : 1022 s. Resolution/formula : 1 s. Comment : End event"},
+      {"intId": 12, "name": "q_textconfirm", "enumType": "TextConfirmationType",
+       "info": "Qualifier for text confirmation.None. Length of variable : 2 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 13, "name": "q_conftextdisplay", "dataType": "boolean",
+       "info": "Qualifier for text confirmation versus end of text display. Gives the relationship between the event 'driver acknowledgement' and the list of events 'location', 'time', 'mode', 'level' defining the end condition for text display. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : If Q_TEXTCONFIRM ≠ 0"},
+      {"intId": 14, "name": "q_textreport", "dataType": "boolean",
+       "info": "Qualifier for reporting acknowledgement of text by driver.None. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : If Q_TEXTCONFIRM ≠ 0"},
+      {"intId": 15, "name": "nid_textmessage", "dataType": "uint32",
+       "info": "Text message identifier.Identity of a text message from trackside to be used in a report of driver acknowledgement to the RBC. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : Number. Comment : Only If Q_TEXTREPORT = 1"},
+      {"intId": 16, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : Only If Q_TEXTREPORT = 1"},
+      {"intId": 17, "name": "nid_rbc", "dataType": "uint32",
+       "info": "RBC ETCS identity number.This variable provides the identity of the RBC belonging to NID_C.The RBC ETCS identity is given by NID_C + NID_RBC.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Number. Comment : Only If Q_TEXTREPORT = 1"},
+      {"intId": 18, "name": "text", "dataType": "string"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_76",
+    "info": " Packet for sending fixed text messages: identical class as ETCSPacket_72",
+    "attrs": [
+
+    ]
+  },
+  {
+    "name": "NewCountry",
+    "attrs": [
+      {"intId": 1, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : if Q_NEWCOUNTRY = 1"}
+    ]
+  },
+  {
+    "name": "GeoPosItem",
+    "attrs": [
+      {"intId": 1, "name": "newCountry", "composition": "NewCountry", "multiplicity": "0..1",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : if Q_NEWCOUNTRY = 1"},
+      {"intId": 2, "name": "nid_bg", "dataType": "uint32",
+       "info": "Identity number of the balise group.Identity number of a balise group or loop within the country or region defined by NID_C.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers. Comment : Geographical Position Reference Balise Group"},
+      {"intId": 3, "name": "d_posoff", "dataType": "uint32", "exp": -1,
+       "info": "Offset from the location reference of the geographical position reference balise group to the related track kilometre reference..The geographical position reporting function uses this variables content as an offset from the location reference of the geographical position reference balise group to the related track kilometre reference.. Length of variable : 15 bits. Minimum Value : 0 m. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 4, "name": "q_mposition", "dataType": "boolean",
+       "info": "Qualifier for track kilometre direction..Qualifier to indicate the direction of counting of the geographical position track kilometre in relation to the geographical position reference balise group directionality.. Length of variable : 1 bit. Minimum Value : 0. Maximum Value : 1. Resolution/formula : None. Comment : Geographical Position counting direction"},
+      {"intId": 5, "name": "m_position", "dataType": "uint32",
+       "info": "Track kilometre reference value.The geographical position reporting function uses this variables content as a reference value.. Length of variable : 24 bits. Minimum Value : 0 m. Maximum Value : 9’999’999 m. Resolution/formula : 1 m. Comment : Track kilometre reference value"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_79",
+    "info": " Geographical Position Information",
+    "attrs": [
+      {"intId": 1, "name": "geoPosItems", "composition": "GeoPosItem", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "ModeProfileItem",
+    "attrs": [
+      {"intId": 1, "name": "d_mamode", "dataType": "uint32", "exp": -1,
+       "info": "Incremental distance to the start of the next Mode Profile.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 3, "name": "m_mamode", "enumType": "MAMode",
+       "info": "Required mode for a part of the MA. None. Length of variable : 2 bits. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : OS, LS, SH"},
+      {"intId": 4, "name": "v_mamode", "dataType": "uint32",
+       "info": "Required mode related speed.None. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : nan"},
+      {"intId": 5, "name": "l_mamode", "dataType": "uint32", "exp": -1,
+       "info": "Length of the area of the required mode. None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depending on Q_SCALE. Comment : nan"},
+      {"intId": 6, "name": "l_ackmamode", "dataType": "uint32", "exp": -1,
+       "info": "Length of the acknowledgement area in rear of the start of the required mode.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 7, "name": "q_mamode", "dataType": "boolean",
+       "info": "Qualifier to indicate the supervision of the beginning of the mode profile. This qualifier defines whether the beginning of the mode profile shall be considered as the SvL, or if the SvL shall be derived from the movement authority.. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_80",
+    "info": " Mode profile",
+    "attrs": [
+      {"intId": 1, "name": "modeProfiles", "composition": "ModeProfileItem", "multiplicity": "1..33", "sorted": false}
+    ]
+  },
+  {
+    "name": "LXStatus",
+    "attrs": [
+      {"intId": 1, "name": "v_lx", "dataType": "uint32",
+       "info": "Permitted speed for the LX speed restriction.Speed at which the LX can be passed when it is not protected. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : Only if Q_LXSTATUS = 1"},
+      {"intId": 2, "name": "q_stoplx", "dataType": "boolean",
+       "info": "Qualifier for stopping in rear of the LX.Indicates whether stopping the train in rear of a non protected LX is required. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : Only if Q_LXSTATUS = 1"},
+      {"intId": 3, "name": "l_stoplx", "dataType": "uint32", "exp": -1,
+       "info": "Length of the stopping area in rear of the start location of the LX area.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : Only if Q_STOPLX = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_88",
+    "info": " Level Crossing information",
+    "attrs": [
+      {"intId": 1, "name": "nid_lx", "dataType": "uint32",
+       "info": "Identity number of the Level Crossing..None. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255. Resolution/formula : Number. Comment : nan"},
+      {"intId": 2, "name": "d_lx", "dataType": "uint32", "exp": -1,
+       "info": "Distance to LX start location.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 3, "name": "l_lx", "dataType": "uint32", "exp": -1,
+       "info": "Length of the LX area.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 4, "name": "lxStatus", "composition": "LXStatus", "multiplicity": "0..1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_90",
+    "info": " Track Ahead Free up to level 2/3 transition location",
+    "attrs": [
+      {"intId": 1, "name": "newCountry", "composition": "NewCountry", "multiplicity": "0..1"},
+      {"intId": 2, "name": "nid_bg", "dataType": "uint32",
+       "info": "Identity number of the balise group.Identity number of a balise group or loop within the country or region defined by NID_C.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers. Comment : Level 2/3 transition location balise group"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_131",
+    "info": " RBC transition order",
+    "attrs": [
+      {"intId": 1, "name": "d_rbctr", "dataType": "uint32", "exp": -1,
+       "info": "Distance to RBC transition.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE.. Comment : nan"},
+      {"intId": 2, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : “Accepting” RBC identity"},
+      {"intId": 3, "name": "nid_rbc", "dataType": "uint32",
+       "info": "RBC ETCS identity number.This variable provides the identity of the RBC belonging to NID_C.The RBC ETCS identity is given by NID_C + NID_RBC.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Number. Comment : nan"},
+      {"intId": 4, "name": "nid_radio", "dataType": "uint64",
+       "info": "Radio subscriber number..Quoted as a 16 digit decimal number.The number is to be entered “left adjusted” starting with the first digit to be dialled. Padding by the special value F shall be added after the least significant digit of the number.For further information about NID_RADIO refer to SUBSET-054.. Length of variable : 64 bits. Minimum Value : 0. Maximum Value : 9999 9999 9999 9999. Resolution/formula : Binary Coded Decimal. Comment : 'Accepting' RBC radio subscriber number"},
+      {"intId": 5, "name": "q_sleepsession", "dataType": "boolean",
+       "info": "Session management for sleeping equipment.Qualifier for a Sleeping onboard equipment to execute or not the 'session establishment' order. Length of variable : 1 bit."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_132",
+    "info": " Danger for Shunting information",
+    "attrs": [
+      {"intId": 1, "name": "q_aspect", "dataType": "boolean",
+       "info": "Aspect of “danger for shunting” signal.. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_133",
+    "info": " Radio infill area information",
+    "attrs": [
+      {"intId": 1, "name": "q_riu", "dataType": "boolean",
+       "info": "Qualifier for communication session order.None. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 6, "name": "nid_c", "dataType": "uint32",
+       "info": "Identity number of the country or region.Code used to identify the country or region in which the balise group, the RBC or the RIU is situated. These need not necessarily follow administrative or political boundaries.. Length of variable : 10 bits. Minimum Value : 0. Maximum Value : 1023. Resolution/formula : Numbers. Comment : Refers to the next main signal balise group (relevant only for the case of establishing a communication session)"},
+      {"intId": 3, "name": "nid_riu", "dataType": "uint32",
+       "info": "Identity of radio infill unit.This variable provides the identity of the RIU belonging to NID_C.The RIU ETCS identity is given by NID_C + NID_RIU.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16383. Resolution/formula : Number. Comment : nan"},
+      {"intId": 4, "name": "nid_radio", "dataType": "uint64",
+       "info": "Radio subscriber number..Quoted as a 16 digit decimal number.The number is to be entered “left adjusted” starting with the first digit to be dialled. Padding by the special value F shall be added after the least significant digit of the number.For further information about NID_RADIO refer to SUBSET-054.. Length of variable : 64 bits. Minimum Value : 0. Maximum Value : 9999 9999 9999 9999. Resolution/formula : Binary Coded Decimal. Comment : nan"},
+      {"intId": 5, "name": "d_infill", "dataType": "uint32", "exp": -1,
+       "info": "Distance to location where to connect/disconnect to a radio infill unit.None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 7, "name": "nid_bg", "dataType": "uint32",
+       "info": "Identity number of the balise group.Identity number of a balise group or loop within the country or region defined by NID_C.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_134",
+    "info": " EOLM Packet",
+    "attrs": [
+      {"intId": 1, "name": "nid_loop", "dataType": "uint32",
+       "info": "Identity number of the loop.Identity number of a loop within the country or region defined by NID_C given in the EOLM balise header.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16383. Resolution/formula : Numbers."},
+      {"intId": 2, "name": "d_loop", "dataType": "uint32", "exp": -1,
+       "info": "Distance between EOLM and start of loop.The EOLM specifies the distance to the beginning of the loop transmission. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 3, "name": "l_loop", "dataType": "uint32", "exp": -1,
+       "info": "Length of loop.L_LOOP specifies the length of the loop starting from the distance indicated by D_LOOP. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE."},
+      {"intId": 4, "name": "q_loopdir", "dataType": "boolean",
+       "info": "Qualifier to indicate the direction of the loop.Indicates LOOP-reference direction in relation to EOLM direction. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 5, "name": "q_sscode", "dataType": "uint32",
+       "info": "Spread Spectrum Code for Euroloop.Specifies the code required to receive telegrams from a specific Euroloop installation.. Length of variable : 4 bits. Minimum Value : 0. Maximum Value : 14. Resolution/formula : None. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_135",
+    "info": " Stop Shunting on desk opening",
+    "attrs": [
+
+    ]
+  },
+  {
+    "name": "ETCSPacket_136",
+    "info": " Infill location reference",
+    "attrs": [
+      {"intId": 1, "name": "newCountry", "composition": "NewCountry", "multiplicity": "0..1"},
+      {"intId": 2, "name": "nid_bg", "dataType": "uint32",
+       "info": "Identity number of the balise group.Identity number of a balise group or loop within the country or region defined by NID_C.. Length of variable : 14 bits. Minimum Value : 0. Maximum Value : 16382. Resolution/formula : Numbers."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_137",
+    "info": " Stop if in Staff Responsible",
+    "attrs": [
+      {"intId": 1, "name": "q_srstop", "dataType": "boolean",
+       "info": "'Stop if in Staff Responsible' information. Specifies whether an onboard equipment in staff responsible has to stop or not. Length of variable : 1 bit."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_138",
+    "info": " Reversing area information",
+    "attrs": [
+      {"intId": 1, "name": "d_startreverse", "dataType": "uint32", "exp": -2,
+       "info": "Distance to start of reversing permitted area. None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "l_reversearea", "dataType": "uint32", "exp": -2,
+       "info": "Length of the reversing permitted area. None. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.670 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_139",
+    "info": " Reversing supervision information",
+    "attrs": [
+      {"intId": 1, "name": "d_reverse", "dataType": "uint32", "exp": -2,
+       "info": "Maximum distance to run in RV mode. Distance from reference location to end location of the distance to run in RV mode. Length of variable : 15 bits. Minimum Value : 0 cm. Maximum Value : 327.660 km. Resolution/formula : 10 cm, 1m or 10 m depends on Q_SCALE. Comment : nan"},
+      {"intId": 2, "name": "v_reverse", "dataType": "uint32",
+       "info": "Reversing mode speed limit. None. Length of variable : 7 bits. Minimum Value : 0 km/h. Maximum Value : 600 km/h. Resolution/formula : 5 km/h. Comment : nan"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_141",
+    "info": " Default Gradient for Temporary Speed Restriction",
+    "attrs": [
+      {"intId": 1, "name": "g_tsr", "dataType": "int32", "exp": -1,
+       "info": "Default gradient for TSR supervision. defines a default gradient to be used for TSR supervision when no gradient profile (packet 21) is available.. Length of variable : 8 bits. Minimum Value : 0. Maximum Value : 255‰."}
+    ]
+  },
+  {
+    "name": "ETCSPacket_145",
+    "info": " Inhibition of balise group message consistency reaction",
+    "attrs": [
+
+    ]
+  },
+  {
+    "name": "ETCSPacket_180",
+    "info": " LSSMA display toggle order",
+    "attrs": [
+      {"intId": 1, "name": "q_lssma", "dataType": "boolean",
+       "info": "Qualifier for the LSSMA display.This qualifier tells whether the on-board has to toggle on/off the display of the lowest supervised speed within the MA. Length of variable : 1 bit. Minimum Value : None. Maximum Value : None. Resolution/formula : None. Comment : nan"},
+      {"intId": 2, "name": "t_lssma", "dataType": "uint32",
+       "info": "Delay to toggle on the LSSMA display.. Length of variable : 8 bit. Minimum Value : 0 s. Maximum Value : 255 s. Resolution/formula : 1 s. Comment : Only if Q_LSSMA = 1"}
+    ]
+  },
+  {
+    "name": "ETCSPacket_181",
+    "info": " Generic LS function marker",
+    "attrs": [
+
+    ]
+  },
+  {
+    "name": "ETCSPacket_254",
+    "info": "Default balise, loop or RIU information",
+    "attrs": [
+
+    ]
+  },
+  {
+    "name": "ETCSPacket_255",
+    "info": " End of Information, This packet consists only of NID_PACKET containing 8 bit 1smessage/telegram when receiving eight bits set to one in the NID_PACKET field.",
+    "attrs": [
+
+    ]
+  }
+  ]
+}

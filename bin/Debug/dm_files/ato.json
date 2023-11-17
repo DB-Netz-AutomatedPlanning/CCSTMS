@@ -1,0 +1,397 @@
+{
+  "name": "ato",
+  "intId": 8,
+  "isDefinedBy": "http://ERJU/datamodel/0.2/ato",
+  "prefix": "ato",
+  "containerStruct": "ATO",
+  "version": "0.3",
+  "info": "Data Model needed for ATO use case",
+  "enums": [
+  {
+    "name": "RangeType",
+    "info": "List defining range types for segment profile",
+    "enumLiterals": [
+      {"intId": 0, "name": "rtStart"},
+      {"intId": 1, "name": "rtEnd"},
+      {"intId": 2, "name": "rtStartEnd"},
+      {"intId": 3, "name": "rtWholeSP"}
+    ]
+  },
+  {
+    "name": "VoltageType",
+    "info": "List defining Voltage types for segment profile",
+    "see": "https://linked.ec-dataplatform.eu/describe/?url=http://data.europa.eu/949/concepts/energy-supply-systems/EnergySupplySystems",
+    "enumLiterals": [
+      {"intId": 0, "name": "vtNotFitted", "info": "Line not fitted (not electrified) with any traction system"},
+      {"intId": 1, "name": "vtAC25kv50Hz", "info": "AC 25kV 50Hz"},
+      {"intId": 2, "name": "vtAC15kv16_7Hz", "info": "AC 15kV 16.7Hz"},
+      {"intId": 3, "name": "vtDC3kv", "info": "DC 3kV"},
+      {"intId": 4, "name": "vtDC1_5kv", "info": "DC 1.5kV"},
+      {"intId": 5, "name": "vtDC600_750v", "info": "DC 600/750V"}
+    ]
+  },
+  {
+    "name": "TunnelType",
+    "info": "List defining tunnel types for segment profile",
+    "enumLiterals": [
+      {"intId": 0, "name": "singleTrackTunnel"},
+      {"intId": 1, "name": "doubleTrackTunnel"},
+      {"intId": 2, "name": "wideCrossSectionTunnel", "info": "probably = 'more than two tracks'"}
+    ]
+  },
+  {
+    "name": "CurveRadius",
+    "info": "List defining different curve radii for segment profile",
+    "enumLiterals": [
+      {"intId": 0, "name": "cr_R_7000", "info": "R>7000"},
+      {"intId": 1, "name": "cr_7000_4500", "info": "7000>=R>4500"},
+      {"intId": 2, "name": "cr_4500_2800", "info": "4500>=R>2800"},
+      {"intId": 3, "name": "cr_2800_2000", "info": "2800>=R>2000"},
+      {"intId": 4, "name": "cr_2000_1500", "info": "2000>=R>1500"},
+      {"intId": 5, "name": "cr_1500_1250", "info": "1500>=R>1250"},
+      {"intId": 6, "name": "cr_1250_1075", "info": "1250>=R>1075"},
+      {"intId": 7, "name": "cr_1075_925", "info": "1075>=R>925"},
+      {"intId": 8, "name": "cr_925_825", "info": "925>=R>825"},
+      {"intId": 9, "name": "cr_825_725", "info": "825>=R>725"},
+      {"intId": 10, "name": "cr_725_625", "info": "725>=R>625"},
+      {"intId": 11, "name": "cr_625_525", "info": "625>=R>525"},
+      {"intId": 12, "name": "cr_525_475", "info": "525>=R>475"},
+      {"intId": 13, "name": "cr_475_425", "info": "475>=R>425"},
+      {"intId": 14, "name": "cr_425_375", "info": "425>=R>375"},
+      {"intId": 15, "name": "cr_375_325", "info": "375>=R>325"},
+      {"intId": 16, "name": "cr_325_300", "info": "325>=R>300"},
+      {"intId": 17, "name": "cr_300_275", "info": "300>=R>275"},
+      {"intId": 18, "name": "cr_275_250", "info": "275>=R>250"},
+      {"intId": 19, "name": "cr_250_225", "info": "250>=R>225"},
+      {"intId": 20, "name": "cr_225_200", "info": "225>=R>200"},
+      {"intId": 21, "name": "cr_200_175", "info": "200>=R>175"},
+      {"intId": 22, "name": "cr_175_150", "info": "175>=R>150"},
+      {"intId": 23, "name": "cr_150", "info": "R=<150"}
+    ]
+  },
+  {
+    "name": "TrainEndApplicability",
+    "enumLiterals": [
+      {"intId": 0, "name": "trainFront", "info": "No train length delay on validity end point of profile element"},
+      {"intId": 1, "name": "trainBack", "info": "Train length delay on validity end point of profile element."}
+    ]
+  }
+  ],
+  "structs": [
+  {
+    "name": "ATO",
+    "attrs": [
+      {"intId": 1, "name": "atoAreas", "composition": "ATOArea", "multiplicity": "0..*", "sorted": true}
+    ]
+  },
+  {
+    "name": "TimingPointMapping",
+    "info": "main Use-Case map from infra (timetable) to ato (journeyProfile)",
+    "attrs": [
+      {"intId": 1, "name": "infraTimingPoint", "reference": "infra.TimingPoint", "key": "global"},
+      {"intId": 2, "name": "atoTimingPoint", "reference": "TimingPoint"}
+    ]
+  },
+  {
+    "name": "ATOArea",
+    "info": "Defines ATO Area with collection of ATO segments",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": "global"},
+      {"intId": 2, "name": "segments", "composition": "ATOSegment", "multiplicity": "1..*", "sorted": true},
+      {"intId": 3, "name": "timingPointsMapping", "composition": "TimingPointMapping", "multiplicity": "0..*", "sorted": true}
+    ]
+  },
+  {
+    "name": "ATOSegment",
+    "info": "Defines the topology reference information for a segment profile.",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "uint32", "key": "global"},
+      {"intId": 2, "name": "sameDir", "dataType": "boolean",
+       "info": "true: same as TrackEdge direction, false: reverse to TrackEdge direction"},
+      {"intId": 3, "name": "trackSection", "composition": "infra.TrackEdgeSection",
+       "info": "refers to the track edge section within a track edge."},
+      {"intId": 4, "name": "segmentProfile", "composition": "SegmentProfile"}
+    ]
+  },
+  {
+    "name": "SegmentProfile",
+    "info": "Defines a segment profile for ATO",
+    "attrs": [
+      {"intId": 1, "name": "nidSP", "dataType": "uint32", "key": "local"},
+      {"intId": 2, "name": "length", "dataType": "uint32", "exp": -2, "range": "1..16777216",
+       "info": "the defined range corresponds to the constraints from SS126"},
+      {"intId": 3, "name": "version", "dataType": "uint32"},
+      {"intId": 4, "name": "nidC", "dataType": "uint32"},
+      {"intId": 5, "name": "eoaOffset", "dataType": "uint32", "exp": -2},
+      {"intId": 6, "name": "utcOffset", "dataType": "uint32",
+       "info": "UTC time offset in minutes ; Resolution as defined in SS126 is 15 mins"},
+      {"intId": 7, "name": "startAltitude", "dataType": "int32", "exp": -2, "range": "-100000..1048576",
+       "info": "Altitude at the beginning of the SP. Considering ETRS89 as reference. The defined range corresponds to constraints from SS126"},
+      {"intId": 8, "name": "atotsContactInfoDir", "dataType": "boolean",
+       "info": "true if contact info exists fornominal direction ; false if contact info exists for reverse direction ; undefined if no contact info exists"},
+      {"intId": 9, "name": "atotsContactInfo", "composition": "AtoTSContactInfo", "multiplicity": "0..1"},
+      {"intId": 10, "name": "staticSpeedProfileStart", "composition": "StaticSpeedProfileStart"},
+      {"intId": 11, "name": "staticSpeedProfileChanges", "composition": "StaticSpeedProfileChange", "multiplicity": "0..*", "sorted": false},
+      {"intId": 12, "name": "specificStaticSpeedProfileStart", "composition": "SpecificStaticSpeedProfileStart"},
+      {"intId": 13, "name": "specificStaticSpeedProfileChanges", "composition": "SpecificStaticSpeedProfileChange", "multiplicity": "0..*", "sorted": false},
+      {"intId": 14, "name": "gradientStart", "composition": "GradientStart"},
+      {"intId": 15, "name": "gradientChanges", "composition": "GradientChange", "multiplicity": "0..32", "sorted": false},
+      {"intId": 16, "name": "curveStart", "composition": "CurveStart"},
+      {"intId": 17, "name": "curveChanges", "composition": "CurveChange", "multiplicity": "0..32", "sorted": false},
+      {"intId": 18, "name": "voltageStart", "composition": "VoltageStart"},
+      {"intId": 19, "name": "voltageChanges", "composition": "VoltageChange", "multiplicity": "0..32", "sorted": false},
+      {"intId": 20, "name": "currentStart", "composition": "CurrentStart"},
+      {"intId": 21, "name": "currentChanges", "composition": "CurrentChange", "multiplicity": "0..32", "sorted": false},
+      {"intId": 22, "name": "baliseGroups", "composition": "BaliseGroup", "multiplicity": "0..32", "sorted": false},
+      {"intId": 23, "name": "timingPoints", "composition": "TimingPoint", "multiplicity": "0..32", "sorted": false},
+      {"intId": 24, "name": "platformAreas", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 25, "name": "tunnels", "composition": "Tunnel", "multiplicity": "0..32", "sorted": false},
+      {"intId": 26, "name": "axleLoadSpeedProfiles", "composition": "AxleLoadSpeedProfile", "multiplicity": "0..32", "sorted": false},
+      {"intId": 27, "name": "unprotectedLXs", "composition": "UnprotectedLX", "multiplicity": "0..32", "sorted": false},
+      {"intId": 28, "name": "permittedBrakingDistances", "composition": "PermittedBrakingDistance", "multiplicity": "0..32", "sorted": false},
+      {"intId": 29, "name": "switchOffEddyCurrentBrakeServiceBrakes", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 30, "name": "switchOffEddyCurrentBrakeEmergencyBrakes", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 31, "name": "switchOffRegenerativeBrakes", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 32, "name": "switchOffMagneticShoeBrakes", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 33, "name": "dynamicBrakeForceInhibitions", "composition": "SegmentSection", "multiplicity": "0..32", "sorted": false},
+      {"intId": 34, "name": "limitedDynamicBrakeForces", "composition": "LimitedDynamicBrakeForce", "multiplicity": "0..32", "sorted": false}
+    ]
+  },
+  {
+    "name": "AtoTSContactInfo",
+    "info": "Defines the ATO-TS contact information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "nidATOTS", "dataType": "uint32"},
+      {"intId": 2, "name": "nidSP", "dataType": "uint32"},
+      {"intId": 3, "name": "spNidC", "dataType": "uint32"},
+      {"intId": 4, "name": "atotsNidC", "dataType": "uint32"}
+    ]
+  },
+  {
+    "name": "StaticSpeedProfileStart",
+    "info": "Defines the static speed profile for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "specificStaticSpeedProfile", "composition": "SpecificStaticSpeedProfileStart", "multiplicity": "0..*", "sorted": false},
+      {"intId": 2, "name": "speed", "dataType": "uint32",
+       "info": "Defines the applicable speed for the section of track ; Resolution as defined in SS126 = 5 km/h"},
+      {"intId": 3, "name": "trainEndApplicability", "enumType": "TrainEndApplicability",
+       "info": "Indicates if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element."}
+    ]
+  },
+  {
+    "name": "SpecificStaticSpeedProfileStart",
+    "info": "Defines the specific static speed profile for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "speed", "dataType": "uint32",
+       "info": "Defines the applicablespeed for the section of track ; Resolution as defined in SS126 = 5 km/h"},
+      {"intId": 2, "name": "specificStaticSpeedProfileType", "enumType": "infra.SpecificStaticSpeedProfileType",
+       "info": "value indicating the type of specific static speed profile."},
+      {"intId": 3, "name": "otherSpecificStaticSpeedProfileCategory", "enumType": "infra.OtherSpecificStaticSpeedProfileCategory", "multiplicity": "0..1",
+       "info": "value indicating the suitable other specific static speed profile category applicable for SSP"},
+      {"intId": 4, "name": "cantDeficiencyCategory", "enumType": "infra.CantDeficiencyCategory", "multiplicity": "0..1",
+       "info": "value indicating the suitable cant deficiency category applicable for SSP. "}
+    ]
+  },
+  {
+    "name": "StaticSpeedProfileChange",
+    "info": "Defines the static speed profile for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "position on the associated segment profile"},
+      {"intId": 2, "name": "specificStaticSpeedProfile", "composition": "SpecificStaticSpeedProfileChange", "multiplicity": "0..*", "sorted": false},
+      {"intId": 3, "name": "speed", "dataType": "uint32",
+       "info": "Defines the applicable speed for the section of track ; Resolution as defined in SS126 = 5 km/h"},
+      {"intId": 4, "name": "trainEndApplicability", "enumType": "TrainEndApplicability",
+       "info": "Indicates if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element."}
+    ]
+  },
+  {
+    "name": "SpecificStaticSpeedProfileChange",
+    "info": "Defines the specific static speed profile for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "speed", "dataType": "uint32",
+       "info": "Defines the applicablespeed for the section of track ; Resolution as defined in SS126 = 5 km/h"},
+      {"intId": 2, "name": "specificStaticSpeedProfileType", "enumType": "infra.SpecificStaticSpeedProfileType",
+       "info": "value indicating the type of specific static speed profile."},
+      {"intId": 3, "name": "otherSpecificStaticSpeedProfileCategory", "enumType": "infra.OtherSpecificStaticSpeedProfileCategory", "multiplicity": "0..1",
+       "info": "value indicating the suitable other specific static speed profile category applicable for SSP"},
+      {"intId": 4, "name": "cantDeficiencyCategory", "enumType": "infra.CantDeficiencyCategory", "multiplicity": "0..1",
+       "info": "value indicating the suitable cant deficiency category applicable for SSP. "}
+    ]
+  },
+  {
+    "name": "AxleLoadSpeedProfile",
+    "info": "Defines the axle load speed profile for a section of track",
+    "attrs": [
+      {"intId": 1, "name": "segmentSection", "composition": "SegmentSection"},
+      {"intId": 2, "name": "speed", "dataType": "uint32",
+       "info": "Defines the applicablespeed for the section of track ; Resolution as defined in SS126 = 5 km/h"},
+      {"intId": 3, "name": "trainEndApplicability", "enumType": "TrainEndApplicability",
+       "info": "Indicates if a speed limit given for a profile element is to be applied until the front of the train (no train length delay) or the end of the train (train length delay) has left the element."},
+      {"intId": 4, "name": "axleLoadCategory", "enumType": "infra.AxleLoadCategory",
+       "info": "value indicating the suitable Axle load category."}
+    ]
+  },
+  {
+    "name": "GradientStart",
+    "info": "Defines the gradient at the start of segment profile",
+    "attrs": [
+      {"intId": 1, "name": "gradient", "dataType": "uint32", "exp": -1},
+      {"intId": 2, "name": "uphillGradient", "dataType": "boolean",
+       "info": "false if the gradient has downhill direction"}
+    ]
+  },
+  {
+    "name": "GradientChange",
+    "info": "Defines the gradient at a given location in segment profile",
+    "attrs": [
+      {"intId": 1, "name": "gradient", "dataType": "uint32", "exp": -1},
+      {"intId": 2, "name": "uphillGradient", "dataType": "boolean",
+       "info": "false if the gradient has downhill direction"},
+      {"intId": 3, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"}
+    ]
+  },
+  {
+    "name": "CurveStart",
+    "info": "Defines the curve at the start of segment profile",
+    "attrs": [
+      {"intId": 1, "name": "curve", "enumType": "CurveRadius"}
+    ]
+  },
+  {
+    "name": "CurveChange",
+    "info": "Defines the curve at a given location in segment profile",
+    "attrs": [
+      {"intId": 1, "name": "curve", "enumType": "CurveRadius"},
+      {"intId": 2, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"}
+    ]
+  },
+  {
+    "name": "TimingPoint",
+    "info": "Defines a fixed point on the infrastructure",
+    "attrs": [
+      {"intId": 1, "name": "name", "dataType": "string",
+       "info": "User-friendly name. Empty string, if equal to the id"},
+      {"intId": 2, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"},
+      {"intId": 3, "name": "nidTP", "dataType": "uint32"},
+      {"intId": 4, "name": "stopLocationTolerance", "dataType": "uint32", "exp": -2,
+       "info": "Defines the required stopping tolerance for a Timing Point"},
+      {"intId": 5, "name": "stoppingPointReachDistance", "dataType": "uint32", "exp": -2,
+       "info": "Defines the distance from a stopping point to consider it as reached"}
+    ]
+  },
+  {
+    "name": "BaliseGroup",
+    "info": "Defines a technical device group on the railway trackbed",
+    "attrs": [
+      {"intId": 1, "name": "nidBG", "dataType": "uint32"},
+      {"intId": 2, "name": "balises", "composition": "Balise", "multiplicity": "1..8", "sorted": false,
+       "info": "Defines the balises within the balise group"},
+      {"intId": 3, "name": "nidCQualifier", "dataType": "boolean",
+       "info": "true if same NID_C as in segment profile is to be used; false if new country id is to be used for the balise"},
+      {"intId": 4, "name": "nidC", "dataType": "uint32", "multiplicity": "0..1",
+       "info": "to be defined when countyIdQualifier is false ; defines the new NID_C for the balise group"}
+    ]
+  },
+  {
+    "name": "Balise",
+    "info": "Defines a technical device on the railway trackbed",
+    "attrs": [
+      {"intId": 1, "name": "positionInGroup", "dataType": "uint32", "range": "0..7",
+       "info": "Defines the position of a balise in a balise group"},
+      {"intId": 2, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"}
+    ]
+  },
+  {
+    "name": "PermittedBrakingDistance",
+    "info": "Defines the permitted braking distance information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "segmentSection", "composition": "SegmentSection"},
+      {"intId": 2, "name": "value", "dataType": "uint32", "exp": -2},
+      {"intId": 3, "name": "byEmergencyBrake", "dataType": "boolean",
+       "info": "true if Braking is to be achieved using Emergency brake ; false if braking is to be achieved by service brake"},
+      {"intId": 4, "name": "gradient", "dataType": "uint32", "exp": -1},
+      {"intId": 5, "name": "uphillGradient", "dataType": "boolean",
+       "info": "false if the gradient has downhill direction"}
+    ]
+  },
+  {
+    "name": "VoltageStart",
+    "info": "Defines the power voltage information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "voltage", "enumType": "VoltageType"},
+      {"intId": 2, "name": "nidC", "dataType": "uint32"}
+    ]
+  },
+  {
+    "name": "VoltageChange",
+    "info": "Defines the power voltage information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"},
+      {"intId": 2, "name": "voltage", "enumType": "VoltageType"},
+      {"intId": 3, "name": "nidC", "dataType": "uint32"}
+    ]
+  },
+  {
+    "name": "CurrentStart",
+    "info": "Defines the current limitation information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "current", "dataType": "uint32",
+       "info": "Defined current limitation in Ampere ; Resolution as defined in SS126 = 10A"}
+    ]
+  },
+  {
+    "name": "CurrentChange",
+    "info": "Defines the current limitation information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "pos", "dataType": "uint32", "exp": -2,
+       "info": "Position on the associated segment profile"},
+      {"intId": 2, "name": "current", "dataType": "uint32",
+       "info": "Defined current limitation in Ampere ; Resolution as defined in SS126 = 10A"}
+    ]
+  },
+  {
+    "name": "Tunnel",
+    "info": "Defines the tunnel information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "segmentSection", "composition": "SegmentSection"},
+      {"intId": 2, "name": "type", "enumType": "TunnelType"}
+    ]
+  },
+  {
+    "name": "UnprotectedLX",
+    "info": "Defines the unprotected LX information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "pNominal", "dataType": "uint32", "exp": -2,
+       "info": "Position on the segment profile associated for nominal direction of Segment profile"},
+      {"intId": 2, "name": "pReverse", "dataType": "uint32", "exp": -2,
+       "info": "Position on the segment profile associated for reverse direction of Segment profile"}
+    ]
+  },
+  {
+    "name": "LimitedDynamicBrakeForce",
+    "info": "Defines the limited dynamic brake force information for a segment profile",
+    "attrs": [
+      {"intId": 1, "name": "segmentSection", "composition": "SegmentSection"},
+      {"intId": 2, "name": "dynamicBrakeForceLimit", "dataType": "uint32", "exp": 3, "range": "0..3000",
+       "info": "the defined range corresponds to the constraints from SS126"}
+    ]
+  },
+  {
+    "name": "SegmentSection",
+    "info": "Defines sections with start and end references for use in segment profile",
+    "attrs": [
+      {"intId": 1, "name": "range", "enumType": "RangeType"},
+      {"intId": 2, "name": "pStart", "dataType": "uint32", "exp": -2,
+       "info": "Start Position on the segment profile"},
+      {"intId": 3, "name": "pEnd", "dataType": "uint32", "exp": -2,
+       "info": "End Position on the segment profile"}
+    ]
+  }
+  ]
+}

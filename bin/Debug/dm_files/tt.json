@@ -1,0 +1,383 @@
+{
+  "name": "tt",
+  "intId": 14,
+  "isDefinedBy": "http://ERJU/datamodel/0.1/timetable",
+  "prefix": "tt",
+  "version": "0.1",
+  "info": "Timetable-package of the TMS model",
+  "enums": [
+  {
+    "name": "BrakePosition",
+    "enumLiterals": [
+      {"intId": 0, "name": "passengerTrainInP"},
+      {"intId": 1, "name": "freightTrainInP"},
+      {"intId": 2, "name": "freightTrainInG"},
+      {"intId": 3, "name": "unknown"}
+    ]
+  },
+  {
+    "name": "BrakeModelType",
+    "enumLiterals": [
+      {"intId": 0, "name": "lambda"},
+      {"intId": 1, "name": "gamma"}
+    ]
+  },
+  {
+    "name": "GradeOfAutomation",
+    "enumLiterals": [
+      {"intId": 0, "name": "GoA1"},
+      {"intId": 1, "name": "GoA2"},
+      {"intId": 2, "name": "GoA3"},
+      {"intId": 3, "name": "GoA4"}
+    ]
+  },
+  {
+    "name": "TrainCategoryType",
+    "enumLiterals": [
+      {"intId": 0, "name": "INTERREGIONAL"},
+      {"intId": 1, "name": "REGIONAL"},
+      {"intId": 2, "name": "SUB_URBAN"},
+      {"intId": 3, "name": "NIGHT_TRAIN"},
+      {"intId": 4, "name": "MOTOR_RAIL"},
+      {"intId": 5, "name": "MOUNTAIN_TRAIN"},
+      {"intId": 6, "name": "HISTORIC_TRAIN"},
+      {"intId": 7, "name": "COACH_GROUP"},
+      {"intId": 8, "name": "TRAM"},
+      {"intId": 9, "name": "UNDERGROUND"},
+      {"intId": 10, "name": "HIGHSPEED_TRAIN"},
+      {"intId": 11, "name": "INTERCITY"}
+    ]
+  },
+  {
+    "name": "TrainUsageType",
+    "enumLiterals": [
+      {"intId": 0, "name": "COMMERCIAL_PASSENGER_TRAIN"},
+      {"intId": 1, "name": "COMMERCIAL_CARGO_TRAIN"},
+      {"intId": 2, "name": "LOCOMOTIVE_RUNNING_LIGHT"},
+      {"intId": 3, "name": "LIGHT_RUNNING"},
+      {"intId": 4, "name": "NOT_IN_SERVICE", "info": "betriebsfahrt"},
+      {"intId": 5, "name": "ENGINEERING_TRAIN"},
+      {"intId": 6, "name": "BREAKDOWN_TRAIN", "info": "Hilfszug"},
+      {"intId": 7, "name": "MIXED_TRAIN"},
+      {"intId": 8, "name": "SPECIAL_TRAIN"},
+      {"intId": 9, "name": "OTHER_TRAIN"}
+    ]
+  },
+  {
+    "name": "TrainProtectionType",
+    "enumLiterals": [
+      {"intId": 0, "name": "Etcs"}
+    ]
+  },
+  {
+    "name": "EventType",
+    "enumLiterals": [
+      {"intId": 0, "name": "PASSAGE"},
+      {"intId": 1, "name": "STOP"},
+      {"intId": 2, "name": "OTHER_EVENT"}
+    ]
+  },
+  {
+    "name": "AlignmentType",
+    "enumLiterals": [
+      {"intId": 0, "name": "HEAD"},
+      {"intId": 1, "name": "CENTER"},
+      {"intId": 2, "name": "REAR"}
+    ]
+  },
+  {
+    "name": "PositionType",
+    "enumLiterals": [
+      {"intId": 0, "name": "PositionOnTrack"},
+      {"intId": 1, "name": "LogicalPosition"}
+    ]
+  },
+  {
+    "name": "StopType",
+    "enumLiterals": [
+      {"intId": 0, "name": "COMMERCIAL", "info": "e.g. passenger exchange"},
+      {"intId": 1, "name": "OPERATIONAL", "info": "e.g. for changing staff"},
+      {"intId": 2, "name": "CONDITIONAL", "info": "to let other train pass before leaving"}
+    ]
+  },
+  {
+    "name": "LoadingDirection",
+    "enumLiterals": [
+      {"intId": 0, "name": "bothDirections"},
+      {"intId": 1, "name": "onTrain", "info": "boarding passengers or receive goods"},
+      {"intId": 2, "name": "offTrain", "info": "offboarding of passengers or unload goods"}
+    ]
+  },
+  {
+    "name": "DoorSide",
+    "enumLiterals": [
+      {"intId": 0, "name": "noneSide"},
+      {"intId": 1, "name": "rightSide"},
+      {"intId": 2, "name": "leftSide"},
+      {"intId": 3, "name": "bothSides"}
+    ]
+  },
+  {
+    "name": "ActivityType",
+    "enumLiterals": [
+      {"intId": 0, "name": "joinActivity", "info": "uncouple vehicles/parts for self-propelling train parts"},
+      {"intId": 1, "name": "splitActivity", "info": "uncouple vehicles/parts for self-propelling train parts"},
+      {"intId": 2, "name": "collectActivity", "info": "couple vehicles/parts"},
+      {"intId": 3, "name": "dropActivity", "info": "uncouple vehicles/trainParts"},
+      {"intId": 4, "name": "reverseActivity", "info": "stop to change driving direction of a train"}
+    ]
+  },
+  {
+    "name": "AdhesionCategory",
+    "enumLiterals": [
+      {"intId": 0, "name": "dryRail"},
+      {"intId": 1, "name": "medium"},
+      {"intId": 2, "name": "normal_low"},
+      {"intId": 3, "name": "lowAdhesion"},
+      {"intId": 4, "name": "veryLowAdhesion"},
+      {"intId": 5, "name": "extremelyLowAdhesion"}
+    ]
+  },
+  {
+    "name": "EventTimeType",
+    "enumLiterals": [
+      {"intId": 0, "name": "earliestOperationalDeparture"},
+      {"intId": 1, "name": "latestOperationalDeparture"},
+      {"intId": 2, "name": "earliestOperationalArrival"},
+      {"intId": 3, "name": "lastOperationalArrival"},
+      {"intId": 4, "name": "operationalDeparture"},
+      {"intId": 5, "name": "publishedArrival"},
+      {"intId": 6, "name": "publishedDeparture"},
+      {"intId": 7, "name": "realisedArrival"},
+      {"intId": 8, "name": "realisedDeparture"},
+      {"intId": 9, "name": "creation", "info": "The Operational Restriction Area or Operational Warning Area shall be created at the given DateTime"},
+      {"intId": 10, "name": "removal", "info": "The Operational Restriction Area or Operational Warning Area shall be removed at the given DateTime"}
+    ]
+  }
+  ],
+  "structs": [
+  {
+    "name": "OperationalPlanOperationalMovement",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "uuid", "dataType": "string"},
+      {"intId": 3, "name": "versionId", "dataType": "string"},
+      {"intId": 4, "name": "mapDataVersionRef", "dataType": "string"},
+      {"intId": 5, "name": "operationalSegments", "composition": "OperationalSegment", "multiplicity": "1..*", "sorted": false},
+      {"intId": 6, "name": "operationalTrainUnits", "composition": "OperationalTrainUnit", "multiplicity": "1..*", "sorted": false},
+      {"intId": 7, "name": "operationalConsists", "composition": "OperationalConsist", "multiplicity": "1..*", "sorted": false},
+      {"intId": 8, "name": "operationalMovementEvents", "composition": "OperationalMovementEvent", "multiplicity": "1..*", "sorted": false},
+      {"intId": 9, "name": "operationalMovementMarkers", "composition": "OperationalMovementMarker", "multiplicity": "0..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "OperationalSegment",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "uuid", "dataType": "string"},
+      {"intId": 3, "name": "sequence", "dataType": "uint32"},
+      {"intId": 4, "name": "operationalTrainUnitRef", "reference": "OperationalTrainUnit"}
+    ]
+  },
+  {
+    "name": "OperationalTrainUnit",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "uuid", "dataType": "string"},
+      {"intId": 3, "name": "physicalTrainUnit", "composition": "PhysicalTrainUnitIdentifier"},
+      {"intId": 4, "name": "operationalTrainCategory", "composition": "OperationalTrainCategory"},
+      {"intId": 5, "name": "operationalConsistRefs", "reference": "OperationalConsist", "multiplicity": "1..*", "sorted": false},
+      {"intId": 6, "name": "nominalRotatingMass", "dataType": "uint32", "units": "percent",
+       "info": "special value 16=unknown"},
+      {"intId": 7, "name": "regularBrakeWeightPercentage", "dataType": "uint32", "units": "percent",
+       "info": "user zero as undefined"},
+      {"intId": 8, "name": "emergencyBrakeWeightPercentage", "dataType": "uint32", "units": "percent",
+       "info": "user zero as undefined"},
+      {"intId": 9, "name": "brakePosition", "enumType": "BrakePosition"},
+      {"intId": 10, "name": "brakeModelType", "enumType": "BrakeModelType"},
+      {"intId": 11, "name": "usedGradeOfAutomation", "enumType": "GradeOfAutomation"}
+    ]
+  },
+  {
+    "name": "OperationalTrainCategory",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "uuid", "dataType": "string"},
+      {"intId": 3, "name": "name", "enumType": "TrainCategoryType"},
+      {"intId": 4, "name": "description", "dataType": "string",
+       "info": "for UI-purposes"},
+      {"intId": 5, "name": "trainUsage", "enumType": "TrainUsageType"}
+    ]
+  },
+  {
+    "name": "OperationalConsist",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "supportedOnBoardEquipment", "composition": "SupportedOnBoardEquipment"}
+    ]
+  },
+  {
+    "name": "SupportedOnBoardEquipment",
+    "attrs": [
+      {"intId": 1, "name": "type", "enumType": "TrainProtectionType"},
+      {"intId": 2, "name": "etcsVersions", "dataType": "string", "multiplicity": "1..*", "sorted": false},
+      {"intId": 3, "name": "anyClass", "composition": "AnyClass", "multiplicity": "0..*", "sorted": false}
+    ]
+  },
+  {
+    "name": "AnyClass",
+    "attrs": [
+      {"intId": 1, "name": "className", "dataType": "string"},
+      {"intId": 2, "name": "content", "dataType": "bytes"}
+    ]
+  },
+  {
+    "name": "OperationalMovementEvent",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "type", "enumType": "EventType"},
+      {"intId": 3, "name": "alignment", "enumType": "AlignmentType"},
+      {"intId": 4, "name": "position", "composition": "OperationalMovementEventPosition"},
+      {"intId": 5, "name": "operationalEventTimes", "composition": "OperationalEventTime", "multiplicity": "2..4", "sorted": false},
+      {"intId": 6, "name": "operationalEventLinks", "composition": "OperationalEventLink", "multiplicity": "0..*", "sorted": false},
+      {"intId": 7, "name": "trackPathToSubsequentEvent", "composition": "infra.LinkedPath", "multiplicity": "0..1"},
+      {"intId": 8, "name": "stopDescription", "composition": "StopDescription", "multiplicity": "0..1"},
+      {"intId": 9, "name": "changedSincePreviousVersion", "dataType": "boolean"}
+    ]
+  },
+  {
+    "name": "OperationalMovementEventPosition",
+    "attrs": [
+      {"intId": 1, "name": "type", "enumType": "PositionType"},
+      {"intId": 2, "name": "trackEdgePoint", "composition": "infra.TrackEdgePoint", "multiplicity": "0..1"}
+    ]
+  },
+  {
+    "name": "StopDescription",
+    "attrs": [
+      {"intId": 1, "name": "stopType", "enumType": "StopType"},
+      {"intId": 2, "name": "stopOnDemand", "dataType": "boolean"},
+      {"intId": 3, "name": "stopSkipped", "dataType": "boolean",
+       "info": "compared to the original plan"},
+      {"intId": 4, "name": "onOff", "enumType": "LoadingDirection",
+       "info": "into train, out of train, both"},
+      {"intId": 5, "name": "stopTimes", "composition": "StopTimes", "multiplicity": "0..1"},
+      {"intId": 6, "name": "stopActivities", "composition": "StopActivity", "multiplicity": "0..*", "sorted": false},
+      {"intId": 7, "name": "platformEdges", "reference": "infra.PlatformEdge", "multiplicity": "0..*", "sorted": false},
+      {"intId": 8, "name": "openingDoorSide", "enumType": "DoorSide", "multiplicity": "0..1"},
+      {"intId": 9, "name": "centralisedOpening", "dataType": "boolean",
+       "info": "true opening by passengers, false - centralised"},
+      {"intId": 10, "name": "centralisedClosing", "dataType": "boolean",
+       "info": "true by ATO, false - without ATO"},
+      {"intId": 11, "name": "changeOfGradeOfAutomation", "dataType": "boolean",
+       "info": "true - request for change GoA, false - no request for change GoA"},
+      {"intId": 12, "name": "relaxedCoupler", "dataType": "boolean",
+       "info": "true - request for coupler relaxation, false -not, see Q_Relaxed_Coupler in SS126"},
+      {"intId": 12, "name": "holdTrain", "dataType": "boolean",
+       "info": "see SS126"}
+    ]
+  },
+  {
+    "name": "StopTimes",
+    "attrs": [
+      {"intId": 1, "name": "minimalTime", "dataType": "uint32", "units": "second",
+       "info": "use zero if not defined"},
+      {"intId": 2, "name": "operationalReserve", "dataType": "uint32", "units": "second",
+       "info": "additional stop time for operational purposes, use zero if not defined"},
+      {"intId": 3, "name": "additionalReserve", "dataType": "uint32", "units": "second",
+       "info": "additional unspecified stop time e.g. for a connection, use zero if not defined"}
+    ]
+  },
+  {
+    "name": "StopActivity",
+    "attrs": [
+      {"intId": 1, "name": "type", "enumType": "ActivityType"},
+      {"intId": 2, "name": "actualOperationalSegment", "reference": "OperationalSegment"},
+      {"intId": 3, "name": "targetOperationalSegment", "reference": "OperationalSegment"}
+    ]
+  },
+  {
+    "name": "PhysicalTrainUnitIdentifier",
+    "attrs": [
+      {"intId": 1, "name": "trainRunningNumber", "dataType": "string", "multiplicity": "0..1"},
+      {"intId": 2, "name": "additionalTrainRunningNumber", "dataType": "string", "multiplicity": "0..1",
+       "info": "Distinction between Operational Train Units with the same trainRunningNumber. This may occur if a trainRunningNumber is reused for different spare trains."},
+      {"intId": 3, "name": "tafTapTsiTrainID", "dataType": "string", "multiplicity": "0..1"},
+      {"intId": 4, "name": "leadingOnBoardUnitId", "dataType": "string", "multiplicity": "0..1",
+       "info": "see NID_ENGINE"}
+    ]
+  },
+  {
+    "name": "OperationalMovementMarker",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "tsrMarker", "composition": "TemporarySpeedRestrictionMarker"},
+      {"intId": 2, "name": "lowAdhesionMarker", "composition": "LowAdhesionMarker"}
+    ]
+  },
+  {
+    "name": "TemporarySpeedRestrictionMarker",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "sequence", "dataType": "uint32",
+       "info": "Defines the chronological order of the Operational Movement Marker inside the Operational Plan."},
+      {"intId": 3, "name": "isStart", "dataType": "boolean",
+       "info": "true - type=start, false - type=end"},
+      {"intId": 4, "name": "maximumSpeedRestriction", "dataType": "uint32", "units": "km/h"},
+      {"intId": 5, "name": "observingPointHead", "dataType": "boolean",
+       "info": "true: observingPoint=head, false: observingPoint=rear"},
+      {"intId": 6, "name": "trackEdgePoint", "composition": "infra.TrackEdgePoint"}
+    ]
+  },
+  {
+    "name": "LowAdhesionMarker",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true},
+      {"intId": 2, "name": "sequence", "dataType": "uint32",
+       "info": "Defines the chronological order of the Operational Movement Marker inside the Operational Plan."},
+      {"intId": 3, "name": "isStart", "dataType": "boolean",
+       "info": "true - type=start, false - type=end"},
+      {"intId": 4, "name": "adhesionCategory", "enumType": "AdhesionCategory"},
+      {"intId": 5, "name": "observingPointHead", "dataType": "boolean",
+       "info": "true: observingPoint=head, false: observingPoint=rear"},
+      {"intId": 6, "name": "trackEdgePoint", "composition": "infra.TrackEdgePoint"}
+    ]
+  },
+  {
+    "name": "OperationalEventLink",
+    "attrs": [
+      {"intId": 1, "name": "type", "enumType": "EventType"},
+      {"intId": 2, "name": "operationalEvent", "composition": "OperationalEventRef"}
+    ]
+  },
+  {
+    "name": "OperationalEventRef",
+    "union": true,
+    "attrs": [
+      {"intId": 1, "name": "movementEvent", "reference": "OperationalMovementEvent"},
+      {"intId": 2, "name": "restrictionEvent", "reference": "OperationalRestrictionEvent"},
+      {"intId": 3, "name": "warningMeasureEvent", "reference": "OperationalWarningMeasureEvent"}
+    ]
+  },
+  {
+    "name": "OperationalEventTime",
+    "attrs": [
+      {"intId": 1, "name": "type", "enumType": "EventTimeType"},
+      {"intId": 2, "name": "dateTime", "dataType": "DateTime",
+       "info": "in UTC"}
+    ]
+  },
+  {
+    "name": "OperationalRestrictionEvent",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true}
+    ]
+  },
+  {
+    "name": "OperationalWarningMeasureEvent",
+    "attrs": [
+      {"intId": 1, "name": "id", "dataType": "string", "key": true}
+    ]
+  }
+  ]
+}

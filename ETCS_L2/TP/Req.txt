@@ -1,0 +1,3 @@
+1- Blade Length of the point L1,L2.
+2- FlankProtection direction information.
+3- dependencies as not representing the real ground as it is operational.

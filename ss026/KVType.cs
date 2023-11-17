@@ -1,0 +1,11 @@
+﻿using System.Xml.Serialization;
+namespace ss026
+{
+	[XmlRoot(Namespace = "https://erju.org/infra", ElementName = "kVType")]
+	public enum KVType
+	{
+		freightTrains,
+		conventionalPassengerTrains,
+		spare,
+	}
+}
