@@ -1,0 +1,7 @@
+bin/
+obj/
+Properties/
+*.dwg
+*.dwl
+*.dwl2
+*.bak
